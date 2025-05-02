@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,6 @@
     .tours .card { background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 8px; }
     footer { background: #004d40; color: white; text-align: center; padding: 20px; }
 
-    /* 👇 Estilo para la imagen del botón de WhatsApp */
     .whatsapp-btn {
       position: fixed;
       bottom: 20px;
@@ -33,33 +32,32 @@
       transform: scale(1.1) rotate(2deg);
     }
     .chat-text {
-  background: #fff3cd;
-  color: #333;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  font-size: 15px;
-  margin-right: 10px;
-  line-height: 1.2;
-  animation: bounce 2s infinite;
-}
+      background: #fff3cd;
+      color: #333;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 15px;
+      margin-right: 10px;
+      line-height: 1.2;
+      animation: bounce 2s infinite;
+    }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
   </style>
 </head>
 <body>
 <header>
   <div><strong>Suyay Tour</strong></div>
   <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
+    <a href="#inicio">Home</a>
+    <a href="#nosotros">About Us</a>
     <a href="#tours">Tours</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#contacto">Contacto</a>
-    <!-- Selector de idioma -->
+    <a href="#testimonios">Testimonials</a>
+    <a href="#contacto">Contact</a>
     <a href="index.html"><img src="https://flagcdn.com/w20/es.png" alt="Español" style="margin-left: 10px;"></a>
     <a href="en.html"><img src="https://flagcdn.com/w20/gb.png" alt="English" style="margin-left: 5px;"></a>
   </nav>
@@ -67,77 +65,76 @@
 
 <section id="inicio" style="position: relative; text-align: center; background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2.png') no-repeat center center / cover; height: 600px;">
   <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 40px; border-radius: 12px; color: white;">
-    <h1 style="font-size: 2.5em; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.7);">Descubre Perú con nosotros</h1>
+    <h1 style="font-size: 2.5em; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.7);">Discover Peru with us</h1>
     <p style="font-size: 1.2em; max-width: 700px; margin: 0 auto; text-shadow: 0 1px 4px rgba(0,0,0,0.6);">
-      No somos una agencia más. Somos personas que aman su país y quieren que tú lo vivas como lo vivimos nosotros: con emoción, buena comida y una sonrisa sincera.
+      We are not just another agency. We are people who love our country and want you to experience it the way we do — with emotion, great food, and a genuine smile.
     </p>
-   <a href="#tours" style="margin-top: 20px; display: inline-block; background:#ffc107; color:#333; padding:12px 20px; border-radius:8px; font-weight:bold; text-decoration: none;">Comienza tu aventura</a>
+    <a href="#tours" style="margin-top: 20px; display: inline-block; background:#ffc107; color:#333; padding:12px 20px; border-radius:8px; font-weight:bold; text-decoration: none;">Start your adventure</a>
+  </div>
 </section>
 
 <section id="nosotros">
-  <h2>Sobre Nosotros</h2>
-  <p>En <strong>Suyay Tour</strong> no somos una gran agencia. Somos un grupo de personas que ama el Perú y quiere compartirlo contigo de forma cercana y real.</p>
-  <p>Nuestro nombre, Suyay, significa “esperanza” en quechua — y eso es lo que buscamos ofrecer: una experiencia auténtica, tranquila y llena de momentos memorables. Desde que te recogemos en el aeropuerto hasta el último paseo por nuestras calles, estarás acompañado como parte de nuestra familia.</p>
-  <p>Hacemos city tours por Lima, viajes a Huacachina, rutas gastronómicas y más, pero sobre todo te damos una mirada local, con cariño, con paciencia y con muchas ganas de que te enamores del Perú tanto como nosotros.</p>
-  <p>Estás invitado a vivirlo con nosotros. Bienvenido a Suyay Tour.</p>
+  <h2>About Us</h2>
+  <p>At <strong>Suyay Tour</strong>, we're not a big agency. We're a small group of people who love Peru and want to share it with you in a personal, authentic way.</p>
+  <p>Our name, Suyay, means "hope" in Quechua — and that's exactly what we want to give you: an authentic, relaxed experience filled with unforgettable moments. From airport pickup to your last stroll through our streets, you’ll feel like part of our family.</p>
+  <p>We offer city tours in Lima, trips to Huacachina, food tours, and more. But most importantly, we offer a local perspective — warm, patient, and full of passion to help you fall in love with Peru just like we did.</p>
+  <p>You're invited to experience it with us. Welcome to Suyay Tour.</p>
 </section>
 
 <section id="tours" class="tours">
-  <h2>Experiencias en Lima</h2>
+  <h2>Experiences in Lima</h2>
 
   <div class="card" onclick="scrollToBot()">
     <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="City Tour Lima" style="width:100%; border-radius: 8px;">
-    <h3>City Tour Lima</h3>
-    <p>Explora el centro histórico, Miraflores y Barranco con guía local.</p>
+    <h3>Lima City Tour</h3>
+    <p>Explore the historic center, Miraflores, and Barranco with a local guide.</p>
   </div>
 
   <div class="card" onclick="scrollToBot()">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Tour Huacachina" style="width:100%; border-radius: 8px;">
-    <h3>Tour Huacachina</h3>
-    <p>Viaje de aventura a las dunas, paseo en buggy y atardecer en el oasis.</p>
+    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Huacachina Tour" style="width:100%; border-radius: 8px;">
+    <h3>Huacachina Tour</h3>
+    <p>Adventure trip to the dunes, buggy ride, and sunset at the oasis.</p>
   </div>
 
   <div class="card" onclick="scrollToBot()">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" alt="Tour Gastronómico" style="width:100%; border-radius: 8px;">
-    <h3>Tour Gastronómico</h3>
-    <p>Degusta lo mejor de la cocina peruana: ceviche, lomo saltado y más.</p>
+    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" alt="Gastronomic Tour" style="width:100%; border-radius: 8px;">
+    <h3>Gastronomic Tour</h3>
+    <p>Enjoy the best of Peruvian cuisine: ceviche, lomo saltado, and more.</p>
   </div>
 </section>
 
 <section id="galeria" style="background-color: #f6f6f6; padding: 60px 20px;">
-  <h2 style="text-align: center;">Explora con Suyay Tour</h2>
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage.png" alt="Galería visual" style="width:100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;">
+  <h2 style="text-align: center;">Explore with Suyay Tour</h2>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage.png" alt="Visual Gallery" style="width:100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;">
 </section>
 
-  <section id="testimonios">
-    <h2>Testimonios</h2>
-    <p>"Excelente experiencia con Suyay Tour" - Cliente A</p>
-    <p>"Los mejores guías y lugares increíbles" - Cliente B</p>
-  </section>
+<section id="testimonios">
+  <h2>Testimonials</h2>
+  <p>"Amazing experience with Suyay Tour" - Client A</p>
+  <p>"The best guides and unforgettable places" - Client B</p>
+</section>
 
-  <section id="contacto">
-    <h2>Contáctanos</h2>
-    <p>Correo: contacto@suyaytour.com</p>
-    <p>Teléfono: +51 912 345 678</p>
-  </section>
+<section id="contacto">
+  <h2>Contact Us</h2>
+  <p>Email: contacto@suyaytour.com</p>
+  <p>Phone: +51 912 345 678</p>
+</section>
 
-  <footer>
-    <p>&copy; 2025 Suyay Tour - Todos los derechos reservados</p>
-  </footer>
+<footer>
+  <p>&copy; 2025 Suyay Tour - All rights reserved</p>
+</footer>
 
-  <!-- ✅ Botón personalizado con la llama -->
 <a href="https://wa.me/51925585680" target="_blank" class="whatsapp-btn">
-  <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Pregúntame" style="height: 80px;">
+  <div class="chat-text">Questions?<br>Click here</div>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Ask me" style="height: 80px;">
 </a>
-  <script>
-  function scrollToBot() {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    });
-  }
+<script>
+function scrollToBot() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+}
 </script>
 </body>
 </html>
-Crear versión en inglés
