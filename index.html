@@ -12,7 +12,27 @@
     .hero { background: url('https://source.unsplash.com/1600x600/?peru,mountain') no-repeat center center/cover; height: 400px; display: flex; justify-content: center; align-items: center; color: white; text-align: center; font-size: 2em; }
     .tours .card { background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 8px; }
     footer { background: #004d40; color: white; text-align: center; padding: 20px; }
-    .whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 12px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+    /* 👇 Estilo para la imagen del botón de WhatsApp */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      background: white;
+      color: #333;
+      padding: 10px 15px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .whatsapp-btn:hover img {
+      transform: scale(1.1) rotate(2deg);
+    }
   </style>
 </head>
 <body>
@@ -59,9 +79,9 @@
     <p>&copy; 2025 Suyay Tour - Todos los derechos reservados</p>
   </footer>
 
-<a href="https://wa.me/51925585680" target="_blank" style="position: fixed; bottom: 20px; right: 20px; display: flex; align-items: center; background: white; color: #333; padding: 10px 15px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_colorful_cartoon-style_digital_illustration_feat.png" alt="Pregúntame" style="height: 120px;">
-  Pregúntame
-</a>
+  <!-- ✅ Botón personalizado con la llama -->
+  <a href="https://wa.me/51925585680" target="_blank" class="whatsapp-btn">
+    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Pregúntame" style="height: 120px;">
+  </a>
 </body>
 </html>
