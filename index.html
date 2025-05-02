@@ -41,6 +41,46 @@
     padding: 40px 20px 140px;
   }
 }
+
+    /* ✅ Estilos para la llama flotante */
+.llama-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background: white;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+  z-index: 999;
+}
+
+.llama-btn:hover img {
+  transform: scale(1.1) rotate(2deg);
+}
+
+.chat-text {
+  background: #fff3cd;
+  color: #333;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 15px;
+  margin-right: 10px;
+  line-height: 1.2;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+    
   </style>
 </head>
 <body>
@@ -120,9 +160,9 @@
 
   <!-- ✅ Botón personalizado con la llama -->
 <div id="chat">
-  <a href="https://wa.me/51925585680" target="_blank" class="whatsapp-btn">
+  <a href="#" class="llama-btn">
     <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Pregúntame" style="height: 80px;">
+    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Llama bot" style="height: 80px;">
   </a>
 </div>
 </body>
