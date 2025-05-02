@@ -33,6 +33,22 @@
     .whatsapp-btn:hover img {
       transform: scale(1.1) rotate(2deg);
     }
+    .chat-text {
+  background: #fff3cd;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-size: 14px;
+  margin-right: 10px;
+  line-height: 1.2;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
   </style>
 </head>
 <body>
@@ -80,8 +96,9 @@
   </footer>
 
   <!-- ✅ Botón personalizado con la llama -->
-  <a href="https://wa.me/51925585680" target="_blank" class="whatsapp-btn">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Pregúntame" style="height: 120px;">
-  </a>
+<a href="https://wa.me/51925585680" target="_blank" class="whatsapp-btn">
+  <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Pregúntame" style="height: 100px;">
+</a>
 </body>
 </html>
