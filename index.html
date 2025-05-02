@@ -12,47 +12,40 @@
     .tours .card { background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 8px; }
     footer { background: #004d40; color: white; text-align: center; padding: 20px; }
 
-    /* 👇 Estilo para la imagen del botón de WhatsApp */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      background: white;
-      color: #333;
-      padding: 10px 15px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-    }
+    @media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .whatsapp-btn:hover img {
-      transform: scale(1.1) rotate(2deg);
-    }
-    .chat-text {
-  background: #fff3cd;
-  color: #333;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  font-size: 15px;
-  margin-right: 10px;
-  line-height: 1.2;
-  animation: bounce 2s infinite;
-}
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+  }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+  .whatsapp-btn {
+    bottom: 90px;
+  }
+
+  section#inicio h1 {
+    font-size: 1.7em;
+  }
+
+  section#inicio p {
+    font-size: 1em;
+  }
+
+  section#inicio div {
+    padding: 40px 20px 140px;
+  }
 }
   </style>
 </head>
 <body>
 <header>
-  <div><a href="#inicio" style="color: white; text-decoration: none;"><strong>Suyay Tour</strong></a></div>
+  <div style="white-space: nowrap; font-size: 1.1em;"><a href="#inicio" style="color: white; text-decoration: none;"><strong>Suyay Tour</strong></a></div>
   <nav>
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
@@ -66,7 +59,7 @@
 </header>
 
 <section id="inicio" style="position: relative; text-align: center; background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2.png') no-repeat center center / cover; height: 600px;">
-  <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 40px; border-radius: 12px; color: white;">
+  <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 40px 120px; border-radius: 12px; color: white;">
 <h1 style="font-size: 2.5em; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.7);">Viaja con locales. Vive Perú con confianza.</h1>
 <p style="font-size: 1.2em; max-width: 700px; margin: 0 auto; text-shadow: 0 1px 4px rgba(0,0,0,0.6);">
   Somos limeños que amamos nuestro país. Con nosotros no hay prisas, ni rutas forzadas — solo experiencias reales, atención cálida y ganas de que disfrutes como en casa.
