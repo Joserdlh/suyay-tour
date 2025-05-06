@@ -80,24 +80,56 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
 }
+    /* Estilo para botón hamburguesa */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #004d40;
+    padding: 10px 0;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  nav a {
+    padding: 10px;
+    border-top: 1px solid #ffffff33;
+  }
+}
     
   </style>
 </head>
 <body>
 <header>
-  <div style="white-space: nowrap; font-size: 1.1em;"><a href="#inicio" style="color: white; text-decoration: none;"><strong>Suyay Tour</strong></a></div>
-  <nav>
+  <div style="white-space: nowrap; font-size: 1.1em; color: white;"><strong>Suyay Tour</strong></div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="menu">
     <a href="#inicio">Inicio</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#tours">Tours</a>
     <a href="#testimonios">Testimonios</a>
     <a href="#contacto">Contacto</a>
-    <!-- Selector de idioma -->
     <a href="index.html"><img src="https://flagcdn.com/w20/es.png" alt="Español" style="margin-left: 10px;"></a>
     <a href="en.html"><img src="https://flagcdn.com/w20/gb.png" alt="English" style="margin-left: 5px;"></a>
   </nav>
 </header>
-
 <section id="inicio" style="position: relative; text-align: center; background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png') no-repeat center center / cover; height: 600px;">
   <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 40px 120px; border-radius: 12px; color: white;">
 <h1 style="font-size: 2.5em; margin-bottom: 10px; text-shadow: 0 2px 5px rgba(0,0,0,0.7);">Viaja con locales. Vive Perú con confianza.</h1>
@@ -165,5 +197,11 @@
     <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Llama bot" style="height: 80px;">
   </a>
 </div>
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('show');
+  }
+</script>
 </body>
 </html>
