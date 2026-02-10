@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tours | Suyay Tour</title>
+  <style>
+    body { margin:0; font-family:sans-serif; background:#f6f6f6; }
+    header { background:#004d40; color:white; padding:16px 20px; position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; }
+    header a{ color:white; text-decoration:none; font-weight:800; }
+    main { max-width: 1000px; margin: 0 auto; padding: 28px 20px; }
+    h1 { margin: 0 0 6px; }
+    .subtitle { margin: 0 0 22px; color:#333; }
+    .grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:18px; }
+    .card{ background:white; border-radius:14px; overflow:hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.10); }
+    .card img{ width:100%; height:200px; object-fit:cover; display:block; }
+    .body{ padding:14px 14px 16px; }
+    .meta{ color:#333; margin: 0 0 10px; }
+    .prices{ background:#f2f5f4; border-radius:12px; padding:12px; margin: 12px 0 14px; }
+    .prices div{ margin: 6px 0; }
+    .actions{ display:flex; gap:10px; }
+    .btn{ flex:1; display:inline-block; padding:10px 12px; border-radius:10px; font-weight:800; text-decoration:none; text-align:center; }
+    .btn-primary{ background:#004d40; color:white; }
+    .btn-outline{ background:white; color:#004d40; border:2px solid #004d40; }
+    @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">Suyay Tour</a>
+    <a href="index.html#contacto">Contacto</a>
+  </header>
+
+  <main>
+    <h1>Tours y Experiencias</h1>
+    <p class="subtitle">Elige tu experiencia y reserva por WhatsApp.</p>
+
+    <div class="grid">
+
+      <!-- 1) City Tour Lima Premium -->
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="City Tour Lima Premium" loading="lazy">
+        <div class="body">
+          <h2 style="margin:0 0 8px;">City Tour Lima Premium</h2>
+          <p class="meta">7h aprox · 08:00–15:00 · Recojo Miraflores/San Isidro/Barranco.</p>
+          <div class="prices">
+            <div><strong>01–03 pax:</strong> 62 USD / persona</div>
+            <div><strong>04–07 pax:</strong> 55 USD / persona</div>
+            <div><strong>08–16 pax:</strong> 48 USD / persona</div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-outline" href="index.html#contacto">Preguntar</a>
+            <a class="btn btn-primary" target="_blank" rel="noopener"
+               href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20el%20City%20Tour%20Lima%20Premium.%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20%0A-%20Recojo%20en%3A%20Miraflores%20/%20San%20Isidro%20/%20Barranco">
+               Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2) Puerto/Aeropuerto (Centro + Pisco + Larco + Almuerzo) -->
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Tour para Puerto/Aeropuerto" loading="lazy">
+        <div class="body">
+          <h2 style="margin:0 0 8px;">Tour desde Puerto / Aeropuerto</h2>
+          <p class="meta">Centro histórico + Pisco + Museo Larco + Almuerzo · 6h aprox.</p>
+          <div class="prices">
+            <div><strong>10 pax:</strong> 175 USD / persona</div>
+            <div><strong>11–17 pax:</strong> 156 USD / persona</div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-outline" href="index.html#contacto">Preguntar</a>
+            <a class="btn btn-primary" target="_blank" rel="noopener"
+               href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20informaci%C3%B3n%20para%20el%20Tour%20desde%20Puerto/Aeropuerto%20(Centro%20+%20Pisco%20+%20Museo%20Larco%20+%20Almuerzo).%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20%0A-%20Llegada%3A%20Puerto%20/%20Aeropuerto">
+               Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3) Experiencia nocturna -->
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" alt="Circuito Mágico + Cena Show" loading="lazy">
+        <div class="body">
+          <h2 style="margin:0 0 8px;">Circuito Mágico + Cena Show</h2>
+          <p class="meta">Circuito Mágico del Agua + La Candelaria · 5h aprox · Jue/Vie/Sáb.</p>
+          <div class="prices">
+            <div><strong>01–04 pax:</strong> 105 USD / persona</div>
+            <div><strong>05–07 pax:</strong> 90 USD / persona</div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-outline" href="index.html#contacto">Preguntar</a>
+            <a class="btn btn-primary" target="_blank" rel="noopener"
+               href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20la%20Experiencia%20Nocturna%20(Circuito%20M%C3%A1gico%20+%20Cena%20Show%20La%20Candelaria).%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20">
+               Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4) Paracas - Ica - Huacachina -->
+      <div class="card">
+        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Paracas Ica Huacachina" loading="lazy">
+        <div class="body">
+          <h2 style="margin:0 0 8px;">Full Day Paracas – Ica – Huacachina</h2>
+          <p class="meta">Salida desde Lima · Día completo.</p>
+          <div class="prices">
+            <div><strong>01–02 pax:</strong> 135 USD / persona</div>
+            <div><strong>04–07 pax:</strong> 128 USD / persona</div>
+            <div><strong>08–16 pax:</strong> 116 USD / persona</div>
+          </div>
+          <div class="actions">
+            <a class="btn btn-outline" href="index.html#contacto">Preguntar</a>
+            <a class="btn btn-primary" target="_blank" rel="noopener"
+               href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20el%20Full%20Day%20Paracas%20-%20Ica%20-%20Huacachina.%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20">
+               Reservar
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
