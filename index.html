@@ -9,7 +9,80 @@
     header { background: #004d40; color: white; padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
     nav a { color: white; margin: 0 10px; text-decoration: none; }
     section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-    .tours .card { background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 8px; }
+    /* ✅ Tours en grid tipo cards (estilo más "landing") */
+.tours-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.tours .card{
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.tours .card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+}
+
+.tours .card img{
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.tours .card-body{
+  padding: 14px 14px 16px;
+}
+
+.tours .card h3{
+  margin: 6px 0 8px;
+}
+
+.tours .card p{
+  margin: 0 0 12px;
+  color: #333;
+}
+
+.card-actions{
+  display: flex;
+  gap: 10px;
+}
+
+.btn{
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  flex: 1;
+}
+
+.btn-primary{
+  background: #004d40;
+  color: white;
+}
+
+.btn-outline{
+  background: white;
+  color: #004d40;
+  border: 2px solid #004d40;
+}
+
+/* Responsive */
+@media screen and (max-width: 900px){
+  .tours-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media screen and (max-width: 560px){
+  .tours-grid{ grid-template-columns: 1fr; }
+}
     footer { background: #004d40; color: white; text-align: center; padding: 20px; }
 
    @media screen and (max-width: 768px) {
@@ -138,27 +211,45 @@
   <p>Estás invitado a vivirlo con nosotros. Bienvenido a Suyay Tour.</p>
 </section>
 
-<section id="tours" class="tours">
-  <h2>Experiencias en Lima</h2>
+  <div class="tours-grid">
 
-  <div class="card" onclick="scrollToBot()">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" loading="lazy" alt="City Tour Lima" style="width:100%; border-radius: 8px;">
-    <h3>City Tour Lima</h3>
-    <p>Explora el centro histórico, Miraflores y Barranco con guía local.</p>
-  </div>
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" loading="lazy" alt="City Tour Lima">
+      <div class="card-body">
+        <h3>City Tour Lima</h3>
+        <p>Explora el centro histórico, Miraflores y Barranco con guía local.</p>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="#contacto">Ver detalles</a>
+          <a class="btn btn-primary" href="#contacto">Reservar</a>
+        </div>
+      </div>
+    </div>
 
-  <div class="card" onclick="scrollToBot()">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" loading="lazy" alt="Tour Huacachina" style="width:100%; border-radius: 8px;">
-    <h3>Tour Huacachina</h3>
-    <p>Viaje de aventura a las dunas, paseo en buggy y atardecer en el oasis.</p>
-  </div>
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" loading="lazy" alt="Tour Huacachina">
+      <div class="card-body">
+        <h3>Tour Huacachina</h3>
+        <p>Viaje de aventura a las dunas, paseo en buggy y atardecer en el oasis.</p>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="#contacto">Ver detalles</a>
+          <a class="btn btn-primary" href="#contacto">Reservar</a>
+        </div>
+      </div>
+    </div>
 
-  <div class="card" onclick="scrollToBot()">
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" loading="lazy" alt="Tour Gastronómico" style="width:100%; border-radius: 8px;">
-    <h3>Tour Gastronómico</h3>
-    <p>Degusta lo mejor de la cocina peruana: ceviche, lomo saltado y más.</p>
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" loading="lazy" alt="Tour Gastronómico">
+      <div class="card-body">
+        <h3>Tour Gastronómico</h3>
+        <p>Degusta lo mejor de la cocina peruana: ceviche, lomo saltado y más.</p>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="#contacto">Ver detalles</a>
+          <a class="btn btn-primary" href="#contacto">Reservar</a>
+        </div>
+      </div>
+    </div>
+
   </div>
-</section>
 
 <section id="galeria" style="background-color: #f6f6f6; padding: 60px 20px;">
   <h2 style="text-align: center;">Explora con Suyay Tour</h2>
