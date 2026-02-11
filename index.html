@@ -9,17 +9,7 @@
     header { background: #004d40; color: white; padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
     nav a { color: white; margin: 0 10px; text-decoration: none; }
     section { padding: 60px 20px; max-width: 1000px; margin: auto; }
-    .hero{
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png') no-repeat center center / cover;
-}
 
-.hero-overlay{
-  width: 100%;
-  background: rgba(0,0,0,0.6);
-}
 
 .hero-content{
   max-width: 1000px;
@@ -51,6 +41,59 @@
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
+}
+    /* HERO con video + carrusel de imágenes */
+.hero{
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #000; /* fallback */
+}
+
+.hero-media{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Video de fondo */
+.hero-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Carrusel de imágenes */
+.hero-slides{
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slide{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+
+/* La que se ve */
+.hero-slide.is-active{
+  opacity: 1;
+}
+
+/* Overlay encima del media */
+.hero-overlay{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: rgba(0,0,0,0.55);
 }
     
     /* ✅ Tours en grid tipo cards (estilo más "landing") */
@@ -226,7 +269,7 @@ footer { background: #004d40; color: white; text-align: center; padding: 20px; }
     border-top: 1px solid #ffffff33;
   }
 }
-    
+  
   </style>
 </head>
 <body>
@@ -244,18 +287,31 @@ footer { background: #004d40; color: white; text-align: center; padding: 20px; }
   </nav>
 </header>
 <section id="inicio" class="hero">
+  <!-- MEDIA: video + 3 imágenes -->
+  <div class="hero-media">
+    <!-- Video (si no existe aún, igual no rompe) -->
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- 3 fotos rotando -->
+    <div class="hero-slides">
+      <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Suyay Tour - 1" loading="eager">
+      <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="Suyay Tour - 2" loading="lazy">
+      <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Suyay Tour - 3" loading="lazy">
+    </div>
+  </div>
+
+  <!-- CONTENIDO encima -->
   <div class="hero-overlay">
     <div class="hero-content">
-      <h1 class="hero-title">
-        Viaja con locales. Vive Perú con confianza.
-      </h1>
+      <h1 class="hero-title">Viaja con locales. Vive Perú con confianza.</h1>
 
       <p class="hero-text">
         Somos limeños que amamos nuestro país. Con nosotros no hay prisas, ni rutas forzadas — solo experiencias reales, atención cálida y ganas de que disfrutes como en casa.
       </p>
 
-      <a class="hero-cta"
-         onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
+      <a class="hero-cta" onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
         Comienza tu aventura
       </a>
     </div>
@@ -344,11 +400,24 @@ footer { background: #004d40; color: white; text-align: center; padding: 20px; }
     <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Llama bot" style="height: 80px;">
   </a>
 </div>
-  <script>
+<script>
   function toggleMenu() {
     const menu = document.getElementById('menu');
     menu.classList.toggle('show');
   }
+
+  // Carrusel de 3 imágenes en el hero
+  (function heroSlider(){
+    const slides = document.querySelectorAll('.hero-slide');
+    if (!slides.length) return;
+
+    let i = 0;
+    setInterval(() => {
+      slides[i].classList.remove('is-active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('is-active');
+    }, 4500);
+  })();
 </script>
 </body>
 </html>
