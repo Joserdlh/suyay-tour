@@ -33,30 +33,10 @@
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer; }
 
     /* ─── HERO ───────────────────────────────────────────── */
-    .page-hero {
-      position: relative;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: var(--azul);
-    }
-    .page-hero-bg {
-      position: absolute; inset: 0;
-      background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png') center/cover;
-      opacity: 0.2;
-    }
-    .page-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(26,58,107,0.9) 0%, rgba(0,77,64,0.85) 100%);
-    }
-    .page-hero-inner {
-      position: relative; z-index: 1;
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 120px 40px 80px;
-      text-align: center;
-    }
+    .page-hero { position: relative; min-height: 70vh; display: flex; align-items: center; overflow: hidden; background: var(--azul); }
+    .page-hero-bg { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png') center/cover; opacity: 0.2; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,58,107,0.9) 0%, rgba(0,77,64,0.85) 100%); }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; padding: 120px 40px 80px; text-align: center; }
     .section-label { font-size: 0.75em; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dorado); margin-bottom: 18px; display: block; }
     .page-hero-inner h1 { font-family: 'Playfair Display', serif; font-weight: 800; font-size: clamp(2.4em, 5vw, 4em); color: white; line-height: 1.1; margin-bottom: 18px; }
     .page-hero-inner h1 em { font-style: italic; color: var(--dorado); }
@@ -67,107 +47,39 @@
     .hero-stat .lbl { font-size: 0.78em; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; text-transform: uppercase; }
 
     /* ─── SOBRE NOSOTROS ─────────────────────────────────── */
-    .sobre {
-      background: var(--crema);
-      padding: 100px 20px;
-    }
-    .sobre-inner {
-      max-width: 780px;
-      margin: 0 auto;
-      text-align: center;
-    }
+    .sobre { background: var(--crema); padding: 100px 20px; }
+    .sobre-inner { max-width: 780px; margin: 0 auto; text-align: center; }
     .sobre-inner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8em, 3.5vw, 2.6em); font-weight: 700; color: var(--azul); margin-bottom: 36px; line-height: 1.2; }
     .sobre-inner h2 em { font-style: italic; color: var(--dorado); }
     .sobre-inner p { font-size: 1.08em; line-height: 1.9; color: #444; margin-bottom: 24px; }
     .sobre-inner p strong { color: var(--azul); }
-    .sobre-inner p:last-child { margin-bottom: 0; }
     .divider { width: 60px; height: 2px; background: var(--dorado); margin: 40px auto 0; border-radius: 2px; }
 
     /* ─── GALERÍA ────────────────────────────────────────── */
-    .galeria {
-      background: #f0ede6;
-      padding: 80px 20px;
-    }
+    .galeria { background: #f0ede6; padding: 80px 20px; }
     .galeria-inner { max-width: 1100px; margin: 0 auto; }
     .galeria-inner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6em, 3vw, 2.2em); font-weight: 700; color: var(--azul); text-align: center; margin-bottom: 10px; }
     .galeria-inner .sub { text-align: center; color: #888; font-size: 0.9em; margin-bottom: 40px; }
-
-    .galeria-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 220px 220px;
-      gap: 12px;
-    }
-    .galeria-item {
-      border-radius: 14px;
-      overflow: hidden;
-      background: #ddd;
-      position: relative;
-    }
+    .galeria-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 12px; }
+    .galeria-item { border-radius: 14px; overflow: hidden; background: #ddd; position: relative; }
     .galeria-item.grande { grid-row: 1 / 3; }
     .galeria-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
     .galeria-item:hover img { transform: scale(1.04); }
-    .galeria-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, #c8d8e8, #b0c4d8);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 8px; color: #6a8aaa;
-    }
+    .galeria-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #c8d8e8, #b0c4d8); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #6a8aaa; }
     .galeria-placeholder span { font-size: 2em; }
     .galeria-placeholder p { font-size: 0.75em; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
     /* ─── ÚNETE ──────────────────────────────────────────── */
-    .unete {
-      background: var(--azul);
-      padding: 100px 20px;
-    }
+    .unete { background: var(--azul); padding: 100px 20px; }
     .unete-inner { max-width: 1100px; margin: 0 auto; }
     .unete-header { text-align: center; margin-bottom: 60px; }
     .unete-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8em, 3.5vw, 2.6em); color: white; font-weight: 700; margin-bottom: 12px; }
     .unete-header p { color: rgba(255,255,255,0.6); font-size: 1em; max-width: 500px; margin: 0 auto; }
-
-    /* Grid de links — igual concepto que los tours */
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .links-grid.row2 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .link-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 28px 22px;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      transition: all 0.25s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .link-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-    .link-card:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(201,168,76,0.35);
-      transform: translateY(-4px);
-    }
+    .links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+    .link-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 28px 22px; text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; transition: all 0.25s ease; position: relative; overflow: hidden; }
+    .link-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; transform: scaleX(0); transition: transform 0.3s ease; }
+    .link-card:hover { background: rgba(255,255,255,0.12); border-color: rgba(201,168,76,0.35); transform: translateY(-4px); }
     .link-card:hover::before { transform: scaleX(1); }
-
-    /* Color accent por tipo */
     .link-card.instagram::before { background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .link-card.tiktok::before { background: #69c9d0; }
     .link-card.linkedin::before { background: #0077b5; }
@@ -175,26 +87,15 @@
     .link-card.email::before { background: var(--dorado); }
     .link-card.spotify::before { background: #1db954; }
     .link-card.dona::before { background: #ff5e5b; }
-
     .link-icon { font-size: 2em; }
     .link-tag { font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.8); }
     .link-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05em; color: white; font-weight: 700; line-height: 1.2; }
     .link-card p { color: rgba(255,255,255,0.55); font-size: 0.82em; line-height: 1.55; flex: 1; }
     .link-arrow { color: rgba(255,255,255,0.3); font-size: 0.85em; font-weight: 700; transition: all 0.2s; margin-top: 6px; }
     .link-card:hover .link-arrow { color: var(--dorado); transform: translateX(4px); }
-
-    /* Card de dona — destacada */
-    .link-card.dona {
-      background: rgba(255,94,91,0.12);
-      border-color: rgba(255,94,91,0.3);
-      grid-column: span 2;
-      flex-direction: row;
-      align-items: center;
-      gap: 20px;
-      padding: 28px 32px;
-    }
+    .link-card.dona { background: rgba(255,94,91,0.12); border-color: rgba(255,94,91,0.3); grid-column: span 2; flex-direction: row; align-items: center; gap: 20px; padding: 28px 32px; }
     .link-card.dona .link-icon { font-size: 2.8em; flex-shrink: 0; }
-    .link-card.dona .link-content { flex: 1; }
+    .link-card.dona .link-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .link-card.dona h3 { font-size: 1.2em; }
     .link-card.dona p { font-size: 0.88em; }
     .link-card.dona:hover { background: rgba(255,94,91,0.18); border-color: rgba(255,94,91,0.5); }
@@ -213,25 +114,9 @@
     .llama-btn img { height: 60px; }
 
     /* ─── MOBILE ─────────────────────────────────────────── */
-    @media (max-width: 1000px) {
-      .links-grid, .links-grid.row2 { grid-template-columns: repeat(2, 1fr); }
-      .link-card.dona { grid-column: span 2; }
-    }
-    @media (max-width: 700px) {
-      .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-      .galeria-item.grande { grid-row: auto; }
-      .links-grid, .links-grid.row2 { grid-template-columns: 1fr; }
-      .link-card.dona { grid-column: span 1; flex-direction: column; }
-      .hero-stats { gap: 24px; }
-    }
-    @media (max-width: 768px) {
-      header { padding: 0 20px; }
-      nav { display: none; flex-direction: column; width: 100%; }
-      nav.show { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--verde); padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-      .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(0,0,0,0.2); margin-top: 4px; }
-      .menu-toggle { display: block; }
-      .page-hero-inner { padding: 110px 20px 60px; }
-    }
+    @media (max-width: 1000px) { .links-grid { grid-template-columns: repeat(2, 1fr); } .link-card.dona { grid-column: span 2; } }
+    @media (max-width: 700px) { .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; } .galeria-item.grande { grid-row: auto; } .links-grid { grid-template-columns: 1fr; } .link-card.dona { grid-column: span 1; flex-direction: column; } .hero-stats { gap: 24px; } }
+    @media (max-width: 768px) { header { padding: 0 20px; } nav { display: none; flex-direction: column; width: 100%; } nav.show { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--verde); padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1); } .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(0,0,0,0.2); margin-top: 4px; } .menu-toggle { display: block; } .page-hero-inner { padding: 110px 20px 60px; } }
   </style>
 </head>
 <body>
@@ -255,7 +140,7 @@
         <a href="tours.html">Ver todos los tours →</a>
       </div>
     </div>
-    <div class="nav-item"><a href="suyayvoluntariado.html">Suyay Voluntariado</a></div>
+    <div class="nav-item"><a href="voluntariado.html">Suyay Voluntariado</a></div>
     <div class="nav-item"><a href="#">Suyay Moda</a></div>
   </nav>
   <div class="lang">
@@ -309,34 +194,19 @@
     <p class="sub">Pronto aquí verás nuestras fotos reales — por ahora, el espacio está reservado para ellas.</p>
     <div class="galeria-grid">
       <div class="galeria-item grande">
-        <div class="galeria-placeholder">
-          <span>📸</span>
-          <p>Foto principal</p>
-        </div>
+        <div class="galeria-placeholder"><span>📸</span><p>Foto principal</p></div>
       </div>
       <div class="galeria-item">
-        <div class="galeria-placeholder">
-          <span>🤝</span>
-          <p>Voluntarios</p>
-        </div>
+        <div class="galeria-placeholder"><span>🤝</span><p>Voluntarios</p></div>
       </div>
       <div class="galeria-item">
-        <div class="galeria-placeholder">
-          <span>📚</span>
-          <p>Educación</p>
-        </div>
+        <div class="galeria-placeholder"><span>📚</span><p>Educación</p></div>
       </div>
       <div class="galeria-item">
-        <div class="galeria-placeholder">
-          <span>👧</span>
-          <p>Comunidad</p>
-        </div>
+        <div class="galeria-placeholder"><span>👧</span><p>Comunidad</p></div>
       </div>
       <div class="galeria-item">
-        <div class="galeria-placeholder">
-          <span>💙</span>
-          <p>Impacto</p>
-        </div>
+        <div class="galeria-placeholder"><span>💙</span><p>Impacto</p></div>
       </div>
     </div>
   </div>
@@ -351,9 +221,7 @@
       <p>Síguenos, escúchanos, escríbenos o apoya directamente. Cada acción suma.</p>
     </div>
 
-    <!-- FILA 1: redes sociales -->
     <div class="links-grid">
-
       <a class="link-card instagram" href="https://instagram.com/proyecto_suyay" target="_blank" rel="noopener">
         <span class="link-icon">📸</span>
         <span class="link-tag">Red social</span>
@@ -361,7 +229,6 @@
         <p>Historias, momentos y el día a día de Suyay.</p>
         <span class="link-arrow">Ver perfil →</span>
       </a>
-
       <a class="link-card tiktok" href="https://www.tiktok.com/@suyay_gl" target="_blank" rel="noopener">
         <span class="link-icon">🎵</span>
         <span class="link-tag">Red social</span>
@@ -369,7 +236,6 @@
         <p>Videos cortos sobre nuestro impacto y comunidad.</p>
         <span class="link-arrow">Ver perfil →</span>
       </a>
-
       <a class="link-card linkedin" href="https://pe.linkedin.com/company/suyay-peru" target="_blank" rel="noopener">
         <span class="link-icon">💼</span>
         <span class="link-tag">Profesional</span>
@@ -377,7 +243,6 @@
         <p>Novedades, alianzas y noticias de la organización.</p>
         <span class="link-arrow">Ver perfil →</span>
       </a>
-
       <a class="link-card whatsapp" href="https://whatsapp.com/channel/0029VadVdCJGpLHY01bRsT0s" target="_blank" rel="noopener">
         <span class="link-icon">💬</span>
         <span class="link-tag">Canal · 1.2K seguidores</span>
@@ -385,12 +250,9 @@
         <p>El behind the scenes de Suyay, directo a tu teléfono.</p>
         <span class="link-arrow">Unirse →</span>
       </a>
-
     </div>
 
-    <!-- FILA 2: podcasts + email + dona -->
-    <div class="links-grid row2">
-
+    <div class="links-grid">
       <a class="link-card spotify" href="https://open.spotify.com/show/2m8ZJF4LauqPHg9VmEr8CF" target="_blank" rel="noopener">
         <span class="link-icon">🎙️</span>
         <span class="link-tag">Podcast · Spotify</span>
@@ -398,7 +260,6 @@
         <p>Cuentos para niños que despiertan creatividad e imaginación.</p>
         <span class="link-arrow">Escuchar →</span>
       </a>
-
       <a class="link-card spotify" href="https://open.spotify.com/show/2kRn53d2sO8ryUn5kdWzgB" target="_blank" rel="noopener">
         <span class="link-icon">🎧</span>
         <span class="link-tag">Podcast · Spotify</span>
@@ -406,7 +267,6 @@
         <p>Una friend talk sobre voluntariado, vida adulta y amor propio.</p>
         <span class="link-arrow">Escuchar →</span>
       </a>
-
       <a class="link-card email" href="mailto:proyectosuyay.org@gmail.com">
         <span class="link-icon">📧</span>
         <span class="link-tag">Contacto directo</span>
@@ -414,7 +274,6 @@
         <p>¿Quieres colaborar, aliarte o saber más? Estamos aquí.</p>
         <span class="link-arrow">Enviar email →</span>
       </a>
-
       <a class="link-card dona" href="https://ko-fi.com/suyay" target="_blank" rel="noopener">
         <span class="link-icon">❤️</span>
         <div class="link-content">
@@ -424,8 +283,8 @@
           <span class="link-arrow">Donar ahora →</span>
         </div>
       </a>
-
     </div>
+
   </div>
 </section>
 
