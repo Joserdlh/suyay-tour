@@ -3,498 +3,623 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@400;600&display=swap" rel="stylesheet">
-  <title>Suyay Tour</title>
+  <title>Suyay Global</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: sans-serif; scroll-behavior: smooth; }
-header{
-  background:#004d40;
-  color:#fff;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 0;               /* importante: ahora el padding lo maneja el contenedor */
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* contenedor del header (ancho completo, contenido centrado) */
-.header-inner{
-  max-width: 1200px;        /* más ancho que 1000 para que no se vea apretado */
-  margin: 0 auto;
-  padding: 16px 20px;
-  display: grid;
-  grid-template-columns: 260px 1fr 120px;  /* izquierda / centro / derecha */
-  align-items: center;
-  gap: 12px;
-}
+    :root {
+      --verde: #004d40;
+      --verde-claro: #00695c;
+      --dorado: #c9a84c;
+      --crema: #faf7f2;
+      --texto: #1a1a1a;
+      --gris: #666;
+    }
 
-/* izquierda: isotipo + nombre */
-.brand{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  min-width: 0;
-}
-.brand-mark{
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.18); /* placeholder del isotipo */
-  border: 1px solid rgba(255,255,255,0.25);
-  flex: 0 0 auto;
-}
-.brand-name{
-  font-weight: 800;
-  white-space: nowrap;
-}
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Lato', sans-serif; background: var(--crema); color: var(--texto); }
 
-/* centro: menú centrado */
-nav#menu{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap: 18px;
-}
-nav#menu a{
-  color:#fff;
-  text-decoration:none;
-  font-weight: 600;
-  padding: 10px 8px;
-  border-radius: 10px;
-  opacity: .95;
-}
-nav#menu a:hover{
-  background: rgba(255,255,255,0.12);
-  opacity: 1;
-}
+    /* ─── HEADER ─────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 40px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,77,64,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
 
-/* derecha: idiomas */
-.lang{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  gap: 10px;
-}
-.lang a{
-  display:inline-flex;
-  align-items:center;
-  gap: 6px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.10);
-}
-.lang a:hover{
-  background: rgba(255,255,255,0.16);
-}
-.lang img{
-  display:block;
-}
-    section { padding: 60px 20px; }
-section:not(.hero) { max-width: 1000px; margin: auto; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--dorado);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--verde);
+      letter-spacing: -1px;
+    }
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15em;
+      color: white;
+      letter-spacing: 0.03em;
+    }
 
+    nav {
+      display: flex;
+      gap: 6px;
+    }
+    nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-color: rgba(201,168,76,0.4);
+    }
 
-.hero-content{
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 80px 40px 120px;
-  border-radius: 12px;
-  color: white;
-  text-align: center;
-}
-.hero-title{
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5em;
-  font-weight: 800;
-  margin-bottom: 14px;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.6);
-}
+    .lang {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .lang a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.8em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .lang a:hover {
+      background: rgba(255,255,255,0.12);
+      color: white;
+    }
 
-.hero-text{
-  font-family: 'Lato', sans-serif;
-  font-size: 1.2em;
-  font-weight: 400;
-  max-width: 620px;
-  margin: 0 auto;
-  line-height: 1.7;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.85);
-}
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+    }
 
-.hero-cta{
-  margin-top: 20px;
-  display: inline-block;
-  background: #ffc107;
-  color: #333;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-}
-    /* HERO con carrusel de imágenes */
-.hero{
-  position: relative;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: #000; /* fallback */
-}
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
 
-.hero-media{
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .hero-slide.is-active { opacity: 1; }
 
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.55) 100%
+      );
+      z-index: 1;
+    }
 
-/* Carrusel de imágenes */
-.hero-slides{
-  position: absolute;
-  inset: 0;
-}
+    .hero-bottom {
+      position: absolute;
+      bottom: 60px;
+      left: 0; right: 0;
+      z-index: 2;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1em;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(2.8em, 6vw, 5em);
+      color: white;
+      line-height: 1.05;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      letter-spacing: 0.01em;
+    }
+    .hero-title span {
+      color: var(--dorado);
+    }
 
-.hero-slide{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 900ms ease;
-}
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.7em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeInUp 1s 1.5s both;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollLine 2s ease infinite;
+    }
+    @keyframes scrollLine {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
 
-/* La que se ve */
-.hero-slide.is-active{
-  opacity: 1;
-}
+    /* slide dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 28px;
+      right: 40px;
+      z-index: 2;
+      display: flex;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+    .hero-dot.is-active {
+      background: var(--dorado);
+      width: 22px;
+      border-radius: 3px;
+    }
 
-/* Overlay encima del media */
-.hero-overlay{
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  background: rgba(0,0,0,0.35);
-}
-    
-    /* ✅ Tours en grid tipo cards (estilo más "landing") */
-.tours-grid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
+    /* ─── QUIÉNES SOMOS ──────────────────────────────────── */
+    .quienes {
+      background: var(--crema);
+      padding: 100px 20px;
+    }
+    .quienes-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 0.75em;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .quienes h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2em, 4vw, 3em);
+      font-weight: 700;
+      color: var(--verde);
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+    .quienes h2 em {
+      font-style: italic;
+      color: var(--dorado);
+    }
+    .quienes p {
+      font-size: 1.08em;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 22px;
+    }
+    .quienes p:last-child { margin-bottom: 0; }
 
-.tours .card{
-  background: #ffffff;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.10);
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease;
-}
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--dorado);
+      margin: 40px auto 0;
+      border-radius: 2px;
+    }
 
-.tours .card:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
-}
+    /* ─── TRES CAMINOS ───────────────────────────────────── */
+    .caminos {
+      background: var(--verde);
+      padding: 100px 20px;
+    }
+    .caminos-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .caminos-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .caminos-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8em, 3.5vw, 2.6em);
+      color: white;
+      font-weight: 700;
+    }
+    .caminos-header p {
+      color: rgba(255,255,255,0.6);
+      margin-top: 12px;
+      font-size: 1em;
+    }
 
-.tours .card img{
-  width: 100%;
-  height: 190px;
-  object-fit: cover;
-  display: block;
-}
+    .caminos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
 
-.tours .card-body{
-  padding: 14px 14px 16px;
-}
+    .camino-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .camino-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--dorado);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .camino-card:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+    }
+    .camino-card:hover::before {
+      transform: scaleX(1);
+    }
 
-.tours .card h3{
-  margin: 6px 0 8px;
-}
+    .camino-icon {
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .camino-tag {
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .camino-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55em;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .camino-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.95em;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .camino-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(201,168,76,0.5);
+      padding-bottom: 3px;
+      transition: border-color 0.2s;
+    }
+    .camino-card:hover .camino-btn {
+      border-color: var(--dorado);
+      color: var(--dorado);
+    }
+    .camino-btn::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .camino-card:hover .camino-btn::after {
+      transform: translateX(4px);
+    }
 
-.tours .card p{
-  margin: 0 0 12px;
-  color: #333;
-}
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #021f1a;
+      color: rgba(255,255,255,0.5);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    footer .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4em;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    footer .footer-sub {
+      font-size: 0.8em;
+      letter-spacing: 0.08em;
+      color: var(--dorado);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    footer p {
+      font-size: 0.82em;
+    }
 
-.card-desc{
-  margin: 6px 0 12px;
-  color: #333;
-}
+    /* ─── LLAMA FLOTANTE ─────────────────────────────────── */
+    .llama-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 10px 16px 10px 10px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 999;
+    }
+    .llama-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+    }
+    .chat-text {
+      background: #fff3cd;
+      color: #333;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-right: 10px;
+      line-height: 1.3;
+      animation: bounce 2.5s ease infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+    .llama-btn img { height: 60px; }
 
-.card-actions{
-  display: flex;
-  gap: 10px;
-}
-
-.btn{
-  display: inline-block;
-  padding: 10px 12px;
-  border-radius: 10px;
-  font-weight: 700;
-  text-decoration: none;
-  text-align: center;
-  flex: 1;
-}
-
-.btn-primary{
-  background: #004d40;
-  color: white;
-}
-
-.btn-outline{
-  background: white;
-  color: #004d40;
-  border: 2px solid #004d40;
-}
-
-/* Responsive */
-@media screen and (max-width: 900px){
-  .tours-grid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media screen and (max-width: 560px){
-  .tours-grid{ grid-template-columns: 1fr; }
-}
-
-footer { background: #004d40; color: white; text-align: center; padding: 20px; }
-
-    @media screen and (max-width: 768px) {
-  /* header nuevo */
-  .header-inner{
-    grid-template-columns: 1fr auto;  /* izquierda + botón */
-    grid-template-areas:
-      "brand toggle"
-      "menu menu"
-      "lang lang";
-    gap: 10px;
-  }
-
-  .brand{ grid-area: brand; }
-  .menu-toggle{ grid-area: toggle; justify-self: end; display: block; }
-  nav#menu{ grid-area: menu; display: none; flex-direction: column; align-items: stretch; }
-  nav#menu.show{ display: flex; }
-  .lang{ grid-area: lang; justify-content: flex-start; }
-      
-  /* hero */
-  .hero-title{ font-size: 1.7em; }
-  .hero-text{ font-size: 1em; }
-  .hero-content{ padding: 40px 20px 140px; }
-}
-
-    /* ✅ Estilos para la llama flotante */
-.llama-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  background: white;
-  color: #333;
-  padding: 10px 15px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
-  z-index: 999;
-}
-
-.llama-btn:hover img {
-  transform: scale(1.1) rotate(2deg);
-}
-
-.chat-text {
-  background: #fff3cd;
-  color: #333;
-  padding: 12px 18px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  font-size: 15px;
-  margin-right: 10px;
-  line-height: 1.2;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-    /* Estilo para botón hamburguesa */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  background: none;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-
-  
+    /* ─── MOBILE ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .caminos-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      nav { display: none; flex-direction: column; }
+      nav.show {
+        display: flex;
+        position: absolute;
+        top: 70px; left: 0; right: 0;
+        background: var(--verde);
+        padding: 16px 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .menu-toggle { display: block; }
+      .hero-dots { right: 20px; }
+    }
   </style>
 </head>
 <body>
+
+<!-- HEADER -->
 <header>
-  <div class="header-inner">
+  <a href="#" class="brand">
+    <div class="brand-icon">SG</div>
+    <span class="brand-name">Suyay Global</span>
+  </a>
 
-    <!-- IZQUIERDA: isotipo (placeholder) + nombre -->
-    <div class="brand">
-      <div class="brand-mark" aria-label="Isotipo (pendiente)"></div>
-      <div class="brand-name">Suyay Tour</div>
-    </div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
-    <!-- CENTRO: menú -->
-    <nav id="menu">
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#tours">Tours</a>
-      <a href="#testimonios">Testimonios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+  <nav id="menu">
+    <a href="index.html">Suyay Tours</a>
+    <a href="#">Suyay Voluntariado</a>
+    <a href="#">Suyay Moda</a>
+  </nav>
 
-    <!-- DERECHA: idiomas -->
-    <div class="lang">
-      <a href="index.html" aria-label="Español">
-        <img src="https://flagcdn.com/w20/es.png" alt="ES">
-      </a>
-      <a href="en.html" aria-label="English">
-        <img src="https://flagcdn.com/w20/gb.png" alt="EN">
-      </a>
-    </div>
-
+  <div class="lang">
+    <a href="index.html"><img src="https://flagcdn.com/w20/pe.png" alt="ES"> ES</a>
+    <a href="en.html"><img src="https://flagcdn.com/w20/gb.png" alt="EN"> EN</a>
   </div>
 </header>
-<section id="inicio" class="hero">
-  <!-- MEDIA: video + 3 imágenes -->
-  <div class="hero-media">
 
-    <!-- 3 fotos rotando -->
-    <div class="hero-slides">
-      <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Suyay Tour - 1" loading="eager">
-      <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="Suyay Tour - 2" loading="lazy">
-      <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Suyay Tour - 3" loading="lazy">
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-slides">
+    <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Suyay 1" loading="eager">
+    <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="Suyay 2" loading="lazy">
+    <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Suyay 3" loading="lazy">
   </div>
 
-  <!-- CONTENIDO encima -->
-  <div class="hero-overlay">
-    <div class="hero-content">
-      <h1 class="hero-title">Viaja con locales. Vive Perú con confianza.</h1>
+  <div class="hero-overlay"></div>
 
-      <p class="hero-text">
-        Somos limeños que amamos nuestro país. Con nosotros no hay prisas, ni rutas forzadas — solo experiencias reales, atención cálida y ganas de que disfrutes como en casa.
-      </p>
+  <div class="hero-bottom">
+    <p class="hero-tagline">Esperanza hecha experiencia</p>
+    <h1 class="hero-title">Suyay <span>Global</span></h1>
+  </div>
 
-      <a class="hero-cta" onclick="document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });">
-        Comienza tu aventura
+  <div class="scroll-hint">Descubrir</div>
+
+  <div class="hero-dots">
+    <button class="hero-dot is-active" onclick="goToSlide(0)"></button>
+    <button class="hero-dot" onclick="goToSlide(1)"></button>
+    <button class="hero-dot" onclick="goToSlide(2)"></button>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="quienes" id="nosotros">
+  <div class="quienes-inner">
+    <span class="section-label">Nuestra historia</span>
+    <h2>Suyay significa <em>"esperanza"</em></h2>
+    <p>Para nosotros no es solo una palabra bonita: es una promesa. La promesa de que cada persona que se cruce con Suyay se lleve algo más que un recuerdo: se lleve conexión, orgullo y ganas de volver.</p>
+    <p>Esa esperanza vive en tres caminos que se unen en uno solo. Nuestros tours te acercan al Perú real, el que se siente y se comparte con calma, como lo haría un amigo local. Nuestros programas de ayuda social convierten el viaje en impacto, apoyando a comunidades y proyectos que merecen seguir creciendo. Y nuestra tienda de ropa hecha a mano mantiene vivas historias y manos peruanas, con piezas únicas que llevan cultura, paciencia y amor por lo nuestro.</p>
+    <p><strong>Suyay es Perú con corazón: para vivirlo, para cuidarlo y para compartirlo.</strong></p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<!-- TRES CAMINOS -->
+<section class="caminos" id="caminos">
+  <div class="caminos-inner">
+    <div class="caminos-header">
+      <span class="section-label" style="color:rgba(201,168,76,0.8)">Tres caminos, una misión</span>
+      <h2>Elige tu forma de vivir el Perú</h2>
+      <p>Cada rama de Suyay es una puerta distinta al mismo corazón.</p>
+    </div>
+
+    <div class="caminos-grid">
+
+      <a class="camino-card" href="tours.html">
+        <span class="camino-icon">🗺️</span>
+        <span class="camino-tag">Turismo</span>
+        <h3>Suyay Tours</h3>
+        <p>Viaja con locales que aman lo que muestran. City tours por Lima, aventura en Huacachina, gastronomía real y mucho más — sin prisas, con corazón.</p>
+        <span class="camino-btn">Explorar tours</span>
       </a>
+
+      <a class="camino-card" href="#">
+        <span class="camino-icon">🤝</span>
+        <span class="camino-tag">ONG · Impacto social</span>
+        <h3>Suyay Voluntariado</h3>
+        <p>Convierte tu viaje en algo que deja huella. Apoya comunidades, participa en proyectos reales y regresa a casa con algo más que fotos.</p>
+        <span class="camino-btn">Conocer programas</span>
+      </a>
+
+      <a class="camino-card" href="#">
+        <span class="camino-icon">👗</span>
+        <span class="camino-tag">Moda · Artesanía</span>
+        <h3>Suyay Moda</h3>
+        <p>Prendas únicas hechas a mano por artesanos peruanos. Cada pieza lleva historia, cultura y el orgullo de manos que tejen con amor.</p>
+        <span class="camino-btn">Ver tienda</span>
+      </a>
+
     </div>
   </div>
 </section>
 
-<section id="nosotros">
-  <h2>Sobre Nosotros</h2>
-  <p>En <strong>Suyay Tour</strong> no somos una gran agencia. Somos un grupo de personas que ama el Perú y quiere compartirlo contigo de forma cercana y real.</p>
-  <p>Nuestro nombre, Suyay, significa “esperanza” en quechua — y eso es lo que buscamos ofrecer: una experiencia auténtica, tranquila y llena de momentos memorables. Desde que te recogemos en el aeropuerto hasta el último paseo por nuestras calles, estarás acompañado como parte de nuestra familia.</p>
-  <p>Hacemos city tours por Lima, viajes a Huacachina, rutas gastronómicas y más, pero sobre todo te damos una mirada local, con cariño, con paciencia y con muchas ganas de que te enamores del Perú tanto como nosotros.</p>
-  <p>Estás invitado a vivirlo con nosotros. Bienvenido a Suyay Tour.</p>
-</section>
-  
-<section id="tours" class="tours">
-  <h2>Experiencias en Lima</h2>
-  
-  <div class="tours-grid">
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Suyay Global</div>
+  <div class="footer-sub">Perú con corazón</div>
+  <p>contacto@suyayglobal.com · +51 925 585 680</p>
+  <p style="margin-top:12px">&copy; 2025 Suyay Global — Todos los derechos reservados</p>
+</footer>
 
-    <div class="card">
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" loading="lazy" alt="City Tour Lima Premium">
-  <div class="card-body">
-    <h3>City Tour Lima Premium</h3>
-    <p class="card-desc">City Tour Premium con paradas top. Ver itinerario completo.</p>
-    <div class="card-actions">
-      <a class="btn btn-outline" href="tours.html">Ver detalles</a>
-      <a class="btn btn-primary"
-         href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20el%20City%20Tour%20Lima%20Premium.%0A%0A%C2%BFMe%20confirman%20disponibilidad%20y%20precio%3F%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20%0A-%20Recojo%20en%3A%20Miraflores%20/%20San%20Isidro%20/%20Barranco"
-         target="_blank" rel="noopener">Reservar</a>
-    </div>
-  </div>
-</div>
-
-    <div class="card">
-      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" loading="lazy" alt="Tour Huacachina">
-      <div class="card-body">
-        <h3>Tour Huacachina</h3>
-        <p>Viaje de aventura a las dunas, paseo en buggy y atardecer en el oasis.</p>
-        <div class="card-actions">
-          <a class="btn btn-outline" href="#contacto">Ver detalles</a>
-          <a class="btn btn-primary" href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20el%20Tour%20a%20Huacachina.%20%C2%BFMe%20pueden%20dar%20disponibilidad%20y%20precio%3F" target="_blank" rel="noopener">Reservar</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Gastronomia.png" loading="lazy" alt="Tour Gastronómico">
-      <div class="card-body">
-        <h3>Tour Gastronómico</h3>
-        <p>Degusta lo mejor de la cocina peruana: ceviche, lomo saltado y más.</p>
-        <div class="card-actions">
-          <a class="btn btn-outline" href="#contacto">Ver detalles</a>
-          <a class="btn btn-primary" href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20reservar%20el%20Tour%20Gastron%C3%B3mico.%20%C2%BFMe%20pueden%20dar%20disponibilidad%20y%20precio%3F" target="_blank" rel="noopener">Reservar</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  </section>
-
-<section id="galeria" style="background-color: #f6f6f6; padding: 60px 20px;">
-  <h2 style="text-align: center;">Explora con Suyay Tour</h2>
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" loading="lazy" alt="Galería visual" style="width:100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-top: 20px;">
-</section>
-
-  <section id="testimonios">
-    <h2>Testimonios</h2>
-    <p>"Excelente experiencia con Suyay Tour" - Cliente A</p>
-    <p>"Los mejores guías y lugares increíbles" - Cliente B</p>
-  </section>
-
-  <section id="contacto">
-    <h2>Contáctanos</h2>
-    <p>Correo: contacto@suyaytour.com</p>
-    <p>Teléfono: +51 925 585 680</p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Suyay Tour - Todos los derechos reservados</p>
-  </footer>
-
-  <!-- ✅ Botón personalizado con la llama -->
+<!-- LLAMA FLOTANTE -->
 <div id="chat">
-  <a href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20tengo%20una%20consulta%20y%20quiero%20reservar%20un%20tour." class="llama-btn" target="_blank" rel="noopener">
+  <a href="https://wa.me/51925585680?text=Hola%20Suyay%20Global,%20tengo%20una%20consulta." class="llama-btn" target="_blank" rel="noopener">
     <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
-    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Llama bot" style="height: 80px;">
+    <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
   </a>
 </div>
+
 <script>
+  // Menu móvil
   function toggleMenu() {
-    const menu = document.getElementById('menu');
-    menu.classList.toggle('show');
+    document.getElementById('menu').classList.toggle('show');
   }
 
-  // Carrusel de 3 imágenes en el hero
-  (function heroSlider(){
-    const slides = document.querySelectorAll('.hero-slide');
-    if (!slides.length) return;
+  // Carrusel hero
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  let current = 0;
+  let timer;
 
-    let i = 0;
-    setInterval(() => {
-      slides[i].classList.remove('is-active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
-    }, 4500);
-  })();
+  function goToSlide(n) {
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = n;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 5000);
+  }
+
+  function nextSlide() {
+    goToSlide((current + 1) % slides.length);
+  }
+
+  timer = setInterval(nextSlide, 5000);
 </script>
 </body>
 </html>
