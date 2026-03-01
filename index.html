@@ -6,8 +6,90 @@
   <title>Suyay Tour</title>
   <style>
     body { margin: 0; font-family: sans-serif; scroll-behavior: smooth; }
-    header { background: #004d40; color: white; padding: 20px; position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
-    nav a { color: white; margin: 0 10px; text-decoration: none; }
+header{
+  background:#004d40;
+  color:#fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0;               /* importante: ahora el padding lo maneja el contenedor */
+}
+
+/* contenedor del header (ancho completo, contenido centrado) */
+.header-inner{
+  max-width: 1200px;        /* más ancho que 1000 para que no se vea apretado */
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 260px 1fr 120px;  /* izquierda / centro / derecha */
+  align-items: center;
+  gap: 12px;
+}
+
+/* izquierda: isotipo + nombre */
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 0;
+}
+.brand-mark{
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.18); /* placeholder del isotipo */
+  border: 1px solid rgba(255,255,255,0.25);
+  flex: 0 0 auto;
+}
+.brand-name{
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* centro: menú centrado */
+nav#menu{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 18px;
+}
+nav#menu a{
+  color:#fff;
+  text-decoration:none;
+  font-weight: 600;
+  padding: 10px 8px;
+  border-radius: 10px;
+  opacity: .95;
+}
+nav#menu a:hover{
+  background: rgba(255,255,255,0.12);
+  opacity: 1;
+}
+
+/* derecha: idiomas */
+.lang{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap: 10px;
+}
+.lang a{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.10);
+}
+.lang a:hover{
+  background: rgba(255,255,255,0.16);
+}
+.lang img{
+  display:block;
+}
     section { padding: 60px 20px; max-width: 1000px; margin: auto; }
 
 
@@ -58,14 +140,6 @@
   z-index: 0;
 }
 
-/* Video de fondo */
-.hero-video{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Carrusel de imágenes */
 .hero-slides{
@@ -178,24 +252,27 @@
 
 footer { background: #004d40; color: white; text-align: center; padding: 20px; }
 
-   @media screen and (max-width: 768px) {
-  header {
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
+    @media screen and (max-width: 768px) {
+  /* header nuevo */
+  .header-inner{
+    grid-template-columns: 1fr auto;  /* izquierda + botón */
+    grid-template-areas:
+      "brand toggle"
+      "menu menu"
+      "lang lang";
+    gap: 10px;
   }
 
-    .hero-title{
-    font-size: 1.7em;
-  }
-  
-  .hero-text{
-    font-size: 1em;
-  }
-
-    .hero-content{
-    padding: 40px 20px 140px;
-  }
+  .brand{ grid-area: brand; }
+  .menu-toggle{ grid-area: toggle; justify-self: end; display: block; }
+  nav#menu{ grid-area: menu; display: none; flex-direction: column; align-items: stretch; }
+  nav#menu.show{ display: flex; }
+  .lang{ grid-area: lang; justify-content: flex-start; }
+      
+  /* hero */
+  .hero-title{ font-size: 1.7em; }
+  .hero-text{ font-size: 1em; }
+  .hero-content{ padding: 40px 20px 140px; }
 }
 
     /* ✅ Estilos para la llama flotante */
@@ -246,53 +323,44 @@ footer { background: #004d40; color: white; text-align: center; padding: 20px; }
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  nav {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #004d40;
-    padding: 10px 0;
-  }
 
-  nav.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
-
-  nav a {
-    padding: 10px;
-    border-top: 1px solid #ffffff33;
-  }
-}
   
   </style>
 </head>
 <body>
 <header>
-  <div style="white-space: nowrap; font-size: 1.1em; color: white;"><strong>Suyay Tour</strong></div>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <nav id="menu">
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#tours">Tours</a>
-    <a href="#testimonios">Testimonios</a>
-    <a href="#contacto">Contacto</a>
-    <a href="index.html"><img src="https://flagcdn.com/w20/es.png" alt="Español" style="margin-left: 10px;"></a>
-    <a href="en.html"><img src="https://flagcdn.com/w20/gb.png" alt="English" style="margin-left: 5px;"></a>
-  </nav>
+  <div class="header-inner">
+
+    <!-- IZQUIERDA: isotipo (placeholder) + nombre -->
+    <div class="brand">
+      <div class="brand-mark" aria-label="Isotipo (pendiente)"></div>
+      <div class="brand-name">Suyay Tour</div>
+    </div>
+
+    <!-- CENTRO: menú -->
+    <nav id="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#tours">Tours</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- DERECHA: idiomas -->
+    <div class="lang">
+      <a href="index.html" aria-label="Español">
+        <img src="https://flagcdn.com/w20/es.png" alt="ES">
+      </a>
+      <a href="en.html" aria-label="English">
+        <img src="https://flagcdn.com/w20/gb.png" alt="EN">
+      </a>
+    </div>
+
+  </div>
 </header>
 <section id="inicio" class="hero">
   <!-- MEDIA: video + 3 imágenes -->
   <div class="hero-media">
-    <!-- Video (si no existe aún, igual no rompe) -->
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-      <source src="assets/hero.mp4" type="video/mp4">
-    </video>
 
     <!-- 3 fotos rotando -->
     <div class="hero-slides">
