@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Tour Lima Premium – Suyay Tours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --verde: #004d40; --dorado: #c9a84c; --crema: #faf7f2; }
+    body { font-family: 'Lato', sans-serif; background: var(--crema); color: #1a1a1a; }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 40px; height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,77,64,0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--dorado); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 18px; color: var(--verde); }
+    .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15em; color: white; }
+    nav { display: flex; gap: 6px; align-items: center; }
+    .nav-item { position: relative; }
+    .nav-item > a { color: rgba(255,255,255,0.85); text-decoration: none; font-weight: 600; font-size: 0.88em; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 16px; border-radius: 8px; border: 1px solid transparent; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+    .nav-item > a:hover, .nav-item:hover > a { background: rgba(255,255,255,0.1); color: white; border-color: rgba(201,168,76,0.4); }
+    .nav-item.has-dropdown > a::after { content: '▾'; font-size: 0.75em; opacity: 0.7; transition: transform 0.2s; }
+    .nav-item.has-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 240px; background: #003d33; border: 1px solid rgba(201,168,76,0.25); border-radius: 12px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all 0.2s ease; box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 600; padding: 10px 14px; border-radius: 8px; transition: all 0.15s; border-left: 2px solid transparent; }
+    .dropdown a:hover { background: rgba(255,255,255,0.08); color: var(--dorado); border-left-color: var(--dorado); padding-left: 18px; }
+    .dropdown .dropdown-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.6); padding: 8px 14px 4px; display: block; }
+    .dropdown hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 6px 8px; }
+    .lang { display: flex; gap: 8px; align-items: center; }
+    .lang a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.8em; font-weight: 700; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+    .lang a:hover { background: rgba(255,255,255,0.12); color: white; }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer; }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .tour-hero {
+      position: relative;
+      height: 75vh;
+      min-height: 500px;
+      overflow: hidden;
+    }
+    .tour-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .tour-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%);
+    }
+    .tour-hero-content {
+      position: absolute; bottom: 50px; left: 0; right: 0;
+      padding: 0 40px;
+      max-width: 900px; margin: 0 auto;
+    }
+    .breadcrumb {
+      font-size: 0.78em; color: rgba(255,255,255,0.6);
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dorado); }
+    .breadcrumb span { opacity: 0.4; }
+    .tour-hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(2em, 4.5vw, 3.5em);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .tour-hero-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tag {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      color: white; font-size: 0.8em; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .tag.gold { background: var(--dorado); color: #1a1a1a; border-color: var(--dorado); }
+
+    /* ─── LAYOUT PRINCIPAL ───────────────────────────────── */
+    .tour-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 50px;
+      align-items: start;
+    }
+
+    /* ─── CONTENIDO IZQUIERDA ────────────────────────────── */
+    .tour-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7em; font-weight: 700;
+      color: var(--verde); margin-bottom: 16px;
+    }
+    .tour-content p {
+      font-size: 1em; line-height: 1.8;
+      color: #444; margin-bottom: 16px;
+    }
+
+    .section-divider {
+      border: none; border-top: 1px solid #e8e0d4;
+      margin: 40px 0;
+    }
+
+    /* Itinerario */
+    .itinerary { margin-top: 10px; }
+    .itinerary-item {
+      display: flex; gap: 20px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .itinerary-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 15px; top: 34px;
+      width: 2px; bottom: -14px;
+      background: #e0d8cc;
+    }
+    .itinerary-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--verde);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.85em; color: white; font-weight: 700;
+      position: relative; z-index: 1;
+    }
+    .itinerary-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05em; font-weight: 700;
+      color: var(--verde); margin-bottom: 6px;
+    }
+    .itinerary-text p {
+      font-size: 0.9em; color: #555;
+      line-height: 1.65; margin: 0;
+    }
+    .itinerary-text .itinerary-badge {
+      display: inline-block;
+      background: #e8f5e9; color: #2e7d32;
+      font-size: 0.72em; font-weight: 700;
+      padding: 2px 10px; border-radius: 10px;
+      margin-bottom: 6px;
+    }
+
+    /* Incluye / No incluye */
+    .includes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .includes-box {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid #ede6d8;
+    }
+    .includes-box h4 {
+      font-size: 0.85em; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .includes-box.yes h4 { color: #2e7d32; }
+    .includes-box.no h4 { color: #c62828; }
+    .includes-box ul { list-style: none; }
+    .includes-box ul li {
+      font-size: 0.88em; color: #444;
+      padding: 5px 0;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .includes-box.yes ul li::before { content: '✓'; color: #2e7d32; font-weight: 700; flex-shrink: 0; }
+    .includes-box.no ul li::before { content: '✗'; color: #c62828; font-weight: 700; flex-shrink: 0; }
+
+    /* Recomendaciones */
+    .reco-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .reco-item {
+      background: white; border: 1px solid #ede6d8;
+      border-radius: 10px; padding: 10px 16px;
+      font-size: 0.85em; color: #444;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* ─── SIDEBAR ────────────────────────────────────────── */
+    .tour-sidebar { position: sticky; top: 90px; }
+
+    .booking-card {
+      background: white;
+      border-radius: 18px;
+      border: 1px solid #ede6d8;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+    .booking-card-header {
+      background: var(--verde);
+      padding: 24px;
+      text-align: center;
+    }
+    .booking-card-header .precio-label {
+      font-size: 0.75em; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .booking-card-header .precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6em; font-weight: 800; color: white;
+    }
+    .booking-card-header .precio span {
+      font-size: 0.45em; font-family: 'Lato', sans-serif;
+      font-weight: 400; color: rgba(255,255,255,0.7);
+    }
+    .booking-card-header .precio-nota {
+      font-size: 0.78em; color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+    }
+
+    .booking-card-body { padding: 24px; }
+
+    .price-table { width: 100%; margin-bottom: 20px; }
+    .price-table tr td {
+      padding: 8px 4px; font-size: 0.88em;
+      border-bottom: 1px solid #f0ebe2;
+    }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table td:first-child { color: #666; }
+    .price-table td:last-child { font-weight: 700; color: var(--verde); text-align: right; }
+
+    .booking-info { margin-bottom: 20px; }
+    .booking-info-item {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: 10px 0;
+      border-bottom: 1px solid #f0ebe2;
+      font-size: 0.88em;
+    }
+    .booking-info-item:last-child { border-bottom: none; }
+    .booking-info-item .label { color: #888; }
+    .booking-info-item .value { font-weight: 600; color: #1a1a1a; }
+
+    .btn-reservar {
+      display: block; width: 100%;
+      background: #25d366;
+      color: white; text-align: center;
+      padding: 14px; border-radius: 12px;
+      font-size: 1em; font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-bottom: 10px;
+    }
+    .btn-reservar:hover { background: #20b858; }
+    .btn-reservar-outline {
+      display: block; width: 100%;
+      background: white; color: var(--verde);
+      border: 2px solid var(--verde);
+      text-align: center; padding: 12px;
+      border-radius: 12px; font-size: 0.9em;
+      font-weight: 700; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-reservar-outline:hover { background: var(--verde); color: white; }
+    .booking-note {
+      font-size: 0.75em; color: #aaa;
+      text-align: center; margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer { background: #021f1a; color: rgba(255,255,255,0.5); padding: 40px 20px; text-align: center; }
+    footer .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.4em; color: white; font-weight: 700; margin-bottom: 6px; }
+    footer .footer-sub { font-size: 0.8em; letter-spacing: 0.08em; color: var(--dorado); text-transform: uppercase; margin-bottom: 20px; }
+    footer p { font-size: 0.82em; }
+
+    /* ─── LLAMA ──────────────────────────────────────────── */
+    .llama-btn { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; background: white; padding: 10px 16px 10px 10px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: transform 0.3s; z-index: 999; }
+    .llama-btn:hover { transform: translateY(-2px); }
+    .chat-text { background: #fff3cd; color: #333; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-right: 10px; line-height: 1.3; animation: bounce 2.5s ease infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    .llama-btn img { height: 60px; }
+
+    /* ─── MOBILE ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .tour-body { grid-template-columns: 1fr; }
+      .tour-sidebar { position: static; }
+      .includes-grid { grid-template-columns: 1fr; }
+      .tour-hero-content { padding: 0 20px; bottom: 30px; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      nav { display: none; flex-direction: column; width: 100%; }
+      nav.show { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--verde); padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+      .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(0,0,0,0.2); margin-top: 4px; }
+      .menu-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="brand">
+    <div class="brand-icon">SG</div>
+    <span class="brand-name">Suyay Global</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="menu">
+    <div class="nav-item has-dropdown">
+      <a href="tours.html">Suyay Tours</a>
+      <div class="dropdown">
+        <span class="dropdown-label">Nuestros tours</span>
+        <a href="tour-lima-premium.html">🗺️ City Tour Lima Premium</a>
+        <a href="tour-nocturno.html">🌙 Experiencia Nocturna</a>
+        <a href="tour-puerto.html">⚓ Tour Puerto / Aeropuerto</a>
+        <hr>
+        <a href="tours.html">Ver todos los tours →</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#">Suyay Voluntariado</a></div>
+    <div class="nav-item"><a href="#">Suyay Moda</a></div>
+  </nav>
+  <div class="lang">
+    <a href="tour-lima-premium.html"><img src="https://flagcdn.com/w20/pe.png" alt="ES"> ES</a>
+    <a href="#"><img src="https://flagcdn.com/w20/gb.png" alt="EN"> EN</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="tour-hero">
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="City Tour Lima Premium">
+  <div class="tour-hero-overlay"></div>
+  <div class="tour-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a>
+      <span>›</span>
+      <a href="tours.html">Suyay Tours</a>
+      <span>›</span>
+      City Tour Lima Premium
+    </div>
+    <h1>City Tour Lima Premium</h1>
+    <div class="tour-hero-tags">
+      <span class="tag">⏱ 7 horas</span>
+      <span class="tag">🕗 8:00 AM</span>
+      <span class="tag">👥 1–16 personas</span>
+      <span class="tag gold">🌟 Más popular</span>
+    </div>
+  </div>
+</div>
+
+<!-- CUERPO -->
+<div class="tour-body">
+
+  <!-- CONTENIDO -->
+  <div class="tour-content">
+
+    <h2>Historia, cultura, pisco y sabores del Perú</h2>
+    <p>Descubre Lima en una experiencia premium diseñada especialmente para quienes visitan el Perú por primera vez. Este tour combina la Lima bohemia, moderna e histórica, integrando vestigios prehispánicos, arquitectura colonial, tradiciones vivas y sabores auténticos, acompañado por un guía local experto durante todo el recorrido.</p>
+
+    <hr class="section-divider">
+
+    <h2>Itinerario</h2>
+    <div class="itinerary">
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">1</div>
+        <div class="itinerary-text">
+          <h4>Barranco – Barrio bohemio</h4>
+          <span class="itinerary-badge">🚶 Caminata</span>
+          <p>El corazón artístico de Lima: murales coloridos, casonas republicanas, galerías de arte y el icónico Puente de los Suspiros. A pocos pasos del océano Pacífico.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">2</div>
+        <div class="itinerary-text">
+          <h4>Huaca Pucllana + San Isidro + Parque El Olivar</h4>
+          <span class="itinerary-badge">🚐 Panorámico</span>
+          <p>Tres etapas de la historia de Lima: la pirámide preincaica de más de 1,500 años, el distrito financiero moderno y el bosque de olivos centenarios.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">3</div>
+        <div class="itinerary-text">
+          <h4>Plaza San Martín + Hotel Bolívar</h4>
+          <span class="itinerary-badge">🚶 Caminata</span>
+          <p>Plaza inaugurada en 1921 por el centenario de la independencia. Arquitectura europea que marca el desarrollo de la Lima republicana.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">4</div>
+        <div class="itinerary-text">
+          <h4>Jirón de la Unión</h4>
+          <span class="itinerary-badge">🚶 Caminata histórica</span>
+          <p>La vía peatonal más tradicional del centro histórico. Vida cotidiana limeña y siglos de evolución social y comercial en una sola calle.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">5</div>
+        <div class="itinerary-text">
+          <h4>Plaza Mayor de Lima</h4>
+          <span class="itinerary-badge">🏛️ Centro Histórico UNESCO</span>
+          <p>Fundada en 1535, rodeada del Palacio de Gobierno, la Catedral, el Palacio Municipal y el Palacio Arzobispal. El corazón histórico del Perú.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">6</div>
+        <div class="itinerary-text">
+          <h4>Catacumbas de San Francisco</h4>
+          <span class="itinerary-badge">✔ Entrada incluida</span>
+          <p>Pasadizos subterráneos que funcionaron como cementerio colonial. Una de las visitas más fascinantes e impactantes de Lima.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">7</div>
+        <div class="itinerary-text">
+          <h4>Degustación de Pisco Peruano</h4>
+          <span class="itinerary-badge">🍸 Incluido</span>
+          <p>Explicación sobre el origen, elaboración y tipos de uva del pisco, seguida de una degustación guiada. Ideal para quienes lo prueban por primera vez.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">8</div>
+        <div class="itinerary-text">
+          <h4>Casa Aliaga + Convento de Santo Domingo</h4>
+          <span class="itinerary-badge">🏛️ Patrimonio colonial</span>
+          <p>Una de las residencias coloniales más antiguas de América, seguida del convento que alberga los restos de Santa Rosa de Lima y San Martín de Porres.</p>
+        </div>
+      </div>
+
+      <div class="itinerary-item">
+        <div class="itinerary-dot">9</div>
+        <div class="itinerary-text">
+          <h4>Piqueo Típico Peruano</h4>
+          <span class="itinerary-badge">🍽️ Último punto</span>
+          <p>Degustación de comida peruana callejera — segura, auténtica y deliciosa. El cierre perfecto para conocer los sabores más representativos del país.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>¿Qué incluye?</h2>
+    <div class="includes-grid">
+      <div class="includes-box yes">
+        <h4>✓ Incluye</h4>
+        <ul>
+          <li>Transporte turístico cómodo y seguro</li>
+          <li>Recojo desde hotel o Airbnb</li>
+          <li>Guía local profesional</li>
+          <li>Entrada a las Catacumbas de San Francisco</li>
+          <li>Degustación de pisco peruano</li>
+          <li>Piqueo típico callejero</li>
+          <li>1 botella de agua por pasajero</li>
+        </ul>
+      </div>
+      <div class="includes-box no">
+        <h4>✗ No incluye</h4>
+        <ul>
+          <li>Bebidas alcohólicas adicionales</li>
+          <li>Gastos personales</li>
+          <li>Propinas (opcionales)</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Recomendaciones</h2>
+    <div class="reco-grid">
+      <div class="reco-item">👟 Calzado cómodo</div>
+      <div class="reco-item">🧴 Bloqueador solar</div>
+      <div class="reco-item">🧢 Gorra y lentes de sol</div>
+      <div class="reco-item">📱 Cámara o celular</div>
+      <div class="reco-item">💵 Efectivo pequeño</div>
+      <div class="reco-item">🥗 Informar restricciones alimentarias</div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="tour-sidebar">
+    <div class="booking-card">
+      <div class="booking-card-header">
+        <div class="precio-label">Desde</div>
+        <div class="precio">$48 <span>/ persona</span></div>
+        <div class="precio-nota">Precio según tamaño del grupo</div>
+      </div>
+      <div class="booking-card-body">
+
+        <table class="price-table">
+          <tr>
+            <td>1 – 3 personas</td>
+            <td>$62 / persona</td>
+          </tr>
+          <tr>
+            <td>4 – 7 personas</td>
+            <td>$55 / persona</td>
+          </tr>
+          <tr>
+            <td>8 – 16 personas</td>
+            <td>$48 / persona</td>
+          </tr>
+        </table>
+
+        <div class="booking-info">
+          <div class="booking-info-item">
+            <span class="label">Hora de recojo</span>
+            <span class="value">8:00 AM</span>
+          </div>
+          <div class="booking-info-item">
+            <span class="label">Duración</span>
+            <span class="value">~7 horas</span>
+          </div>
+          <div class="booking-info-item">
+            <span class="label">Retorno</span>
+            <span class="value">3:00 PM – Miraflores</span>
+          </div>
+          <div class="booking-info-item">
+            <span class="label">Recojo en</span>
+            <span class="value">Miraflores / San Isidro / Barranco</span>
+          </div>
+          <div class="booking-info-item">
+            <span class="label">Idioma</span>
+            <span class="value">Español / Inglés</span>
+          </div>
+        </div>
+
+        <a class="btn-reservar"
+           href="https://wa.me/51925585680?text=Hola%20Suyay%20Tours,%20quiero%20reservar%20el%20City%20Tour%20Lima%20Premium.%0A%0A-%20Fecha%3A%20%0A-%20N%C2%BA%20personas%3A%20%0A-%20Recojo%20en%3A%20"
+           target="_blank" rel="noopener">
+          💬 Reservar por WhatsApp
+        </a>
+        <a class="btn-reservar-outline" href="tours.html">
+          ← Ver todos los tours
+        </a>
+        <p class="booking-note">Reserva con al menos 24 horas de anticipación. Sin pago por adelantado.</p>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Suyay Global</div>
+  <div class="footer-sub">Perú con corazón</div>
+  <p>contacto@suyayglobal.com · +51 925 585 680</p>
+  <p style="margin-top:12px">&copy; 2025 Suyay Global — Todos los derechos reservados</p>
+</footer>
+
+<!-- LLAMA -->
+<a href="https://wa.me/51925585680?text=Hola%20Suyay%20Tours,%20quiero%20informaci%C3%B3n%20sobre%20el%20City%20Tour%20Lima%20Premium." class="llama-btn" target="_blank" rel="noopener">
+  <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
+</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('show');
+  }
+</script>
+</body>
+</html>
