@@ -64,11 +64,19 @@
       letter-spacing: 0.03em;
     }
 
+    /* ─── NAV ────────────────────────────────────────────── */
     nav {
       display: flex;
       gap: 6px;
+      align-items: center;
     }
-    nav a {
+
+    /* Item con o sin dropdown */
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
       color: rgba(255,255,255,0.85);
       text-decoration: none;
       font-weight: 600;
@@ -79,13 +87,84 @@
       border-radius: 8px;
       border: 1px solid transparent;
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
     }
-    nav a:hover {
+    .nav-item > a:hover,
+    .nav-item:hover > a {
       background: rgba(255,255,255,0.1);
       color: white;
       border-color: rgba(201,168,76,0.4);
     }
 
+    /* Flechita para el dropdown */
+    .nav-item.has-dropdown > a::after {
+      content: '▾';
+      font-size: 0.75em;
+      opacity: 0.7;
+      transition: transform 0.2s;
+    }
+    .nav-item.has-dropdown:hover > a::after {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 240px;
+      background: #003d33;
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 12px;
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: all 0.2s ease;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.85em;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .dropdown a:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--dorado);
+      border-left-color: var(--dorado);
+      padding-left: 18px;
+    }
+    .dropdown .dropdown-label {
+      font-size: 0.7em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.6);
+      padding: 8px 14px 4px;
+      display: block;
+    }
+    .dropdown hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 6px 8px;
+    }
+
+    /* ─── LANG ───────────────────────────────────────────── */
     .lang {
       display: flex;
       gap: 8px;
@@ -179,11 +258,8 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.4);
       letter-spacing: 0.01em;
     }
-    .hero-title span {
-      color: var(--dorado);
-    }
+    .hero-title span { color: var(--dorado); }
 
-    /* scroll indicator */
     .scroll-hint {
       position: absolute;
       bottom: 20px;
@@ -198,7 +274,6 @@
       font-size: 0.7em;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      animation: fadeInUp 1s 1.5s both;
     }
     .scroll-hint::after {
       content: '';
@@ -214,7 +289,6 @@
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
-    /* slide dots */
     .hero-dots {
       position: absolute;
       bottom: 28px;
@@ -276,7 +350,6 @@
       margin-bottom: 22px;
     }
     .quienes p:last-child { margin-bottom: 0; }
-
     .divider {
       width: 60px;
       height: 2px;
@@ -341,15 +414,9 @@
       border-color: rgba(201,168,76,0.4);
       transform: translateY(-4px);
     }
-    .camino-card:hover::before {
-      transform: scaleX(1);
-    }
+    .camino-card:hover::before { transform: scaleX(1); }
 
-    .camino-icon {
-      font-size: 2.4em;
-      margin-bottom: 20px;
-      display: block;
-    }
+    .camino-icon { font-size: 2.4em; margin-bottom: 20px; display: block; }
     .camino-tag {
       font-size: 0.7em;
       font-weight: 700;
@@ -384,19 +451,14 @@
       text-transform: uppercase;
       border-bottom: 1px solid rgba(201,168,76,0.5);
       padding-bottom: 3px;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
     .camino-card:hover .camino-btn {
       border-color: var(--dorado);
       color: var(--dorado);
     }
-    .camino-btn::after {
-      content: '→';
-      transition: transform 0.2s;
-    }
-    .camino-card:hover .camino-btn::after {
-      transform: translateX(4px);
-    }
+    .camino-btn::after { content: '→'; transition: transform 0.2s; }
+    .camino-card:hover .camino-btn::after { transform: translateX(4px); }
 
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
@@ -419,15 +481,12 @@
       text-transform: uppercase;
       margin-bottom: 20px;
     }
-    footer p {
-      font-size: 0.82em;
-    }
+    footer p { font-size: 0.82em; }
 
-    /* ─── LLAMA FLOTANTE ─────────────────────────────────── */
+    /* ─── LLAMA ──────────────────────────────────────────── */
     .llama-btn {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 24px; right: 24px;
       display: flex;
       align-items: center;
       background: white;
@@ -465,7 +524,7 @@
     }
     @media (max-width: 768px) {
       header { padding: 0 20px; }
-      nav { display: none; flex-direction: column; }
+      nav { display: none; flex-direction: column; width: 100%; }
       nav.show {
         display: flex;
         position: absolute;
@@ -473,6 +532,15 @@
         background: var(--verde);
         padding: 16px 20px;
         border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: rgba(0,0,0,0.2);
+        margin-top: 4px;
       }
       .menu-toggle { display: block; }
       .hero-dots { right: 20px; }
@@ -483,7 +551,7 @@
 
 <!-- HEADER -->
 <header>
-  <a href="#" class="brand">
+  <a href="index.html" class="brand">
     <div class="brand-icon">SG</div>
     <span class="brand-name">Suyay Global</span>
   </a>
@@ -491,9 +559,28 @@
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
 
   <nav id="menu">
-    <a href="index.html">Suyay Tours</a>
-    <a href="#">Suyay Voluntariado</a>
-    <a href="#">Suyay Moda</a>
+
+    <!-- SUYAY TOURS con dropdown -->
+    <div class="nav-item has-dropdown">
+      <a href="tours.html">Suyay Tours</a>
+      <div class="dropdown">
+        <span class="dropdown-label">Nuestros tours</span>
+        <a href="tour-lima-premium.html">🗺️ City Tour Lima Premium</a>
+        <a href="tour-nocturno.html">🌙 Experiencia Nocturna</a>
+        <a href="tour-puerto.html">⚓ Tour Puerto / Aeropuerto</a>
+        <hr>
+        <a href="tours.html">Ver todos los tours →</a>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a href="#">Suyay Voluntariado</a>
+    </div>
+
+    <div class="nav-item">
+      <a href="#">Suyay Moda</a>
+    </div>
+
   </nav>
 
   <div class="lang">
@@ -509,16 +596,12 @@
     <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="Suyay 2" loading="lazy">
     <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Huacachina.png" alt="Suyay 3" loading="lazy">
   </div>
-
   <div class="hero-overlay"></div>
-
   <div class="hero-bottom">
     <p class="hero-tagline">Esperanza hecha experiencia</p>
     <h1 class="hero-title">Suyay <span>Global</span></h1>
   </div>
-
   <div class="scroll-hint">Descubrir</div>
-
   <div class="hero-dots">
     <button class="hero-dot is-active" onclick="goToSlide(0)"></button>
     <button class="hero-dot" onclick="goToSlide(1)"></button>
@@ -546,7 +629,6 @@
       <h2>Elige tu forma de vivir el Perú</h2>
       <p>Cada rama de Suyay es una puerta distinta al mismo corazón.</p>
     </div>
-
     <div class="caminos-grid">
 
       <a class="camino-card" href="tours.html">
@@ -594,12 +676,10 @@
 </div>
 
 <script>
-  // Menu móvil
   function toggleMenu() {
     document.getElementById('menu').classList.toggle('show');
   }
 
-  // Carrusel hero
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
   let current = 0;
