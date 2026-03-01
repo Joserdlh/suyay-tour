@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pekes Handmade – Suyay Moda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,400&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --verde: #004d40; --dorado: #c9a84c; --crema: #faf7f2; --tierra: #5c3d2e; --naranja: #d4732a; }
+    body { font-family: 'Lato', sans-serif; background: var(--crema); color: #1a1a1a; }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 40px; height: 70px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,77,64,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--dorado); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 18px; color: var(--verde); }
+    .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15em; color: white; }
+    nav { display: flex; gap: 6px; align-items: center; }
+    .nav-item { position: relative; }
+    .nav-item > a { color: rgba(255,255,255,0.85); text-decoration: none; font-weight: 600; font-size: 0.88em; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 16px; border-radius: 8px; border: 1px solid transparent; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+    .nav-item > a:hover, .nav-item:hover > a { background: rgba(255,255,255,0.1); color: white; border-color: rgba(201,168,76,0.4); }
+    .nav-item.has-dropdown > a::after { content: '▾'; font-size: 0.75em; opacity: 0.7; transition: transform 0.2s; }
+    .nav-item.has-dropdown:hover > a::after { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 240px; background: #003d33; border: 1px solid rgba(201,168,76,0.25); border-radius: 12px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all 0.2s ease; box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85em; font-weight: 600; padding: 10px 14px; border-radius: 8px; transition: all 0.15s; border-left: 2px solid transparent; }
+    .dropdown a:hover { background: rgba(255,255,255,0.08); color: var(--dorado); border-left-color: var(--dorado); padding-left: 18px; }
+    .dropdown .dropdown-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.6); padding: 8px 14px 4px; display: block; }
+    .dropdown hr { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 6px 8px; }
+    .lang { display: flex; gap: 8px; align-items: center; }
+    .lang a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.8em; font-weight: 700; padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+    .lang a:hover { background: rgba(255,255,255,0.12); color: white; }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 26px; cursor: pointer; }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .brand-hero { position: relative; height: 70vh; min-height: 480px; overflow: hidden; background: #2c1810; display: flex; align-items: flex-end; }
+    .brand-hero-bg { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png') center/cover; opacity: 0.15; }
+    .brand-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(44,24,16,0.2) 0%, rgba(44,24,16,0.88) 100%); }
+    .brand-hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 40px 60px; width: 100%; }
+    .breadcrumb { font-size: 0.78em; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--dorado); }
+    .breadcrumb span { opacity: 0.4; }
+    .brand-hero-content h1 { font-family: 'Playfair Display', serif; font-weight: 800; font-size: clamp(2.2em, 5vw, 3.8em); color: white; line-height: 1.1; margin-bottom: 14px; }
+    .brand-hero-content h1 em { font-style: italic; color: #f0c080; }
+    .brand-hero-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tag { background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); color: white; font-size: 0.8em; font-weight: 600; padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
+    .tag.gold { background: var(--dorado); color: #1a1a1a; border-color: var(--dorado); }
+    .tag.naranja { background: rgba(212,115,42,0.3); border-color: rgba(212,115,42,0.5); }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .brand-body { max-width: 1100px; margin: 0 auto; padding: 60px 20px 100px; display: grid; grid-template-columns: 1fr 320px; gap: 60px; align-items: start; }
+
+    /* ─── CONTENIDO ──────────────────────────────────────── */
+    .brand-content h2 { font-family: 'Playfair Display', serif; font-size: 1.7em; font-weight: 700; color: #2c1810; margin-bottom: 16px; }
+    .brand-content p { font-size: 1em; line-height: 1.85; color: #444; margin-bottom: 20px; }
+    .brand-content p em { font-style: italic; color: var(--naranja); }
+    .section-divider { border: none; border-top: 1px solid #e8e0d4; margin: 40px 0; }
+
+    /* Highlight */
+    .highlight-box { background: linear-gradient(135deg, #2c1810, #4a2c1a); border-radius: 14px; padding: 26px 30px; margin: 24px 0; color: white; }
+    .highlight-box h4 { font-family: 'Playfair Display', serif; font-size: 1.1em; color: #f0c080; margin-bottom: 10px; }
+    .highlight-box p { font-size: 0.9em; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0; }
+
+    /* Colecciones */
+    .colecciones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
+    .coleccion-item { background: white; border: 1px solid #e8e0d4; border-radius: 14px; padding: 20px 16px; text-align: center; transition: all 0.2s; }
+    .coleccion-item:hover { border-color: var(--naranja); transform: translateY(-2px); }
+    .coleccion-item .col-icon { font-size: 1.8em; margin-bottom: 8px; display: block; }
+    .coleccion-item h4 { font-family: 'Playfair Display', serif; font-size: 0.95em; font-weight: 700; color: #2c1810; margin-bottom: 4px; }
+    .coleccion-item p { font-size: 0.78em; color: #888; margin: 0; }
+
+    /* Valores */
+    .valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+    .valor-item { background: white; border: 1px solid #e8e0d4; border-radius: 14px; padding: 22px; }
+    .valor-item .valor-icon { font-size: 1.8em; margin-bottom: 10px; }
+    .valor-item h4 { font-family: 'Playfair Display', serif; font-size: 1em; font-weight: 700; color: #2c1810; margin-bottom: 6px; }
+    .valor-item p { font-size: 0.85em; color: #666; line-height: 1.6; margin: 0; }
+
+    /* ─── SIDEBAR ────────────────────────────────────────── */
+    .brand-sidebar { position: sticky; top: 90px; }
+    .contact-card { background: white; border-radius: 18px; border: 1px solid #e8e0d4; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+    .contact-card-header { background: #2c1810; padding: 28px 24px; text-align: center; }
+    .contact-card-header .marca-logo { font-family: 'Playfair Display', serif; font-size: 1.5em; font-weight: 800; color: white; margin-bottom: 6px; }
+    .contact-card-header .marca-sub { font-size: 0.75em; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+    .contact-card-body { padding: 24px; }
+    .contact-info { margin-bottom: 20px; }
+    .contact-info-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0ebe2; font-size: 0.88em; }
+    .contact-info-item:last-child { border-bottom: none; }
+    .contact-info-item .label { color: #888; }
+    .contact-info-item .value { font-weight: 600; color: #1a1a1a; }
+    .btn-ig-main { display: block; width: 100%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366); color: white; text-align: center; padding: 14px; border-radius: 12px; font-size: 1em; font-weight: 700; text-decoration: none; transition: opacity 0.2s; margin-bottom: 10px; }
+    .btn-ig-main:hover { opacity: 0.9; }
+    .btn-wa { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 14px; border-radius: 12px; font-size: 1em; font-weight: 700; text-decoration: none; transition: background 0.2s; margin-bottom: 10px; }
+    .btn-wa:hover { background: #20b858; }
+    .btn-back { display: block; width: 100%; background: white; color: var(--verde); border: 2px solid var(--verde); text-align: center; padding: 12px; border-radius: 12px; font-size: 0.9em; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+    .btn-back:hover { background: var(--verde); color: white; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer { background: #021f1a; color: rgba(255,255,255,0.5); padding: 40px 20px; text-align: center; }
+    footer .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.4em; color: white; font-weight: 700; margin-bottom: 6px; }
+    footer .footer-sub { font-size: 0.8em; letter-spacing: 0.08em; color: var(--dorado); text-transform: uppercase; margin-bottom: 20px; }
+    footer p { font-size: 0.82em; }
+
+    /* ─── LLAMA ──────────────────────────────────────────── */
+    .llama-btn { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; background: white; padding: 10px 16px 10px 10px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: transform 0.3s; z-index: 999; }
+    .llama-btn:hover { transform: translateY(-2px); }
+    .chat-text { background: #fff3cd; color: #333; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-right: 10px; line-height: 1.3; animation: bounce 2.5s ease infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    .llama-btn img { height: 60px; }
+
+    /* ─── MOBILE ─────────────────────────────────────────── */
+    @media (max-width: 900px) { .brand-body { grid-template-columns: 1fr; } .brand-sidebar { position: static; } .valores-grid { grid-template-columns: 1fr 1fr; } .colecciones-grid { grid-template-columns: 1fr 1fr; } .brand-hero-content { padding: 0 20px 40px; } }
+    @media (max-width: 600px) { .colecciones-grid { grid-template-columns: 1fr; } .valores-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { header { padding: 0 20px; } nav { display: none; flex-direction: column; width: 100%; } nav.show { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: var(--verde); padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.1); } .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; background: rgba(0,0,0,0.2); margin-top: 4px; } .menu-toggle { display: block; } }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="brand">
+    <div class="brand-icon">SG</div>
+    <span class="brand-name">Suyay Global</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="menu">
+    <div class="nav-item has-dropdown">
+      <a href="tours.html">Suyay Tours</a>
+      <div class="dropdown">
+        <span class="dropdown-label">Nuestros tours</span>
+        <a href="tour-lima-premium.html">🗺️ City Tour Lima Premium</a>
+        <a href="tour-nocturno.html">🌙 Experiencia Nocturna</a>
+        <a href="tour-puerto.html">⚓ Tour Puerto / Aeropuerto</a>
+        <hr>
+        <a href="tours.html">Ver todos los tours →</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="voluntariado.html">Suyay Voluntariado</a></div>
+    <div class="nav-item has-dropdown">
+      <a href="moda.html">Suyay Moda</a>
+      <div class="dropdown">
+        <span class="dropdown-label">Nuestras marcas</span>
+        <a href="moda-lacumbre.html">🏔️ La Cumbre Comfywear</a>
+        <a href="moda-carolina.html">✂️ Carolina Riojas Atelier</a>
+        <a href="moda-pekes.html">🧸 Pekes Handmade</a>
+        <hr>
+        <a href="moda.html">Ver todas las marcas →</a>
+      </div>
+    </div>
+  </nav>
+  <div class="lang">
+    <a href="moda-pekes.html"><img src="https://flagcdn.com/w20/pe.png" alt="ES"> ES</a>
+    <a href="#"><img src="https://flagcdn.com/w20/gb.png" alt="EN"> EN</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="brand-hero">
+  <div class="brand-hero-bg"></div>
+  <div class="brand-hero-overlay"></div>
+  <div class="brand-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Inicio</a><span>›</span>
+      <a href="moda.html">Suyay Moda</a><span>›</span>
+      Pekes Handmade
+    </div>
+    <h1>Pekes <em>Handmade</em></h1>
+    <div class="brand-hero-tags">
+      <span class="tag naranja">🧸 Ropa infantil</span>
+      <span class="tag">🌿 100% algodón peruano</span>
+      <span class="tag">✋ Hecho a mano</span>
+      <span class="tag gold">✈️ Envíos worldwide</span>
+    </div>
+  </div>
+</div>
+
+<!-- CUERPO -->
+<div class="brand-body">
+
+  <div class="brand-content">
+    <h2>Hecho a mano, con amor, para los más pequeños</h2>
+    <p>En Pekes Handmade cada pieza nace a mano, con paciencia y cariño, pensando en lo más importante: la comodidad, el cuidado y la ternura.</p>
+    <p>Creamos artículos hechos artesanalmente, con materiales elegidos por su suavidad y calidad, para acompañar momentos cotidianos que se vuelven recuerdos. Aquí cada detalle importa: no producimos en masa, creamos con dedicación.</p>
+    <p><em>Hecho a mano, con amor, para los más pequeños.</em></p>
+
+    <div class="highlight-box">
+      <h4>🌍 Enviamos a todo el mundo</h4>
+      <p>Pekes Handmade lleva el algodón peruano hecho a mano hasta donde estés. Envíos internacionales disponibles para que los más pequeños de cualquier familia reciban nuestras prendas con amor.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Nuestras colecciones</h2>
+    <div class="colecciones-grid">
+      <div class="coleccion-item">
+        <span class="col-icon">👶</span>
+        <h4>Pekes Bebés</h4>
+        <p>Para los recién llegados</p>
+      </div>
+      <div class="coleccion-item">
+        <span class="col-icon">🦁</span>
+        <h4>Colección AW</h4>
+        <p>Temporada otoño/invierno</p>
+      </div>
+      <div class="coleccion-item">
+        <span class="col-icon">🎨</span>
+        <h4>Personalizada</h4>
+        <p>Prendas únicas a pedido</p>
+      </div>
+      <div class="coleccion-item">
+        <span class="col-icon">🛍️</span>
+        <h4>3x2</h4>
+        <p>Promociones especiales</p>
+      </div>
+      <div class="coleccion-item">
+        <span class="col-icon">🫧</span>
+        <h4>Guía de lavado</h4>
+        <p>Cuidado garantizado</p>
+      </div>
+      <div class="coleccion-item">
+        <span class="col-icon">💛</span>
+        <h4>Conócenos</h4>
+        <p>La historia de Pekes</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Lo que nos hace únicos</h2>
+    <div class="valores-grid">
+      <div class="valor-item">
+        <div class="valor-icon">✋</div>
+        <h4>100% hecho a mano</h4>
+        <p>Sin producción en masa. Cada pieza se trabaja con dedicación y tiempo.</p>
+      </div>
+      <div class="valor-item">
+        <div class="valor-icon">🌿</div>
+        <h4>Algodón peruano</h4>
+        <p>Material suave, seguro y de calidad premium para la piel de los bebés.</p>
+      </div>
+      <div class="valor-item">
+        <div class="valor-icon">🐢</div>
+        <h4>Slow fashion</h4>
+        <p>Producción consciente, sin apuros. Cada detalle importa y se nota.</p>
+      </div>
+      <div class="valor-item">
+        <div class="valor-icon">🌍</div>
+        <h4>Envíos worldwide</h4>
+        <p>Llegamos a donde estés. Pekes viaja al mundo entero con amor peruano.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="brand-sidebar">
+    <div class="contact-card">
+      <div class="contact-card-header">
+        <div class="marca-logo">PEKES</div>
+        <div class="marca-sub">Handmade · Ropa infantil</div>
+      </div>
+      <div class="contact-card-body">
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <span class="label">Para quién</span>
+            <span class="value">Bebés y niños</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="label">Material</span>
+            <span class="value">100% algodón peruano</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="label">Producción</span>
+            <span class="value">Hecho a mano</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="label">Envíos</span>
+            <span class="value">Worldwide 🌍</span>
+          </div>
+          <div class="contact-info-item">
+            <span class="label">Seguidores IG</span>
+            <span class="value">7,544</span>
+          </div>
+        </div>
+        <a class="btn-ig-main" href="https://www.instagram.com/pekeshandmade/" target="_blank" rel="noopener">📸 Ver en Instagram</a>
+        <a class="btn-wa" href="https://wa.me/51925585680?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Pekes%20Handmade." target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
+        <a class="btn-back" href="moda.html">← Ver todas las marcas</a>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Suyay Global</div>
+  <div class="footer-sub">Perú con corazón</div>
+  <p>contacto@suyayglobal.com · +51 925 585 680</p>
+  <p style="margin-top:12px">&copy; 2025 Suyay Global — Todos los derechos reservados</p>
+</footer>
+
+<a href="https://wa.me/51925585680?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Pekes%20Handmade." class="llama-btn" target="_blank" rel="noopener">
+  <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
+</a>
+
+<script>
+  function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+</script>
+</body>
+</html>
