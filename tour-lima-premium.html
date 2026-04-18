@@ -72,53 +72,37 @@
     .reco-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .reco-item { background: white; border: 1px solid #ede6d8; border-radius: 10px; padding: 10px 16px; font-size: 0.85em; color: #444; display: flex; align-items: center; gap: 8px; }
 
-    /* ─── SIDEBAR / FORMULARIO ───────────────────────────── */
+    /* ─── SIDEBAR ────────────────────────────────────────── */
     .tour-sidebar { position: sticky; top: 90px; }
-
-    /* Precio estático arriba */
     .precio-header { background: var(--verde); border-radius: 18px 18px 0 0; padding: 22px 24px; text-align: center; }
     .precio-label { font-size: 0.75em; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
     .precio-main { font-family: 'Playfair Display', serif; font-size: 2.4em; font-weight: 800; color: white; }
     .precio-main span { font-size: 0.45em; font-family: 'Lato', sans-serif; font-weight: 400; color: rgba(255,255,255,0.7); }
     .precio-nota { font-size: 0.78em; color: rgba(255,255,255,0.55); margin-top: 4px; }
-
-    /* Tabla de precios */
     .price-table-box { background: white; padding: 16px 24px; border-left: 1px solid #ede6d8; border-right: 1px solid #ede6d8; }
     .price-table { width: 100%; }
     .price-table tr td { padding: 7px 4px; font-size: 0.87em; border-bottom: 1px solid #f0ebe2; }
     .price-table tr:last-child td { border-bottom: none; }
     .price-table td:first-child { color: #666; }
     .price-table td:last-child { font-weight: 700; color: var(--verde); text-align: right; }
-
-    /* Formulario */
     .reserva-form { background: white; border: 1px solid #ede6d8; border-radius: 0 0 18px 18px; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-
     .form-title { font-family: 'Playfair Display', serif; font-size: 1.1em; font-weight: 700; color: var(--verde); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #f0ebe2; }
-
     .form-group { margin-bottom: 14px; }
     .form-group label { display: block; font-size: 0.78em; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 0.9em; font-family: 'Lato', sans-serif; color: #1a1a1a; background: #fafafa; transition: border-color 0.2s; }
     .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--verde); background: white; }
-
     .btn-verificar { width: 100%; background: var(--verde); color: white; padding: 13px; border: none; border-radius: 10px; font-size: 0.95em; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
     .btn-verificar:hover { background: #00695c; }
     .btn-verificar:disabled { background: #aaa; cursor: not-allowed; }
-
-    /* Mensaje de disponibilidad */
     .disponibilidad-msg { margin-top: 12px; padding: 12px 14px; border-radius: 10px; font-size: 0.85em; font-weight: 600; display: none; }
     .disponibilidad-msg.ok { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
     .disponibilidad-msg.error { background: #fce4ec; color: #c62828; border: 1px solid #f8bbd0; }
     .disponibilidad-msg.loading { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
-
-    /* Panel de reserva confirmada */
     .reserva-panel { display: none; margin-top: 16px; border-top: 1px solid #f0ebe2; padding-top: 16px; }
-
     .codigo-box { background: var(--verde); border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 16px; }
     .codigo-label { font-size: 0.72em; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
     .codigo-valor { font-family: 'Playfair Display', serif; font-size: 1.8em; font-weight: 800; color: var(--dorado); letter-spacing: 2px; }
     .codigo-expira { font-size: 0.72em; color: rgba(255,255,255,0.55); margin-top: 4px; }
-
-    /* Métodos de pago */
     .pago-titulo { font-size: 0.82em; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
     .pago-metodos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .pago-metodo { background: #fafafa; border: 1px solid #e8e0d4; border-radius: 10px; padding: 10px 14px; cursor: pointer; transition: all 0.15s; }
@@ -131,11 +115,8 @@
     .pago-metodo.activo .pago-metodo-detalle { display: block; }
     .pago-referencia { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 8px 12px; margin-top: 6px; font-size: 0.82em; color: #795548; }
     .pago-referencia strong { color: #e65100; }
-
-    /* Botón WhatsApp confirmar */
     .btn-confirmar { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 14px; border-radius: 12px; font-size: 1em; font-weight: 700; text-decoration: none; transition: background 0.2s; margin-top: 14px; }
     .btn-confirmar:hover { background: #20b858; }
-
     .nota-final { font-size: 0.72em; color: #aaa; text-align: center; margin-top: 10px; line-height: 1.5; }
 
     /* ─── FOOTER ─────────────────────────────────────────── */
@@ -219,9 +200,8 @@
 <!-- CUERPO -->
 <div class="tour-body">
 
-  <!-- CONTENIDO IZQUIERDA -->
+  <!-- CONTENIDO -->
   <div class="tour-content">
-
     <h2>Historia, cultura, pisco y sabores del Perú</h2>
     <p>Descubre Lima en una experiencia premium diseñada especialmente para quienes visitan el Perú por primera vez. Este tour combina la Lima bohemia, moderna e histórica, integrando vestigios prehispánicos, arquitectura colonial, tradiciones vivas y sabores auténticos.</p>
 
@@ -249,7 +229,7 @@
         <div class="itinerary-text">
           <h4>Plaza San Martín + Hotel Bolívar</h4>
           <span class="itinerary-badge">🚶 Caminata</span>
-          <p>Plaza inaugurada en 1921 por el centenario de la independencia. Arquitectura europea de la Lima republicana.</p>
+          <p>Plaza inaugurada en 1921 por el centenario de la independencia.</p>
         </div>
       </div>
       <div class="itinerary-item">
@@ -337,20 +317,15 @@
       <div class="reco-item">💵 Efectivo pequeño</div>
       <div class="reco-item">🥗 Informar restricciones alimentarias</div>
     </div>
-
   </div>
 
-  <!-- SIDEBAR — FORMULARIO DE RESERVA -->
+  <!-- SIDEBAR -->
   <aside class="tour-sidebar">
-
-    <!-- Precio -->
     <div class="precio-header">
       <div class="precio-label">Desde</div>
       <div class="precio-main">$48 <span>/ persona</span></div>
       <div class="precio-nota">Precio según tamaño del grupo</div>
     </div>
-
-    <!-- Tabla de precios -->
     <div class="price-table-box">
       <table class="price-table">
         <tr><td>1 – 3 personas</td><td>$62 / persona</td></tr>
@@ -358,18 +333,15 @@
         <tr><td>8 – 16 personas</td><td>$48 / persona</td></tr>
       </table>
     </div>
-
-    <!-- Formulario -->
     <div class="reserva-form">
       <div class="form-title">🗓️ Reserva ahora</div>
 
       <div class="form-group">
-        <label>Fecha del tour</label>
+        <label for="campo-fecha">Fecha del tour</label>
         <input type="date" id="campo-fecha" min="">
       </div>
-
       <div class="form-group">
-        <label>Número de personas</label>
+        <label for="campo-personas">Número de personas</label>
         <select id="campo-personas">
           <option value="">— Selecciona —</option>
           <option value="1">1 persona</option>
@@ -390,14 +362,12 @@
           <option value="16">16 personas</option>
         </select>
       </div>
-
       <div class="form-group">
-        <label>Tu nombre</label>
+        <label for="campo-nombre">Tu nombre</label>
         <input type="text" id="campo-nombre" placeholder="Nombre completo">
       </div>
-
       <div class="form-group">
-        <label>WhatsApp (con código de país)</label>
+        <label for="campo-whatsapp">WhatsApp (con código de país)</label>
         <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
       </div>
 
@@ -405,63 +375,45 @@
         Verificar disponibilidad
       </button>
 
-      <!-- Mensaje de estado -->
       <div class="disponibilidad-msg" id="msg-disponibilidad"></div>
 
-      <!-- Panel que aparece cuando hay disponibilidad -->
       <div class="reserva-panel" id="panel-reserva">
-
-        <!-- Código generado -->
         <div class="codigo-box">
           <div class="codigo-label">Tu código de reserva</div>
           <div class="codigo-valor" id="codigo-display">—</div>
           <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
         </div>
 
-        <!-- Métodos de pago -->
         <div class="pago-titulo">Elige cómo pagar</div>
         <div class="pago-metodos">
-
           <div class="pago-metodo" onclick="togglePago(this)">
             <div class="pago-metodo-header">
               <span class="pago-metodo-icon">💳</span>
               <span class="pago-metodo-nombre">Visa / Mastercard</span>
             </div>
-            <div class="pago-metodo-detalle">
-              Próximamente disponible. Por ahora contáctanos por WhatsApp y te enviamos el link de pago seguro.
-            </div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.</div>
           </div>
-
           <div class="pago-metodo" onclick="togglePago(this)">
             <div class="pago-metodo-header">
               <span class="pago-metodo-icon">🅿️</span>
               <span class="pago-metodo-nombre">PayPal</span>
             </div>
-            <div class="pago-metodo-detalle">
-              Próximamente disponible. Por ahora contáctanos por WhatsApp y te enviamos el link de pago PayPal.
-            </div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.</div>
           </div>
-
           <div class="pago-metodo" onclick="togglePago(this)">
             <div class="pago-metodo-header">
               <span class="pago-metodo-icon">📱</span>
               <span class="pago-metodo-nombre">Bizum</span>
             </div>
-            <div class="pago-metodo-detalle">
-              Próximamente disponible. Contáctanos por WhatsApp para los detalles.
-            </div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para los detalles.</div>
           </div>
-
           <div class="pago-metodo" onclick="togglePago(this)">
             <div class="pago-metodo-header">
               <span class="pago-metodo-icon">🟣</span>
               <span class="pago-metodo-nombre">Yape</span>
             </div>
-            <div class="pago-metodo-detalle">
-              Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape.
-            </div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape.</div>
           </div>
-
           <div class="pago-metodo" onclick="togglePago(this)">
             <div class="pago-metodo-header">
               <span class="pago-metodo-icon">💵</span>
@@ -474,17 +426,13 @@
               </div>
             </div>
           </div>
-
         </div>
 
-        <!-- Botón WhatsApp -->
         <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">
           💬 Confirmar mi reserva por WhatsApp
         </a>
-
-        <p class="nota-final">Tienes 2 horas para confirmar el pago. Pasado ese tiempo, el cupo se libera automáticamente.</p>
+        <p class="nota-final">Tienes 2 horas para confirmar el pago. Pasado ese tiempo el cupo se libera automáticamente.</p>
       </div>
-
     </div>
   </aside>
 
@@ -498,17 +446,15 @@
   <p style="margin-top:12px">&copy; 2025 Suyay Global — Todos los derechos reservados</p>
 </footer>
 
-<!-- LLAMA -->
 <a href="https://wa.me/51925585680?text=Hola%20Suyay%20Tours,%20quiero%20informaci%C3%B3n%20sobre%20el%20City%20Tour%20Lima%20Premium." class="llama-btn" target="_blank" rel="noopener">
   <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
   <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
 </a>
 
 <script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZIHyg--KvVfDVfOXt18kjvKReOU8lzilAqAYLEvuJO-ZpSMcsOKTl023ZOTtBg9Dc/exec";
-  const TOUR_ID = "CityTourLima";
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZIHyg--KvVfDVfOXt18kjvKReOU8lzilAqAYLEvuJO-ZpSMcsOKTl023ZOTtBg9Dc/exec";
+  var TOUR_ID = "CityTourLima";
 
-  // Fecha mínima = mañana
   window.addEventListener('DOMContentLoaded', function() {
     var hoy = new Date();
     hoy.setDate(hoy.getDate() + 1);
@@ -539,17 +485,21 @@
       url += '&' + k + '=' + encodeURIComponent(params[k]);
     });
 
+    console.log('SUYAY — URL:', url);
+
     var script = document.createElement('script');
     script.src = url;
 
     window[callbackName] = function(data) {
+      console.log('SUYAY — Respuesta:', data);
       callback(null, data);
       delete window[callbackName];
       if (script.parentNode) script.parentNode.removeChild(script);
     };
 
-    script.onerror = function() {
-      callback(new Error('Error de conexión'), null);
+    script.onerror = function(e) {
+      console.log('SUYAY — Error:', e);
+      callback(new Error('Error'), null);
       delete window[callbackName];
       if (script.parentNode) script.parentNode.removeChild(script);
     };
@@ -557,7 +507,7 @@
     document.body.appendChild(script);
   }
 
-  // ─── VERIFICAR DISPONIBILIDAD ──────────────────────────
+  // ─── VERIFICAR ─────────────────────────────────────────
   function verificarDisponibilidad() {
     var fecha    = document.getElementById('campo-fecha').value;
     var personas = document.getElementById('campo-personas').value;
@@ -587,15 +537,12 @@
         btn.textContent = 'Verificar disponibilidad';
         return;
       }
-
       if (!data.disponible) {
         mostrarMensaje('error', '❌ ' + data.mensaje);
         btn.disabled = false;
         btn.textContent = 'Verificar disponibilidad';
         return;
       }
-
-      // Hay disponibilidad — crear reserva
       mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
       crearReserva(fecha, parseInt(personas), nombre, whatsapp);
     });
@@ -604,7 +551,6 @@
   // ─── CREAR RESERVA ─────────────────────────────────────
   function crearReserva(fecha, personas, nombre, whatsapp) {
     var btn = document.getElementById('btn-verificar');
-
     llamarScript({
       accion: 'crear_reserva',
       tour: TOUR_ID,
@@ -619,21 +565,19 @@
         btn.textContent = 'Verificar disponibilidad';
         return;
       }
-
       mostrarPanelReserva(data);
     });
   }
 
-  // ─── MOSTRAR PANEL CON CÓDIGO ──────────────────────────
+  // ─── MOSTRAR PANEL ─────────────────────────────────────
   function mostrarPanelReserva(data) {
     document.getElementById('codigo-display').textContent = data.codigo;
     document.getElementById('codigo-ref-cash').textContent = data.codigo;
 
     var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
-    var hh = expira.getHours();
-    var mm = String(expira.getMinutes()).padStart(2, '0');
     document.getElementById('codigo-expira').textContent =
-      'Válido hasta las ' + hh + ':' + mm + ' — tienes ' + data.expira_en_horas + 'h para confirmar';
+      'Válido hasta las ' + expira.getHours() + ':' + String(expira.getMinutes()).padStart(2,'0') +
+      ' — tienes ' + data.expira_en_horas + 'h para confirmar';
 
     var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
