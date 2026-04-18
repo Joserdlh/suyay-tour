@@ -335,7 +335,6 @@
     </div>
     <div class="reserva-form">
       <div class="form-title">🗓️ Reserva ahora</div>
-
       <div class="form-group">
         <label for="campo-fecha">Fecha del tour</label>
         <input type="date" id="campo-fecha" min="">
@@ -370,64 +369,42 @@
         <label for="campo-whatsapp">WhatsApp (con código de país)</label>
         <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
       </div>
-
       <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">
         Verificar disponibilidad
       </button>
-
       <div class="disponibilidad-msg" id="msg-disponibilidad"></div>
-
       <div class="reserva-panel" id="panel-reserva">
         <div class="codigo-box">
           <div class="codigo-label">Tu código de reserva</div>
           <div class="codigo-valor" id="codigo-display">—</div>
           <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
         </div>
-
         <div class="pago-titulo">Elige cómo pagar</div>
         <div class="pago-metodos">
           <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header">
-              <span class="pago-metodo-icon">💳</span>
-              <span class="pago-metodo-nombre">Visa / Mastercard</span>
-            </div>
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">💳</span><span class="pago-metodo-nombre">Visa / Mastercard</span></div>
             <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.</div>
           </div>
           <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header">
-              <span class="pago-metodo-icon">🅿️</span>
-              <span class="pago-metodo-nombre">PayPal</span>
-            </div>
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">🅿️</span><span class="pago-metodo-nombre">PayPal</span></div>
             <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.</div>
           </div>
           <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header">
-              <span class="pago-metodo-icon">📱</span>
-              <span class="pago-metodo-nombre">Bizum</span>
-            </div>
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">📱</span><span class="pago-metodo-nombre">Bizum</span></div>
             <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para los detalles.</div>
           </div>
           <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header">
-              <span class="pago-metodo-icon">🟣</span>
-              <span class="pago-metodo-nombre">Yape</span>
-            </div>
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">🟣</span><span class="pago-metodo-nombre">Yape</span></div>
             <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape.</div>
           </div>
           <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header">
-              <span class="pago-metodo-icon">💵</span>
-              <span class="pago-metodo-nombre">Cash (pago al guía)</span>
-            </div>
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">💵</span><span class="pago-metodo-nombre">Cash (pago al guía)</span></div>
             <div class="pago-metodo-detalle">
               Paga en efectivo directamente a tu guía al inicio del tour.
-              <div class="pago-referencia">
-                Menciona tu código <strong id="codigo-ref-cash">—</strong> al guía para confirmar tu reserva.
-              </div>
+              <div class="pago-referencia">Menciona tu código <strong id="codigo-ref-cash">—</strong> al guía para confirmar tu reserva.</div>
             </div>
           </div>
         </div>
-
         <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">
           💬 Confirmar mi reserva por WhatsApp
         </a>
@@ -435,7 +412,6 @@
       </div>
     </div>
   </aside>
-
 </div>
 
 <!-- FOOTER -->
@@ -452,8 +428,8 @@
 </a>
 
 <script>
-  var SCRIPT_URL = "https://suyay-tour.pages.dev/functions/reservas";
-  var TOUR_ID = "CityTourLima";
+  var PROXY_URL = "/functions/reservas";
+  var TOUR_ID   = "CityTourLima";
 
   window.addEventListener('DOMContentLoaded', function() {
     var hoy = new Date();
@@ -461,9 +437,7 @@
     document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
   });
 
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
+  function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
 
   function togglePago(el) {
     document.querySelectorAll('.pago-metodo').forEach(function(m) { m.classList.remove('activo'); });
@@ -477,37 +451,6 @@
     msg.style.display = 'block';
   }
 
-  // ─── JSONP helper ──────────────────────────────────────
-  function llamarScript(params, callback) {
-    var callbackName = 'suyay_cb_' + Date.now();
-    var url = SCRIPT_URL + '?callback=' + callbackName;
-    Object.keys(params).forEach(function(k) {
-      url += '&' + k + '=' + encodeURIComponent(params[k]);
-    });
-
-    console.log('SUYAY — URL:', url);
-
-    var script = document.createElement('script');
-    script.src = url;
-
-    window[callbackName] = function(data) {
-      console.log('SUYAY — Respuesta:', data);
-      callback(null, data);
-      delete window[callbackName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-
-    script.onerror = function(e) {
-      console.log('SUYAY — Error:', e);
-      callback(new Error('Error'), null);
-      delete window[callbackName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-
-    document.body.appendChild(script);
-  }
-
-  // ─── VERIFICAR ─────────────────────────────────────────
   function verificarDisponibilidad() {
     var fecha    = document.getElementById('campo-fecha').value;
     var personas = document.getElementById('campo-personas').value;
@@ -525,58 +468,60 @@
     mostrarMensaje('loading', '🔍 Verificando disponibilidad...');
     document.getElementById('panel-reserva').style.display = 'none';
 
-    llamarScript({
-      accion: 'verificar_disponibilidad',
-      tour: TOUR_ID,
-      fecha: fecha,
-      personas: personas
-    }, function(err, data) {
-      if (err || !data || !data.ok) {
-        mostrarMensaje('error', '⚠️ Error al verificar. Inténtalo de nuevo.');
-        btn.disabled = false;
-        btn.textContent = 'Verificar disponibilidad';
-        return;
-      }
-      if (!data.disponible) {
-        mostrarMensaje('error', '❌ ' + data.mensaje);
-        btn.disabled = false;
-        btn.textContent = 'Verificar disponibilidad';
-        return;
-      }
-      mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
-      crearReserva(fecha, parseInt(personas), nombre, whatsapp);
-    });
+    var url = PROXY_URL + '?accion=verificar_disponibilidad&tour=' + TOUR_ID + '&fecha=' + fecha + '&personas=' + personas;
+
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '⚠️ Error al verificar. Inténtalo de nuevo.');
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        if (!data.disponible) {
+          mostrarMensaje('error', '❌ ' + data.mensaje);
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
+        crearReserva(fecha, parseInt(personas), nombre, whatsapp);
+      })
+      .catch(function(err) {
+        console.log('Error verificar:', err);
+        mostrarMensaje('error', '⚠️ Error de conexión. Inténtalo de nuevo.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
+      });
   }
 
-  // ─── CREAR RESERVA ─────────────────────────────────────
   function crearReserva(fecha, personas, nombre, whatsapp) {
     var btn = document.getElementById('btn-verificar');
-    llamarScript({
-      accion: 'crear_reserva',
-      tour: TOUR_ID,
-      fecha: fecha,
-      personas: personas,
-      nombre: nombre,
-      whatsapp: whatsapp
-    }, function(err, data) {
-      if (err || !data || !data.ok) {
-        mostrarMensaje('error', '❌ ' + (data ? data.error : 'Error al crear la reserva.'));
-        btn.disabled = false;
-        btn.textContent = 'Verificar disponibilidad';
-        return;
-      }
-      mostrarPanelReserva(data);
-    });
+    var url = PROXY_URL + '?accion=crear_reserva&tour=' + TOUR_ID +
+      '&fecha=' + fecha + '&personas=' + personas +
+      '&nombre=' + encodeURIComponent(nombre) +
+      '&whatsapp=' + encodeURIComponent(whatsapp);
+
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '❌ ' + (data.error || 'Error al crear la reserva.'));
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        mostrarPanelReserva(data);
+      })
+      .catch(function(err) {
+        console.log('Error crear:', err);
+        mostrarMensaje('error', '⚠️ Error de conexión. Inténtalo de nuevo.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
+      });
   }
 
-  // ─── MOSTRAR PANEL ─────────────────────────────────────
   function mostrarPanelReserva(data) {
     document.getElementById('codigo-display').textContent = data.codigo;
     document.getElementById('codigo-ref-cash').textContent = data.codigo;
 
     var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
     document.getElementById('codigo-expira').textContent =
-      'Válido hasta las ' + expira.getHours() + ':' + String(expira.getMinutes()).padStart(2,'0') +
+      'Válido hasta las ' + expira.getHours() + ':' +
+      String(expira.getMinutes()).padStart(2,'0') +
       ' — tienes ' + data.expira_en_horas + 'h para confirmar';
 
     var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', {
