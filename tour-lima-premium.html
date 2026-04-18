@@ -507,12 +507,10 @@
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZIHyg--KvVfDVfOXt18kjvKReOU8lzilAqAYLEvuJO-ZpSMcsOKTl023ZOTtBg9Dc/exec";
   const TOUR_ID = "CityTourLima";
-  let codigoActual = null;
-  let datosReserva = null;
 
   // Fecha mínima = mañana
-  window.addEventListener('DOMContentLoaded', () => {
-    const hoy = new Date();
+  window.addEventListener('DOMContentLoaded', function() {
+    var hoy = new Date();
     hoy.setDate(hoy.getDate() + 1);
     document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
   });
@@ -522,40 +520,68 @@
   }
 
   function togglePago(el) {
-    document.querySelectorAll('.pago-metodo').forEach(m => m.classList.remove('activo'));
+    document.querySelectorAll('.pago-metodo').forEach(function(m) { m.classList.remove('activo'); });
     el.classList.toggle('activo');
   }
 
   function mostrarMensaje(tipo, texto) {
-    const msg = document.getElementById('msg-disponibilidad');
+    var msg = document.getElementById('msg-disponibilidad');
     msg.className = 'disponibilidad-msg ' + tipo;
     msg.textContent = texto;
     msg.style.display = 'block';
   }
 
-  async function verificarDisponibilidad() {
-    const fecha = document.getElementById('campo-fecha').value;
-    const personas = document.getElementById('campo-personas').value;
-    const nombre = document.getElementById('campo-nombre').value.trim();
-    const whatsapp = document.getElementById('campo-whatsapp').value.trim();
+  // ─── JSONP helper ──────────────────────────────────────
+  function llamarScript(params, callback) {
+    var callbackName = 'suyay_cb_' + Date.now();
+    var url = SCRIPT_URL + '?callback=' + callbackName;
+    Object.keys(params).forEach(function(k) {
+      url += '&' + k + '=' + encodeURIComponent(params[k]);
+    });
 
-    if (!fecha) { mostrarMensaje('error', '⚠️ Por favor elige una fecha.'); return; }
+    var script = document.createElement('script');
+    script.src = url;
+
+    window[callbackName] = function(data) {
+      callback(null, data);
+      delete window[callbackName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    };
+
+    script.onerror = function() {
+      callback(new Error('Error de conexión'), null);
+      delete window[callbackName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    };
+
+    document.body.appendChild(script);
+  }
+
+  // ─── VERIFICAR DISPONIBILIDAD ──────────────────────────
+  function verificarDisponibilidad() {
+    var fecha    = document.getElementById('campo-fecha').value;
+    var personas = document.getElementById('campo-personas').value;
+    var nombre   = document.getElementById('campo-nombre').value.trim();
+    var whatsapp = document.getElementById('campo-whatsapp').value.trim();
+
+    if (!fecha)    { mostrarMensaje('error', '⚠️ Por favor elige una fecha.'); return; }
     if (!personas) { mostrarMensaje('error', '⚠️ Por favor indica cuántas personas sois.'); return; }
-    if (!nombre) { mostrarMensaje('error', '⚠️ Por favor escribe tu nombre.'); return; }
+    if (!nombre)   { mostrarMensaje('error', '⚠️ Por favor escribe tu nombre.'); return; }
     if (!whatsapp) { mostrarMensaje('error', '⚠️ Por favor escribe tu WhatsApp.'); return; }
 
-    const btn = document.getElementById('btn-verificar');
+    var btn = document.getElementById('btn-verificar');
     btn.disabled = true;
     btn.textContent = 'Verificando...';
     mostrarMensaje('loading', '🔍 Verificando disponibilidad...');
     document.getElementById('panel-reserva').style.display = 'none';
 
-    try {
-      const url = `${SCRIPT_URL}?accion=verificar_disponibilidad&tour=${TOUR_ID}&fecha=${fecha}&personas=${personas}`;
-      const resp = await fetch(url);
-      const data = await resp.json();
-
-      if (!data.ok) {
+    llamarScript({
+      accion: 'verificar_disponibilidad',
+      tour: TOUR_ID,
+      fecha: fecha,
+      personas: personas
+    }, function(err, data) {
+      if (err || !data || !data.ok) {
         mostrarMensaje('error', '⚠️ Error al verificar. Inténtalo de nuevo.');
         btn.disabled = false;
         btn.textContent = 'Verificar disponibilidad';
@@ -571,62 +597,62 @@
 
       // Hay disponibilidad — crear reserva
       mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
-      await crearReserva(fecha, parseInt(personas), nombre, whatsapp);
-
-    } catch (err) {
-      mostrarMensaje('error', '⚠️ Error de conexión. Inténtalo de nuevo.');
-      btn.disabled = false;
-      btn.textContent = 'Verificar disponibilidad';
-    }
+      crearReserva(fecha, parseInt(personas), nombre, whatsapp);
+    });
   }
 
-  async function crearReserva(fecha, personas, nombre, whatsapp) {
-    const btn = document.getElementById('btn-verificar');
-    try {
-      const url = `${SCRIPT_URL}?accion=crear_reserva&tour=${TOUR_ID}&fecha=${fecha}&personas=${personas}&nombre=${encodeURIComponent(nombre)}&whatsapp=${encodeURIComponent(whatsapp)}`;
-      const resp = await fetch(url);
-      const data = await resp.json();
+  // ─── CREAR RESERVA ─────────────────────────────────────
+  function crearReserva(fecha, personas, nombre, whatsapp) {
+    var btn = document.getElementById('btn-verificar');
 
-      if (!data.ok) {
-        mostrarMensaje('error', '❌ ' + data.error);
+    llamarScript({
+      accion: 'crear_reserva',
+      tour: TOUR_ID,
+      fecha: fecha,
+      personas: personas,
+      nombre: nombre,
+      whatsapp: whatsapp
+    }, function(err, data) {
+      if (err || !data || !data.ok) {
+        mostrarMensaje('error', '❌ ' + (data ? data.error : 'Error al crear la reserva.'));
         btn.disabled = false;
         btn.textContent = 'Verificar disponibilidad';
         return;
       }
 
-      codigoActual = data.codigo;
-      datosReserva = data;
       mostrarPanelReserva(data);
-
-    } catch (err) {
-      mostrarMensaje('error', '⚠️ Error al crear la reserva. Inténtalo de nuevo.');
-      btn.disabled = false;
-      btn.textContent = 'Verificar disponibilidad';
-    }
+    });
   }
 
+  // ─── MOSTRAR PANEL CON CÓDIGO ──────────────────────────
   function mostrarPanelReserva(data) {
-    // Mostrar código
     document.getElementById('codigo-display').textContent = data.codigo;
     document.getElementById('codigo-ref-cash').textContent = data.codigo;
 
-    // Calcular expiración
-    const expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
+    var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
+    var hh = expira.getHours();
+    var mm = String(expira.getMinutes()).padStart(2, '0');
     document.getElementById('codigo-expira').textContent =
-      `Válido hasta las ${expira.getHours()}:${String(expira.getMinutes()).padStart(2,'0')} — tienes ${data.expira_en_horas}h para confirmar`;
+      'Válido hasta las ' + hh + ':' + mm + ' — tienes ' + data.expira_en_horas + 'h para confirmar';
 
-    // Construir mensaje de WhatsApp
-    const fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    const msg = `Hola Suyay Tours 👋\n\nQuiero confirmar mi reserva:\n\n🗺️ *Tour:* ${data.tour_nombre}\n📅 *Fecha:* ${fechaFormateada}\n🕗 *Hora:* ${data.hora_inicio}\n👥 *Personas:* ${data.personas}\n🔑 *Código:* ${data.codigo}\n\nYa realicé el pago. ¡Gracias!`;
-    const waUrl = `https://wa.me/${data.whatsapp_manager}?text=${encodeURIComponent(msg)}`;
-    document.getElementById('btn-whatsapp-confirmar').href = waUrl;
+    var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    var msg = 'Hola Suyay Tours 👋\n\nQuiero confirmar mi reserva:\n\n'
+      + '🗺️ *Tour:* ' + data.tour_nombre + '\n'
+      + '📅 *Fecha:* ' + fechaFormateada + '\n'
+      + '🕗 *Hora:* ' + data.hora_inicio + '\n'
+      + '👥 *Personas:* ' + data.personas + '\n'
+      + '🔑 *Código:* ' + data.codigo + '\n\n'
+      + 'Ya realicé el pago. ¡Gracias!';
 
-    // Mostrar panel
+    document.getElementById('btn-whatsapp-confirmar').href =
+      'https://wa.me/' + data.whatsapp_manager + '?text=' + encodeURIComponent(msg);
+
     document.getElementById('panel-reserva').style.display = 'block';
     document.getElementById('msg-disponibilidad').style.display = 'none';
 
-    // Actualizar botón
-    const btn = document.getElementById('btn-verificar');
+    var btn = document.getElementById('btn-verificar');
     btn.textContent = '✓ Código generado';
     btn.style.background = '#2e7d32';
   }
