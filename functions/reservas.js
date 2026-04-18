@@ -4,16 +4,31 @@ export async function onRequest(context) {
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyZIHyg--KvVfDVfOXt18kjvKReOU8lzilAqAYLEvuJO-ZpSMcsOKTl023ZOTtBg9Dc/exec";
 
-  const response = await fetch(`${SCRIPT_URL}?${params}`, {
-    redirect: "follow"
-  });
+  try {
+    const response = await fetch(`${SCRIPT_URL}?${params}`, {
+      redirect: "follow",
+      headers: { "Accept": "application/json" }
+    });
 
-  const data = await response.text();
+    const text = await response.text();
 
-  return new Response(data, {
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*"
-    }
-  });
+    return new Response(text, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      }
+    });
+
+  } catch (err) {
+    return new Response(JSON.stringify({ ok: false, error: err.message }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*"
+      }
+    });
+  }
 }
