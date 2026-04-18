@@ -583,17 +583,8 @@
   async function crearReserva(fecha, personas, nombre, whatsapp) {
     const btn = document.getElementById('btn-verificar');
     try {
-      const resp = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-          accion: 'crear_reserva',
-          tour: TOUR_ID,
-          fecha: fecha,
-          personas: personas,
-          nombre: nombre,
-          whatsapp: whatsapp
-        })
-      });
+      const url = `${SCRIPT_URL}?accion=crear_reserva&tour=${TOUR_ID}&fecha=${fecha}&personas=${personas}&nombre=${encodeURIComponent(nombre)}&whatsapp=${encodeURIComponent(whatsapp)}`;
+      const resp = await fetch(url);
       const data = await resp.json();
 
       if (!data.ok) {
