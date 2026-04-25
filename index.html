@@ -272,6 +272,8 @@
       opacity: 0.85;
     }
     .tour-card:hover img { transform: scale(1.06); opacity: 0.6; }
+    /* card-lima tiene position relative para el carrusel interno */
+    #card-lima .tour-card-img { position: relative; }
     .tour-card-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
@@ -314,6 +316,16 @@
       transition: transform 0.3s ease;
     }
     .tour-card:hover .tour-card-arrow { transform: translate(-50%, -50%) scale(1); }
+
+    /* Card carousel */
+    .card-slide {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .card-slide.is-active { opacity: 1; }
 
     /* ─── SECCIÓN: POR QUÉ SUYAY ─────────────────────────── */
     .section-why {
@@ -578,11 +590,21 @@
   <div class="tours-grid">
 
     <!-- Tour 1 -->
-    <a href="tour-lima-premium.html" class="tour-card">
-      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="City Tour Lima Premium">
-      <div class="tour-card-overlay"></div>
-      <div class="tour-card-price">Desde $48</div>
-      <div class="tour-card-arrow">→</div>
+    <a href="tour-lima-premium.html" class="tour-card" id="card-lima">
+      <div class="tour-card-img">
+        <img class="card-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3027.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3030.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3046.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3051.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3069.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3082.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3086.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3092.jpeg" alt="City Tour Lima">
+        <img class="card-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3101.jpeg" alt="City Tour Lima">
+        <div class="tour-card-overlay"></div>
+        <div class="tour-card-price">Desde $48</div>
+        <div class="tour-card-arrow">→</div>
+      </div>
       <div class="tour-card-body">
         <span class="tour-card-badge">🌟 Más popular</span>
         <h3 class="tour-card-title">City Tour Lima Premium</h3>
@@ -849,6 +871,17 @@
   }
 
   timer = setInterval(function() { goToSlide(current + 1); }, 6000);
+
+  // ─── CARD CAROUSEL (City Tour Lima) ────────────────────
+  (function() {
+    var cardSlides = document.querySelectorAll('#card-lima .card-slide');
+    var cardCurrent = 0;
+    setInterval(function() {
+      cardSlides[cardCurrent].classList.remove('is-active');
+      cardCurrent = (cardCurrent + 1) % cardSlides.length;
+      cardSlides[cardCurrent].classList.add('is-active');
+    }, 2500);
+  })();
 </script>
 </body>
 </html>
