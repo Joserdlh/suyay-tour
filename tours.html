@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tours y Experiencias de Lujo en Lima – Suyay Peru Travel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -16,17 +16,18 @@
       --gris: #888;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; background: var(--blanco); color: var(--negro); overflow-x: hidden; }
+    body { font-family: 'Raleway', sans-serif; background: var(--blanco); color: var(--negro); overflow-x: hidden; }
 
     /* ─── HEADER ─────────────────────────────────────────── */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 80px; height: 100px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, transparent 100%); transition: background 0.4s, box-shadow 0.4s, height 0.3s; }
     header.scrolled { background: rgba(10,10,10,0.97); box-shadow: 0 2px 30px rgba(0,0,0,0.4); height: 80px; }
+    header.scrolled .logo-wakeup { display: none; }
     .logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.15; }
-    .logo-suyay { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.8em; color: var(--naranja); letter-spacing: 0.14em; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
-    .logo-peru { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95em; color: var(--naranja-fuerte); letter-spacing: 0.32em; text-transform: uppercase; margin-top: 1px; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
-    .logo-wakeup { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.88em; color: rgba(255,255,255,0.7); letter-spacing: 0.12em; margin-top: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    .logo-suyay { font-family: 'Fraunces', serif; font-weight: 600; font-size: 2em; color: var(--naranja); letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .logo-peru { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 0.78em; color: var(--naranja-fuerte); letter-spacing: 0.38em; text-transform: uppercase; margin-top: 2px; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+    .logo-wakeup { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.1em; color: rgba(255,255,255,0.7); letter-spacing: 0.12em; margin-top: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
     nav { display: flex; align-items: center; gap: 6px; }
-    .nav-link { color: rgba(255,255,255,0.92); text-decoration: none; font-size: 0.82em; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 20px; border-radius: 4px; transition: all 0.2s; position: relative; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+    .nav-link { color: white; text-decoration: none; font-size: 0.82em; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 20px; border-radius: 4px; transition: all 0.2s; position: relative; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
     .nav-link::after { content: ''; position: absolute; bottom: 5px; left: 20px; right: 20px; height: 1px; background: var(--naranja); transform: scaleX(0); transition: transform 0.2s; }
     .nav-link:hover { color: white; }
     .nav-link:hover::after { transform: scaleX(1); }
@@ -68,7 +69,7 @@
       background: var(--naranja); opacity: 0.6;
     }
     .page-hero-content h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Fraunces', serif;
       font-weight: 300; font-size: clamp(2.8em, 6vw, 5em);
       color: white; line-height: 1.1; margin-bottom: 18px;
     }
@@ -104,7 +105,7 @@
       color: var(--naranja); margin-bottom: 14px; display: block;
     }
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Fraunces', serif;
       font-size: clamp(2em, 4vw, 3em);
       font-weight: 400; color: var(--negro);
       line-height: 1.15;
@@ -182,7 +183,7 @@
     }
 
     .tour-card-title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Fraunces', serif;
       font-size: 1.55em; font-weight: 600;
       color: var(--negro); line-height: 1.2;
       margin-bottom: 12px;
@@ -223,7 +224,7 @@
       text-transform: uppercase;
     }
     .tour-price-box .amount {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Fraunces', serif;
       font-size: 2em; font-weight: 600;
       color: var(--negro); line-height: 1;
     }
@@ -326,7 +327,7 @@
     <!-- TOUR 1: City Tour Lima Premium -->
     <a class="tour-card" href="tour-lima-premium.html">
       <div class="tour-card-img">
-        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/Descarga%20Lima.png" alt="City Tour Lima Premium">
+        <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3092.jpeg" alt="City Tour Lima Premium">
         <div class="tour-card-img-overlay"></div>
         <span class="tour-badge">🌟 Más popular</span>
         <span class="tour-price-tag">Desde $48</span>
