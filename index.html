@@ -226,7 +226,7 @@
 
     /* ─── SECCIÓN: NUESTROS TOURS ────────────────────────── */
     .section-tours {
-      background: var(--crema);
+      background: #0d1f1c;
       padding: 100px 48px;
     }
     .section-header {
@@ -243,15 +243,15 @@
       font-family: 'Fraunces', serif;
       font-size: clamp(2.2em, 4vw, 3.2em);
       font-weight: 400; line-height: 1.1;
-      color: var(--negro);
+      color: white;
     }
     .section-title em { font-style: italic; color: var(--naranja); }
     .section-link {
       font-size: 0.72em; font-weight: 600;
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--negro); text-decoration: none;
+      color: rgba(255,255,255,0.7); text-decoration: none;
       display: flex; align-items: center; gap: 8px;
-      border-bottom: 1px solid var(--negro); padding-bottom: 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
     .section-link:hover { color: var(--naranja); border-color: var(--naranja); }
@@ -399,7 +399,7 @@
 
     /* ─── SECCIÓN: DESTINOS / CATEGORÍAS ─────────────────── */
     .section-destinos {
-      background: white;
+      background: #0d1f1c;
       padding: 100px 48px;
     }
     .destinos-grid {
@@ -410,7 +410,8 @@
     }
     .destino-card {
       text-decoration: none; color: inherit;
-      border: 1px solid #e8e4dc;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
       padding: 32px 24px;
       transition: all 0.3s;
       position: relative; overflow: hidden;
@@ -423,7 +424,7 @@
       transform: scaleX(0); transition: transform 0.3s;
       transform-origin: left;
     }
-    .destino-card:hover { border-color: var(--naranja); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    .destino-card:hover { border-color: rgba(232,82,10,0.5); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); background: rgba(255,255,255,0.07); }
     .destino-card:hover::before { transform: scaleX(1); }
     .destino-icon { font-size: 2.2em; margin-bottom: 18px; display: block; }
     .destino-num {
@@ -434,11 +435,11 @@
     .destino-title {
       font-family: 'Fraunces', serif;
       font-size: 1.3em; font-weight: 600;
-      color: var(--negro); line-height: 1.3;
+      color: white; line-height: 1.3;
       margin-bottom: 10px;
     }
     .destino-desc {
-      font-size: 0.78em; color: var(--gris);
+      font-size: 0.78em; color: rgba(255,255,255,0.5);
       line-height: 1.7;
     }
     .destino-arrow {
@@ -821,23 +822,7 @@
     <div class="info-divider"></div>
 
     <div class="info-col">
-      <h4 class="info-col-title">Recomendados en</h4>
-      <div class="recomendados-list">
-        <a href="https://www.viator.com/es-ES/tours/Lima/Private-Transportation-Lima-Airport-to-Hotel-or-Airbnb/d928-424480P2" target="_blank" rel="noopener" class="recomendado-item">
-          <svg viewBox="0 0 80 26" width="76" height="24" xmlns="http://www.w3.org/2000/svg">
-            <text x="0" y="21" font-family="Arial" font-weight="900" font-size="22" fill="#00B140" letter-spacing="-0.5">viator</text>
-          </svg>
-          <span class="recomendado-arrow">→</span>
-        </a>
-        <a href="https://www.getyourguide.com/es-mx/lima-l39/taxi-aeropuerto-peru-lima-t481832/?ranking_uuid=5e777ef2-4938-4cb7-bd9f-b3fe4f0ab1e9" target="_blank" rel="noopener" class="recomendado-item">
-          <svg viewBox="0 0 150 26" width="140" height="24" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="3" width="22" height="22" rx="3" fill="#FF5533"/>
-            <text x="3" y="19" font-family="Arial" font-weight="900" font-size="16" fill="white">G</text>
-            <text x="28" y="20" font-family="Arial" font-weight="700" font-size="13" fill="rgba(255,255,255,0.85)">GetYourGuide</text>
-          </svg>
-          <span class="recomendado-arrow">→</span>
-        </a>
-      </div>
+      <h4 class="info-col-title">Encuéntranos en</h4>
       <div class="empresa-box">
         <div class="empresa-line"><strong>Suyay Tour E.I.R.L.</strong></div>
         <div class="empresa-line">RUC: 20609251639</div>
