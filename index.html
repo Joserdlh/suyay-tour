@@ -267,6 +267,14 @@
       filter: brightness(1.1) saturate(1.25) contrast(1.05);
     }
     .tour-card:hover img { transform: scale(1.06); opacity: 0.85; filter: brightness(1.12) saturate(1.3) contrast(1.1); }
+    .tour-card-placeholder-bg {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--negro) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5em;
+      transition: transform 0.6s ease;
+    }
+    .tour-card:hover .tour-card-placeholder-bg { transform: scale(1.06); }
     /* Card carousel slides */
     .card-slide {
       position: absolute; inset: 0;
@@ -584,7 +592,6 @@
     <a href="/tours/tour-lima-premium.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg" alt="City Tour Lima Premium" loading="lazy" decoding="async">
       <div class="tour-card-overlay"></div>
-      <div class="tour-card-price">Desde $48</div>
       <div class="tour-card-arrow">→</div>
       <div class="tour-card-body">
         <span class="tour-card-badge">🌟 Más popular</span>
@@ -600,7 +607,6 @@
     <a href="/tours/tour-nocturno.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Experiencia Nocturna" loading="lazy" decoding="async">
       <div class="tour-card-overlay"></div>
-      <div class="tour-card-price">Desde $90</div>
       <div class="tour-card-arrow">→</div>
       <div class="tour-card-body">
         <span class="tour-card-badge">🌙 Nocturno</span>
@@ -613,18 +619,15 @@
       </div>
     </a>
     <!-- Tour 3 -->
-    <a href="/tours/tour-pachacamac.html" class="tour-card">
-      <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3075.jpeg" alt="Pachacamac & Barranco Luxury Experience" loading="lazy" decoding="async">
+    <a href="/tours/Traslados.html" class="tour-card">
+      <div class="tour-card-placeholder-bg">🚗</div>
       <div class="tour-card-overlay"></div>
-      <div class="tour-card-price">Desde $42</div>
       <div class="tour-card-arrow">→</div>
       <div class="tour-card-body">
-        <span class="tour-card-badge">🏛️ Cultural</span>
-        <h3 class="tour-card-title">Pachacamac & Barranco Luxury Experience</h3>
+        <span class="tour-card-badge">🚗 Traslados</span>
+        <h3 class="tour-card-title">Traslados Privados Premium</h3>
         <div class="tour-card-meta">
-          <span>⏱ 6.5 horas</span>
-          <span>🕗 8:00 AM</span>
-          <span>👥 1–16</span>
+          <span>🛫 Aeropuerto ↔ Hotel</span>
         </div>
       </div>
     </a>
@@ -632,7 +635,6 @@
     <a href="/tours/tour-cieneguilla.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia1.jpeg" alt="Cieneguilla Premium Experience" loading="lazy" decoding="async">
       <div class="tour-card-overlay"></div>
-      <div class="tour-card-price">Desde $155</div>
       <div class="tour-card-arrow">→</div>
       <div class="tour-card-body">
         <span class="tour-card-badge">🐎 Naturaleza</span>
