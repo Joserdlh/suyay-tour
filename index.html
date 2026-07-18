@@ -7,19 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --naranja: #e8520a;
       --naranja-fuerte: #c43d00;
       --negro: #0a0a0a;
+      --verde-oscuro: #17332d;
       --blanco: #ffffff;
       --crema: #f5f0e8;
       --gris: #888;
     }
-
     html { scroll-behavior: smooth; }
     body { font-family: 'Raleway', sans-serif; background: var(--blanco); color: var(--negro); overflow-x: hidden; }
-
     /* ─── HEADER ─────────────────────────────────────────── */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
@@ -34,7 +32,6 @@
       height: 80px;
       padding: 0 80px;
     }
-
     /* Logo */
     .logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.15; }
     .logo-suyay {
@@ -62,7 +59,6 @@
       margin-top: 3px;
       text-shadow: 0 1px 6px rgba(0,0,0,0.4);
     }
-
     /* Nav */
     nav { display: flex; align-items: center; gap: 6px; }
     .nav-link {
@@ -95,7 +91,6 @@
     .nav-link.cta::after { display: none; }
     .nav-link.cta:hover { background: var(--naranja-fuerte); }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
-
     /* ─── HERO ───────────────────────────────────────────── */
     .hero {
       position: relative;
@@ -103,7 +98,6 @@
       overflow: hidden;
       background: #111;
     }
-
     /* Slides */
     .hero-slide {
       position: absolute; inset: 0;
@@ -122,7 +116,6 @@
       from { transform: scale(1.04); }
       to   { transform: scale(1.0); }
     }
-
     .hero-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(
@@ -133,7 +126,6 @@
       );
       z-index: 1;
     }
-
     /* Contenido hero */
     .hero-content {
       position: absolute; inset: 0; z-index: 2;
@@ -181,7 +173,6 @@
     }
     .hero-btn:hover { background: var(--naranja-fuerte); transform: translateY(-2px); }
     .hero-btn-arrow { font-size: 1.1em; }
-
     /* Dots */
     .hero-dots {
       position: absolute; bottom: 32px; left: 50%;
@@ -195,7 +186,6 @@
       transition: all 0.3s;
     }
     .hero-dot.is-active { background: var(--naranja); width: 48px; }
-
     /* Scroll hint */
     .scroll-hint {
       position: absolute; bottom: 36px; right: 48px;
@@ -215,7 +205,6 @@
       51% { transform: scaleY(1); transform-origin: bottom; }
       100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
     }
-
     /* Slide counter */
     .slide-counter {
       position: absolute; bottom: 36px; left: 48px;
@@ -223,10 +212,9 @@
       font-size: 0.65em; letter-spacing: 0.15em;
     }
     .slide-counter strong { color: white; font-size: 1.2em; }
-
     /* ─── SECCIÓN: NUESTROS TOURS ────────────────────────── */
     .section-tours {
-      background: #0d1f1c;
+      background: var(--verde-oscuro);
       padding: 60px 48px;
     }
     .section-header {
@@ -255,7 +243,6 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .section-link:hover { color: var(--naranja); border-color: var(--naranja); }
-
     /* Tour cards */
     .tours-grid {
       display: grid;
@@ -276,7 +263,6 @@
       filter: saturate(1.15) contrast(1.05);
     }
     .tour-card:hover img { transform: scale(1.06); opacity: 0.75; filter: saturate(1.2) contrast(1.1); }
-
     /* Card carousel slides */
     .card-slide {
       position: absolute; inset: 0;
@@ -286,7 +272,6 @@
       transition: opacity 1s ease;
     }
     .card-slide.is-active { opacity: 1; }
-
     /* Logo — ocultar wake up in peru cuando scrolled */
     header.scrolled .logo-wakeup { display: none; }
     .tour-card-overlay {
@@ -331,7 +316,6 @@
       transition: transform 0.3s ease;
     }
     .tour-card:hover .tour-card-arrow { transform: translate(-50%, -50%) scale(1); }
-
     /* Card carousel */
     .card-slide {
       position: absolute; inset: 0;
@@ -341,7 +325,6 @@
       transition: opacity 1s ease;
     }
     .card-slide.is-active { opacity: 1; }
-
     /* ─── SECCIÓN: POR QUÉ SUYAY ─────────────────────────── */
     .section-why {
       background: var(--negro);
@@ -397,10 +380,9 @@
       font-size: 0.72em; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
     }
-
     /* ─── SECCIÓN: DESTINOS / CATEGORÍAS ─────────────────── */
     .section-destinos {
-      background: #0d1f1c;
+      background: var(--verde-oscuro);
       padding: 100px 48px;
     }
     .destinos-grid {
@@ -452,7 +434,6 @@
       transition: all 0.3s;
     }
     .destino-card:hover .destino-arrow { opacity: 1; transform: translateX(0); }
-
     /* ─── BANDA INFO ─────────────────────────────────────── */
     .info-band { background: #111; border-top: 1px solid rgba(232,82,10,0.2); padding: 60px 48px; }
     .info-band-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; align-items: start; }
@@ -479,7 +460,6 @@
     .empresa-line { font-size: 0.78em; color: rgba(255,255,255,0.35); margin-bottom: 5px; }
     .empresa-line:last-child { margin-bottom: 0; }
     .empresa-line strong { color: rgba(255,255,255,0.55); }
-
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
       background: #0a0a0a;
@@ -493,14 +473,12 @@
     .footer-logo .logo-suyay { font-size: 1.1em; }
     .footer-logo .logo-wakeup { color: rgba(255,255,255,0.25); }
     .footer-copy { font-size: 0.72em; letter-spacing: 0.06em; }
-
     /* ─── LLAMA ──────────────────────────────────────────── */
     .llama-btn { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; background: white; padding: 10px 16px 10px 10px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: transform 0.3s; z-index: 999; }
     .llama-btn:hover { transform: translateY(-2px); }
     .chat-text { background: #fff3cd; color: #333; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-right: 10px; line-height: 1.3; animation: bounce 2.5s ease infinite; }
     @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
     .llama-btn img { height: 60px; }
-
     /* ─── MOBILE ─────────────────────────────────────────── */
     @media (max-width: 1000px) {
       .tours-grid { grid-template-columns: 1fr 1fr; }
@@ -529,7 +507,6 @@
   </style>
 </head>
 <body>
-
 <!-- HEADER -->
 <header id="header">
   <a href="index.html" class="logo">
@@ -546,10 +523,8 @@
     <a href="#contacta" class="nav-link cta">Contacta</a>
   </nav>
 </header>
-
 <!-- HERO -->
 <section class="hero">
-
   <!-- 7 slides -->
   <img class="hero-slide is-active"
        src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Barranco%2015.jpeg"
@@ -572,9 +547,7 @@
   <img class="hero-slide"
        src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3107.jpeg"
        alt="Lima" loading="lazy">
-
   <div class="hero-overlay"></div>
-
   <div class="hero-content">
     <div class="hero-location">Perú · Sudamérica</div>
     <h1 class="hero-city">Lima</h1>
@@ -583,20 +556,15 @@
       Explorar tours <span class="hero-btn-arrow">→</span>
     </a>
   </div>
-
   <div class="hero-dots" id="hero-dots"></div>
-
   <div class="scroll-hint">
     Scroll
     <div class="scroll-line"></div>
   </div>
-
   <div class="slide-counter">
     <strong id="slide-current">01</strong> / 07
   </div>
-
 </section>
-
 <!-- NUESTROS TOURS -->
 <section class="section-tours">
   <div class="section-header">
@@ -606,9 +574,7 @@
     </div>
     <a href="tours.html" class="section-link">Ver todos los tours →</a>
   </div>
-
   <div class="tours-grid">
-
     <!-- Tour 1 -->
     <a href="tours/tour-lima-premium.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3092.jpeg" alt="City Tour Lima Premium">
@@ -625,7 +591,6 @@
         </div>
       </div>
     </a>
-
     <!-- Tour 2 -->
     <a href="tours/tour-nocturno.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Experiencia Nocturna">
@@ -642,7 +607,6 @@
         </div>
       </div>
     </a>
-
     <!-- Tour 3 -->
     <a href="tours/tour-pachacamac.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3092.jpeg" alt="Pachacamac & Barranco Luxury Experience">
@@ -659,7 +623,6 @@
         </div>
       </div>
     </a>
-
     <!-- Tour 4 -->
     <a href="tours/tour-cieneguilla.html" class="tour-card">
       <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cieneguilla-1.jpeg" alt="Cieneguilla Premium Experience">
@@ -676,10 +639,8 @@
         </div>
       </div>
     </a>
-
   </div>
 </section>
-
 <!-- POR QUÉ SUYAY -->
 <section class="section-why">
   <div class="why-text">
@@ -716,7 +677,6 @@
     <div class="why-image-tag">Hecho en Lima, Perú</div>
   </div>
 </section>
-
 <!-- CATEGORÍAS -->
 <section class="section-destinos">
   <div class="section-header">
@@ -726,7 +686,6 @@
     </div>
   </div>
   <div class="destinos-grid">
-
     <a href="tours.html" class="destino-card">
       <span class="destino-icon">🗺️</span>
       <span class="destino-num">01</span>
@@ -734,7 +693,6 @@
       <p class="destino-desc">City tours, cultura, historia y gastronomía auténtica de Lima con guías locales expertos.</p>
       <span class="destino-arrow">Ver tours →</span>
     </a>
-
     <a href="#" class="destino-card">
       <span class="destino-icon">🏔️</span>
       <span class="destino-num">02</span>
@@ -742,7 +700,6 @@
       <p class="destino-desc">Experiencias exclusivas fuera de Lima: naturaleza, aventura y gastronomía regional.</p>
       <span class="destino-arrow">Próximamente →</span>
     </a>
-
     <a href="#" class="destino-card">
       <span class="destino-icon">🚗</span>
       <span class="destino-num">03</span>
@@ -750,7 +707,6 @@
       <p class="destino-desc">Transporte exclusivo desde aeropuerto, puerto o entre destinos con máximo confort.</p>
       <span class="destino-arrow">Próximamente →</span>
     </a>
-
     <a href="#" class="destino-card">
       <span class="destino-icon">✍️</span>
       <span class="destino-num">04</span>
@@ -758,14 +714,11 @@
       <p class="destino-desc">Diseñamos el itinerario perfecto según tus intereses, fechas y grupo de viaje.</p>
       <span class="destino-arrow">Contactar →</span>
     </a>
-
   </div>
 </section>
-
 <!-- BANDA INFO -->
 <section class="info-band" id="contacta">
   <div class="info-band-inner">
-
     <div class="info-col">
       <h4 class="info-col-title">Contáctanos</h4>
       <ul class="info-list">
@@ -779,13 +732,10 @@
         <div class="horario-line">Domingos · 10:00 AM – 6:00 PM</div>
       </div>
     </div>
-
     <div class="info-divider"></div>
-
     <div class="info-col">
       <h4 class="info-col-title">Pago seguro</h4>
       <div class="pago-grid">
-
         <!-- VISA -->
         <div class="pago-item">
           <svg viewBox="0 0 80 50" width="72" height="44" xmlns="http://www.w3.org/2000/svg">
@@ -794,7 +744,6 @@
             <text x="12" y="33" font-family="Arial" font-weight="900" font-size="22" fill="white" letter-spacing="2" font-style="italic">VISA</text>
           </svg>
         </div>
-
         <!-- MASTERCARD -->
         <div class="pago-item">
           <svg viewBox="0 0 80 50" width="72" height="44" xmlns="http://www.w3.org/2000/svg">
@@ -804,7 +753,6 @@
             <path d="M40 14.2a14 14 0 0 1 0 21.6A14 14 0 0 1 40 14.2z" fill="#FF5F00"/>
           </svg>
         </div>
-
         <!-- PAYPAL -->
         <div class="pago-item">
           <svg viewBox="0 0 80 50" width="72" height="44" xmlns="http://www.w3.org/2000/svg">
@@ -815,7 +763,6 @@
             <text x="10" y="40" font-family="Arial" font-weight="400" font-size="8" fill="rgba(255,255,255,0.5)" letter-spacing="1">SECURE PAYMENT</text>
           </svg>
         </div>
-
         <!-- AMEX -->
         <div class="pago-item">
           <svg viewBox="0 0 80 50" width="72" height="44" xmlns="http://www.w3.org/2000/svg">
@@ -831,14 +778,11 @@
             <text x="55" y="36" font-family="Arial" font-weight="900" font-size="20" fill="rgba(255,255,255,0.25)">®</text>
           </svg>
         </div>
-
       </div>
       <p class="pago-nota">Aceptamos tarjetas de crédito y débito</p>
       <p class="pago-nota">Cancelación flexible hasta 24h antes</p>
     </div>
-
     <div class="info-divider"></div>
-
     <div class="info-col">
       <h4 class="info-col-title">Encuéntranos en</h4>
       <div class="empresa-box">
@@ -847,10 +791,8 @@
         <div class="empresa-line">San Miguel, Lima, Perú</div>
       </div>
     </div>
-
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <a href="index.html" class="footer-logo">
@@ -859,13 +801,11 @@
   </a>
   <span class="footer-copy">&copy; 2025 Suyay Peru Travel — Todos los derechos reservados</span>
 </footer>
-
 <!-- LLAMA -->
 <a href="https://wa.me/51925585680?text=Hola%20Suyay%20Peru%20Travel,%20quiero%20informaci%C3%B3n%20sobre%20los%20tours." class="llama-btn" target="_blank" rel="noopener">
   <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
   <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
 </a>
-
 <script>
   // ─── HEADER scroll ──────────────────────────────────────
   window.addEventListener('scroll', function() {
@@ -875,11 +815,9 @@
   });
   // Inicia scrolled si ya hay scroll
   if (window.scrollY > 50) document.getElementById('header').classList.add('scrolled');
-
   function toggleMenu() {
     document.getElementById('menu').classList.toggle('show');
   }
-
   // ─── HERO CAROUSEL ──────────────────────────────────────
   var slides = document.querySelectorAll('.hero-slide');
   var dotsContainer = document.getElementById('hero-dots');
@@ -887,7 +825,6 @@
   var current = 0;
   var timer;
   var total = slides.length;
-
   // Crear dots
   slides.forEach(function(_, i) {
     var dot = document.createElement('button');
@@ -895,7 +832,6 @@
     dot.addEventListener('click', function() { goToSlide(i); });
     dotsContainer.appendChild(dot);
   });
-
   function goToSlide(n) {
     slides[current].classList.remove('is-active');
     dotsContainer.children[current].classList.remove('is-active');
@@ -906,9 +842,7 @@
     clearInterval(timer);
     timer = setInterval(function() { goToSlide(current + 1); }, 6000);
   }
-
   timer = setInterval(function() { goToSlide(current + 1); }, 6000);
-
   // ─── WHY CAROUSEL ───────────────────────────────────────
   (function() {
     var whySlides = document.querySelectorAll('#why-carousel .why-slide');
@@ -919,7 +853,6 @@
       whySlides[whyCurrent].classList.add('is-active');
     }, 3000);
   })();
-
   // ─── CARD CAROUSEL (City Tour Lima) ────────────────────
   (function() {
     var cardSlides = document.querySelectorAll('#card-lima .card-slide');
