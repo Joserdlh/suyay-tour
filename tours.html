@@ -47,11 +47,12 @@
     }
     .page-hero img {
       width: 100%; height: 100%;
-      object-fit: cover; opacity: 0.55;
+      object-fit: cover; opacity: 0.85;
+      filter: brightness(1.1) saturate(1.15);
     }
     .page-hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.1) 35%, rgba(0,0,0,0.55) 100%);
     }
     .page-hero-content {
       position: absolute; inset: 0;
@@ -295,7 +296,7 @@
 </header>
 <!-- HERO -->
 <section class="page-hero">
-  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cover3.jpeg" alt="Letras LIMA - Tours Lima" loading="eager" fetchpriority="high" decoding="async" style="object-position: center 78%;">
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cover3.jpeg" alt="Letras LIMA - Tours Lima" loading="eager" fetchpriority="high" decoding="async" style="object-position: center 78%; transform: scale(0.72);">
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
     <div class="hero-eyebrow">Lima · Perú</div>
