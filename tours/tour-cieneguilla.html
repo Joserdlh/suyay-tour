@@ -170,9 +170,9 @@
     <div class="hero-eyebrow">Valle del Lurín · Lima</div>
     <h1>Cieneguilla<br><em>Premium Experience</em></h1>
     <div class="hero-tags">
-      <span class="hero-tag">⏱ 7 horas</span>
+      <span class="hero-tag">⏱ 6h 30min</span>
       <span class="hero-tag">🕘 9:00 AM</span>
-      <span class="hero-tag">👥 1–16 personas</span>
+      <span class="hero-tag">👥 1–15 personas</span>
       <span class="hero-tag naranja">🐎 Caballo de Paso</span>
     </div>
   </div>
@@ -189,8 +189,8 @@
   <!-- CONTENT -->
   <div class="tour-content">
     <h2>Cocina en vivo, caballo de paso <em>& naturaleza</em></h2>
-    <p>Escapa del ritmo de la ciudad y descubre un oasis natural a pocos minutos de Lima. Vive una experiencia auténtica en Cieneguilla donde la tradición y la naturaleza se unen en un día inolvidable.</p>
-    <p>Granja interactiva, caminata por el valle del Lurín, show de cocina en vivo, caballo de paso y marinera — todo en un solo día de lujo rural.</p>
+    <p>Una experiencia auténtica en el campo con granja interactiva, explorando senderos a lo largo de las orillas del río Lurín. Disfruta de una demostración de cocina en vivo, un espectáculo de caballos peruanos de paso y un baile tradicional de marinera.</p>
+    <p>A solo unos minutos de la ciudad, descubrirás el hermoso valle del río Lurín, un lugar donde la naturaleza, la gastronomía y las tradiciones peruanas se unen para ofrecer una experiencia auténtica, elegante e inolvidable.</p>
     <hr class="section-divider">
     <h2>Itinerario</h2>
     <div class="itinerary">
@@ -274,6 +274,9 @@
           <li>Almuerzo completo</li>
           <li>Show cultural (caballo de paso + marinera)</li>
           <li>Experiencia fotográfica con caballos</li>
+          <li>Agua embotellada y refresco/gaseosa</li>
+          <li>Wifi a bordo</li>
+          <li>Comida para alimentar a los animales de la granja</li>
         </ul>
       </div>
       <div class="includes-box no">
@@ -327,7 +330,7 @@
           <button type="button" class="calc-btn" onclick="calcChange('bebe',1)">+</button>
         </div>
       </div>
-      <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-16 personas).</div>
+      <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-15 personas).</div>
     </div>
     <div class="reserva-box">
       <div class="reserva-title">🗓️ Reserva ahora</div>
@@ -346,7 +349,7 @@
           <option value="9">9 personas</option><option value="10">10 personas</option>
           <option value="11">11 personas</option><option value="12">12 personas</option>
           <option value="13">13 personas</option><option value="14">14 personas</option>
-          <option value="15">15 personas</option><option value="16">16 personas</option>
+          <option value="15">15 personas</option>
         </select>
       </div>
       <div class="form-group">
@@ -440,12 +443,12 @@
 
   // ─── CALCULADORA DE PRECIO (tarifa "Gastronomia") ──────
   // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
-  // Tramos: 1 pax / 2 pax / 3-5 pax / 6-16 pax (de 6 en adelante el precio no baja más).
+  // Tramos: 1 pax / 2 pax / 3-5 pax / 6-15 pax (de 6 en adelante el precio no baja más).
   var PRICING = {
-    adulto:   [ {max:1, price:89.76}, {max:2, price:82.72}, {max:5, price:80.96}, {max:16, price:78.32} ],
-    joven811: [ {max:1, price:67.32}, {max:2, price:62.04}, {max:16, price:60.72} ],
-    joven47:  [ {max:1, price:44.88}, {max:2, price:41.36}, {max:16, price:40.48} ],
-    bebe:     [ {max:16, price:0} ]
+    adulto:   [ {max:1, price:89.76}, {max:2, price:82.72}, {max:5, price:80.96}, {max:15, price:78.32} ],
+    joven811: [ {max:1, price:67.32}, {max:2, price:62.04}, {max:15, price:60.72} ],
+    joven47:  [ {max:1, price:44.88}, {max:2, price:41.36}, {max:15, price:40.48} ],
+    bebe:     [ {max:15, price:0} ]
   };
   var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
 
@@ -473,7 +476,7 @@
     document.getElementById('calc-total-display').innerHTML = '$' + total.toFixed(2) + ' <span>/ grupo</span>';
     document.getElementById('calc-pax-display').textContent = totalPax;
     var selPersonas = document.getElementById('campo-personas');
-    if (selPersonas && totalPax >= 1 && totalPax <= 16) {
+    if (selPersonas && totalPax >= 1 && totalPax <= 15) {
       selPersonas.value = String(totalPax);
     }
   }
