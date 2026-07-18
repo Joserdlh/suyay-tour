@@ -157,7 +157,11 @@
 </header>
 <!-- HERO -->
 <section class="tour-hero">
-  <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Barranco%2015.jpeg" alt="City Tour Lima Premium - Barranco">
+  <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg" alt="City Tour Lima Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour2.jpeg" alt="City Tour Lima Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour3.jpeg" alt="City Tour Lima Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour4.jpeg" alt="City Tour Lima Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Barranco%2015.jpeg" alt="City Tour Lima Premium - Barranco">
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3092.jpeg" alt="City Tour Lima Premium">
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Barranco%2027.jpeg" alt="City Tour Lima Premium - Barranco">
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/IMG_3075.jpeg" alt="City Tour Lima Premium">
@@ -377,7 +381,11 @@
         <input type="text" id="campo-nombre" placeholder="Nombre completo">
       </div>
       <div class="form-group">
-        <label for="campo-whatsapp">WhatsApp (con código de país)</label>
+        <label for="campo-correo">Correo electrónico *</label>
+        <input type="email" id="campo-correo" placeholder="tucorreo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label for="campo-whatsapp">WhatsApp (con código de país) *</label>
         <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
       </div>
       <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">
@@ -514,15 +522,26 @@
     msg.textContent = texto;
     msg.style.display = 'block';
   }
+  function esCorreoValido(correo) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo);
+  }
+  function esWhatsappValido(numero) {
+    var limpio = numero.replace(/[\s\-()]/g, '');
+    return /^\+?\d{8,15}$/.test(limpio);
+  }
   function verificarDisponibilidad() {
     var fecha    = document.getElementById('campo-fecha').value;
     var personas = document.getElementById('campo-personas').value;
     var nombre   = document.getElementById('campo-nombre').value.trim();
+    var correo   = document.getElementById('campo-correo').value.trim();
     var whatsapp = document.getElementById('campo-whatsapp').value.trim();
     if (!fecha)    { mostrarMensaje('error', '⚠️ Por favor elige una fecha.'); return; }
     if (!personas) { mostrarMensaje('error', '⚠️ Por favor indica cuántas personas sois.'); return; }
     if (!nombre)   { mostrarMensaje('error', '⚠️ Por favor escribe tu nombre.'); return; }
+    if (!correo)   { mostrarMensaje('error', '⚠️ El correo electrónico es obligatorio.'); return; }
+    if (!esCorreoValido(correo)) { mostrarMensaje('error', '⚠️ Escribe un correo electrónico válido (ej. nombre@dominio.com).'); return; }
     if (!whatsapp) { mostrarMensaje('error', '⚠️ Por favor escribe tu WhatsApp.'); return; }
+    if (!esWhatsappValido(whatsapp)) { mostrarMensaje('error', '⚠️ Escribe un número de WhatsApp válido, con código de país (ej. +51999999999).'); return; }
     var btn = document.getElementById('btn-verificar');
     btn.disabled = true;
     btn.textContent = 'Verificando...';
@@ -541,7 +560,7 @@
           btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
         }
         mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
-        crearReserva(fecha, parseInt(personas), nombre, whatsapp);
+        crearReserva(fecha, parseInt(personas), nombre, correo, whatsapp);
       })
       .catch(function(err) {
         console.log('Error verificar:', err);
@@ -549,11 +568,12 @@
         btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
       });
   }
-  function crearReserva(fecha, personas, nombre, whatsapp) {
+  function crearReserva(fecha, personas, nombre, correo, whatsapp) {
     var btn = document.getElementById('btn-verificar');
     var url = PROXY_URL + '?accion=crear_reserva&tour=' + TOUR_ID +
       '&fecha=' + fecha + '&personas=' + personas +
       '&nombre=' + encodeURIComponent(nombre) +
+      '&correo=' + encodeURIComponent(correo) +
       '&whatsapp=' + encodeURIComponent(whatsapp);
     fetch(url)
       .then(function(r) { return r.json(); })
