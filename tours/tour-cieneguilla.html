@@ -84,11 +84,37 @@
     .calc-note { font-size: 0.66em; color: #999; margin-top: 10px; line-height: 1.5; }
     .reserva-box { background: white; border: 1px solid #ede6d8; border-radius: 0 0 8px 8px; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
     .reserva-title { font-family: 'Fraunces', serif; font-size: 1.1em; color: var(--negro); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #f0ebe2; }
-    .btn-reservar { display: block; width: 100%; background: var(--naranja); color: white; text-align: center; padding: 14px; font-size: 0.85em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background 0.2s; margin-bottom: 12px; }
-    .btn-reservar:hover { background: var(--naranja-fuerte); }
-    .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 13px; font-size: 0.82em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background 0.2s; }
-    .btn-whatsapp:hover { background: #20b858; }
-    .reserva-nota { font-size: 0.7em; color: #aaa; text-align: center; margin-top: 12px; line-height: 1.6; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.72em; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em; font-family: 'Raleway', sans-serif; color: var(--negro); background: #fafafa; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--naranja); background: white; }
+    .btn-verificar { width: 100%; background: var(--naranja); color: white; padding: 13px; border: none; border-radius: 3px; font-size: 0.85em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
+    .btn-verificar:hover { background: var(--naranja-fuerte); }
+    .btn-verificar:disabled { background: #aaa; cursor: not-allowed; }
+    .disponibilidad-msg { margin-top: 12px; padding: 12px 14px; border-radius: 4px; font-size: 0.85em; font-weight: 600; display: none; }
+    .disponibilidad-msg.ok { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+    .disponibilidad-msg.error { background: #fce4ec; color: #c62828; border: 1px solid #f8bbd0; }
+    .disponibilidad-msg.loading { background: #fff3e0; color: #c43d00; border: 1px solid #ffe0b2; }
+    .reserva-panel { display: none; margin-top: 16px; border-top: 1px solid #f0ebe2; padding-top: 16px; }
+    .codigo-box { background: var(--negro); border-radius: 4px; padding: 16px; text-align: center; margin-bottom: 16px; }
+    .codigo-label { font-size: 0.68em; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
+    .codigo-valor { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
+    .codigo-expira { font-size: 0.7em; color: rgba(255,255,255,0.45); margin-top: 4px; }
+    .pago-titulo { font-size: 0.78em; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .pago-metodos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .pago-metodo { background: #fafafa; border: 1px solid #e8e0d4; border-radius: 4px; padding: 10px 14px; cursor: pointer; transition: all 0.15s; }
+    .pago-metodo:hover { border-color: var(--naranja); background: #fff7f2; }
+    .pago-metodo.activo { border-color: var(--naranja); background: rgba(232,82,10,0.06); }
+    .pago-metodo-header { display: flex; align-items: center; gap: 10px; }
+    .pago-metodo-icon { font-size: 1.3em; }
+    .pago-metodo-nombre { font-weight: 700; font-size: 0.88em; color: var(--negro); }
+    .pago-metodo-detalle { display: none; font-size: 0.8em; color: #555; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e0d8cc; line-height: 1.6; }
+    .pago-metodo.activo .pago-metodo-detalle { display: block; }
+    .pago-referencia { background: #fff8e1; border: 1px solid #ffe082; border-radius: 4px; padding: 8px 12px; margin-top: 6px; font-size: 0.8em; color: #795548; }
+    .pago-referencia strong { color: var(--naranja-fuerte); }
+    .btn-confirmar { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 14px; border-radius: 3px; font-size: 0.9em; font-weight: 700; text-decoration: none; transition: background 0.2s; margin-top: 14px; }
+    .btn-confirmar:hover { background: #20b858; }
+    .nota-final { font-size: 0.7em; color: #aaa; text-align: center; margin-top: 10px; line-height: 1.5; }
     /* FOOTER */
     footer { background: #0a0a0a; color: rgba(255,255,255,0.3); padding: 32px 80px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer-logo { display: flex; flex-direction: column; text-decoration: none; }
@@ -133,6 +159,12 @@
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cieneguilla-8.jpeg" alt="Cieneguilla">
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cieneguilla-9.jpeg" alt="Cieneguilla">
   <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cieneguilla-10.jpeg" alt="Cieneguilla">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia1.jpeg" alt="Cieneguilla - Show de cocina en vivo">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia2.jpeg" alt="Cieneguilla - Show de cocina en vivo">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia3.jpeg" alt="Cieneguilla - Show de cocina en vivo">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia4.jpeg" alt="Cieneguilla - Show de cocina en vivo">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia5.jpeg" alt="Cieneguilla - Show de cocina en vivo">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/gastronomia6.jpeg" alt="Cieneguilla - Show de cocina en vivo">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Valle del Lurín · Lima</div>
@@ -298,10 +330,74 @@
       <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-16 personas).</div>
     </div>
     <div class="reserva-box">
-      <div class="reserva-title">🗓️ Reserva tu experiencia</div>
-      <a href="/tours/tour-lima-premium.html" class="btn-reservar">Reservar ahora →</a>
-      <a href="#" id="btn-whatsapp-consulta" class="btn-whatsapp" target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
-      <p class="reserva-nota">Cancelación flexible hasta 24h antes · Guía bilingüe incluido · Almuerzo incluido</p>
+      <div class="reserva-title">🗓️ Reserva ahora</div>
+      <div class="form-group">
+        <label for="campo-fecha">Fecha del tour</label>
+        <input type="date" id="campo-fecha" min="">
+      </div>
+      <div class="form-group">
+        <label for="campo-personas">Número de personas</label>
+        <select id="campo-personas">
+          <option value="">— Selecciona —</option>
+          <option value="1">1 persona</option><option value="2">2 personas</option>
+          <option value="3">3 personas</option><option value="4">4 personas</option>
+          <option value="5">5 personas</option><option value="6">6 personas</option>
+          <option value="7">7 personas</option><option value="8">8 personas</option>
+          <option value="9">9 personas</option><option value="10">10 personas</option>
+          <option value="11">11 personas</option><option value="12">12 personas</option>
+          <option value="13">13 personas</option><option value="14">14 personas</option>
+          <option value="15">15 personas</option><option value="16">16 personas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="campo-nombre">Tu nombre</label>
+        <input type="text" id="campo-nombre" placeholder="Nombre completo">
+      </div>
+      <div class="form-group">
+        <label for="campo-correo">Correo electrónico *</label>
+        <input type="email" id="campo-correo" placeholder="tucorreo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label for="campo-whatsapp">WhatsApp (con código de país) *</label>
+        <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
+      </div>
+      <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">Verificar disponibilidad</button>
+      <div class="disponibilidad-msg" id="msg-disponibilidad"></div>
+      <div class="reserva-panel" id="panel-reserva">
+        <div class="codigo-box">
+          <div class="codigo-label">Tu código de reserva</div>
+          <div class="codigo-valor" id="codigo-display">—</div>
+          <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
+        </div>
+        <div class="pago-titulo">Elige cómo pagar</div>
+        <div class="pago-metodos">
+          <div class="pago-metodo" onclick="togglePago(this)">
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">💳</span><span class="pago-metodo-nombre">Visa / Mastercard</span></div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.</div>
+          </div>
+          <div class="pago-metodo" onclick="togglePago(this)">
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">🅿️</span><span class="pago-metodo-nombre">PayPal</span></div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.</div>
+          </div>
+          <div class="pago-metodo" onclick="togglePago(this)">
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">📱</span><span class="pago-metodo-nombre">Bizum</span></div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para los detalles.</div>
+          </div>
+          <div class="pago-metodo" onclick="togglePago(this)">
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">🟣</span><span class="pago-metodo-nombre">Yape</span></div>
+            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape.</div>
+          </div>
+          <div class="pago-metodo" onclick="togglePago(this)">
+            <div class="pago-metodo-header"><span class="pago-metodo-icon">💵</span><span class="pago-metodo-nombre">Cash (pago al guía)</span></div>
+            <div class="pago-metodo-detalle">
+              Paga en efectivo directamente a tu guía al inicio del tour.
+              <div class="pago-referencia">Menciona tu código <strong id="codigo-ref-cash">—</strong> al guía para confirmar tu reserva.</div>
+            </div>
+          </div>
+        </div>
+        <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">💬 Confirmar mi reserva por WhatsApp</a>
+        <p class="nota-final">Tienes 2 horas para confirmar el pago. Pasado ese tiempo el cupo se libera automáticamente.</p>
+      </div>
     </div>
   </aside>
 </div>
@@ -318,13 +414,22 @@
   <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
 </a>
 <script>
+  var PROXY_URL = "/functions/api";
+  var TOUR_ID   = "Cieneguilla";
+
   window.addEventListener('scroll', function() {
     var h = document.getElementById('header');
     if (window.scrollY > 50) h.classList.add('scrolled');
     else h.classList.remove('scrolled');
   });
   function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
-  // Hero carousel — 10 fotos
+  window.addEventListener('DOMContentLoaded', function() {
+    var hoy = new Date();
+    hoy.setDate(hoy.getDate() + 1);
+    document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
+    updateTotal();
+  });
+  // Hero carousel
   var slides = document.querySelectorAll('.hero-slide');
   var current = 0;
   setInterval(function() {
@@ -367,17 +472,117 @@
     var total = calcCounts.adulto * rAdulto + calcCounts.joven811 * rJoven811 + calcCounts.joven47 * rJoven47 + calcCounts.bebe * rBebe;
     document.getElementById('calc-total-display').innerHTML = '$' + total.toFixed(2) + ' <span>/ grupo</span>';
     document.getElementById('calc-pax-display').textContent = totalPax;
-
-    var msg = 'Hola Suyay Tours 👋\n\nQuiero información sobre la Cieneguilla Premium Experience.\n\n'
-      + '👥 Adultos: ' + calcCounts.adulto + '\n'
-      + '👦 Jóvenes (8-11): ' + calcCounts.joven811 + '\n'
-      + '🧒 Niños (4-7): ' + calcCounts.joven47 + '\n'
-      + '👶 Bebés (0-3): ' + calcCounts.bebe + '\n'
-      + '💰 Precio estimado: $' + total.toFixed(2) + '\n\n'
-      + '¿Tienen disponibilidad?';
-    document.getElementById('btn-whatsapp-consulta').href = 'https://wa.me/51925585680?text=' + encodeURIComponent(msg);
+    var selPersonas = document.getElementById('campo-personas');
+    if (selPersonas && totalPax >= 1 && totalPax <= 16) {
+      selPersonas.value = String(totalPax);
+    }
   }
-  updateTotal();
+
+  // ─── RESERVA ────────────────────────────────────────────
+  function esCorreoValido(correo) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo);
+  }
+  function esWhatsappValido(numero) {
+    var limpio = numero.replace(/[\s\-()]/g, '');
+    return /^\+?\d{8,15}$/.test(limpio);
+  }
+  function togglePago(el) {
+    document.querySelectorAll('.pago-metodo').forEach(function(m) { m.classList.remove('activo'); });
+    el.classList.toggle('activo');
+  }
+  function mostrarMensaje(tipo, texto) {
+    var msg = document.getElementById('msg-disponibilidad');
+    msg.className = 'disponibilidad-msg ' + tipo;
+    msg.textContent = texto;
+    msg.style.display = 'block';
+  }
+  function verificarDisponibilidad() {
+    var fecha    = document.getElementById('campo-fecha').value;
+    var personas = document.getElementById('campo-personas').value;
+    var nombre   = document.getElementById('campo-nombre').value.trim();
+    var correo   = document.getElementById('campo-correo').value.trim();
+    var whatsapp = document.getElementById('campo-whatsapp').value.trim();
+    if (!fecha)    { mostrarMensaje('error', '⚠️ Por favor elige una fecha.'); return; }
+    if (!personas) { mostrarMensaje('error', '⚠️ Por favor indica cuántas personas sois.'); return; }
+    if (!nombre)   { mostrarMensaje('error', '⚠️ Por favor escribe tu nombre.'); return; }
+    if (!correo)   { mostrarMensaje('error', '⚠️ El correo electrónico es obligatorio.'); return; }
+    if (!esCorreoValido(correo)) { mostrarMensaje('error', '⚠️ Escribe un correo electrónico válido (ej. nombre@dominio.com).'); return; }
+    if (!whatsapp) { mostrarMensaje('error', '⚠️ Por favor escribe tu WhatsApp.'); return; }
+    if (!esWhatsappValido(whatsapp)) { mostrarMensaje('error', '⚠️ Escribe un número de WhatsApp válido, con código de país (ej. +51999999999).'); return; }
+    var btn = document.getElementById('btn-verificar');
+    btn.disabled = true;
+    btn.textContent = 'Verificando...';
+    mostrarMensaje('loading', '🔍 Verificando disponibilidad...');
+    document.getElementById('panel-reserva').style.display = 'none';
+    var url = PROXY_URL + '?accion=verificar_disponibilidad&tour=' + TOUR_ID + '&fecha=' + fecha + '&personas=' + personas;
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '⚠️ Error al verificar. Inténtalo de nuevo.');
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        if (!data.disponible) {
+          mostrarMensaje('error', '❌ ' + data.mensaje);
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        mostrarMensaje('loading', '✅ ¡Hay disponibilidad! Generando tu código...');
+        crearReserva(fecha, parseInt(personas), nombre, correo, whatsapp);
+      })
+      .catch(function(err) {
+        console.log('Error verificar:', err);
+        mostrarMensaje('error', '⚠️ Error de conexión. Inténtalo de nuevo.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
+      });
+  }
+  function crearReserva(fecha, personas, nombre, correo, whatsapp) {
+    var btn = document.getElementById('btn-verificar');
+    var url = PROXY_URL + '?accion=crear_reserva&tour=' + TOUR_ID +
+      '&fecha=' + fecha + '&personas=' + personas +
+      '&nombre=' + encodeURIComponent(nombre) +
+      '&correo=' + encodeURIComponent(correo) +
+      '&whatsapp=' + encodeURIComponent(whatsapp);
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '❌ ' + (data.error || 'Error al crear la reserva.'));
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
+        }
+        mostrarPanelReserva(data);
+      })
+      .catch(function(err) {
+        console.log('Error crear:', err);
+        mostrarMensaje('error', '⚠️ Error de conexión. Inténtalo de nuevo.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
+      });
+  }
+  function mostrarPanelReserva(data) {
+    document.getElementById('codigo-display').textContent = data.codigo;
+    document.getElementById('codigo-ref-cash').textContent = data.codigo;
+    var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
+    document.getElementById('codigo-expira').textContent =
+      'Válido hasta las ' + expira.getHours() + ':' +
+      String(expira.getMinutes()).padStart(2,'0') +
+      ' — tienes ' + data.expira_en_horas + 'h para confirmar';
+    var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    var msg = 'Hola Suyay Tours 👋\n\nQuiero confirmar mi reserva:\n\n'
+      + '🗺️ *Tour:* ' + data.tour_nombre + '\n'
+      + '📅 *Fecha:* ' + fechaFormateada + '\n'
+      + '🕗 *Hora:* ' + data.hora_inicio + '\n'
+      + '👥 *Personas:* ' + data.personas + '\n'
+      + '🔑 *Código:* ' + data.codigo + '\n\n'
+      + 'Ya realicé el pago. ¡Gracias!';
+    document.getElementById('btn-whatsapp-confirmar').href =
+      'https://wa.me/' + data.whatsapp_manager + '?text=' + encodeURIComponent(msg);
+    document.getElementById('panel-reserva').style.display = 'block';
+    document.getElementById('msg-disponibilidad').style.display = 'none';
+    var btn = document.getElementById('btn-verificar');
+    btn.textContent = '✓ Código generado';
+    btn.style.background = '#2e7d32';
+  }
 </script>
 </body>
 </html>
