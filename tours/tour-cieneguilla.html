@@ -10,7 +10,6 @@
     :root { --naranja: #e8520a; --naranja-fuerte: #c43d00; --negro: #0a0a0a; --crema: #f5f0e8; --gris: #888; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Raleway', sans-serif; background: #fff; color: var(--negro); overflow-x: hidden; }
-
     /* HEADER */
     header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 80px; height: 100px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, transparent 100%); transition: background 0.4s, height 0.3s; }
     header.scrolled { background: rgba(10,10,10,0.97); box-shadow: 0 2px 30px rgba(0,0,0,0.4); height: 80px; }
@@ -27,12 +26,11 @@
     .nav-link.cta::after { display: none; }
     .nav-link.cta:hover { background: var(--naranja-fuerte); }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
-
     /* HERO */
     .tour-hero { position: relative; height: 80vh; min-height: 560px; overflow: hidden; background: #111; }
-    .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease; }
-    .hero-slide.is-active { opacity: 0.75; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.72) 100%); z-index: 1; }
+    .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease; filter: brightness(1.08) saturate(1.15); }
+    .hero-slide.is-active { opacity: 0.85; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.52) 100%); z-index: 1; }
     .hero-content { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; padding-top: 100px; }
     .hero-eyebrow { font-size: 0.68em; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--naranja); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
     .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--naranja); opacity: 0.6; }
@@ -44,11 +42,8 @@
     .breadcrumb { position: absolute; bottom: 28px; left: 80px; display: flex; align-items: center; gap: 8px; font-size: 0.7em; color: rgba(255,255,255,0.45); z-index: 3; }
     .breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
     .breadcrumb a:hover { color: var(--naranja); }
-
     /* BODY */
     .tour-body { max-width: 1140px; margin: 0 auto; padding: 70px 40px 100px; display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: start; }
-
-    /* CONTENT */
     .tour-content h2 { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 400; color: var(--negro); margin-bottom: 16px; }
     .tour-content h2 em { font-style: italic; color: var(--naranja); }
     .tour-content p { font-size: 0.92em; line-height: 1.85; color: #444; margin-bottom: 16px; font-weight: 300; }
@@ -69,7 +64,6 @@
     .includes-box ul li { font-size: 0.85em; color: #444; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
     .includes-box.yes ul li::before { content: '✓'; color: var(--naranja); font-weight: 700; flex-shrink: 0; }
     .includes-box.no ul li::before { content: '✗'; color: #c62828; font-weight: 700; flex-shrink: 0; }
-
     /* SIDEBAR */
     .tour-sidebar { position: sticky; top: 110px; }
     .precio-header { background: var(--negro); border-radius: 8px 8px 0 0; padding: 24px; text-align: center; }
@@ -77,12 +71,17 @@
     .precio-main { font-family: 'Fraunces', serif; font-size: 2.8em; font-weight: 300; color: white; }
     .precio-main span { font-size: 0.4em; font-family: 'Raleway', sans-serif; color: rgba(255,255,255,0.55); }
     .precio-nota { font-size: 0.72em; color: rgba(255,255,255,0.4); margin-top: 4px; }
-    .price-table-box { background: #faf7f2; padding: 16px 24px; border-left: 1px solid #ede6d8; border-right: 1px solid #ede6d8; }
-    .price-table { width: 100%; }
-    .price-table tr td { padding: 8px 4px; font-size: 0.85em; border-bottom: 1px solid #ede6d8; }
-    .price-table tr:last-child td { border-bottom: none; }
-    .price-table td:first-child { color: #666; }
-    .price-table td:last-child { font-weight: 700; color: var(--negro); text-align: right; }
+    .calc-box { background: #faf7f2; padding: 18px 24px 20px; border-left: 1px solid #ede6d8; border-right: 1px solid #ede6d8; }
+    .calc-title { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--negro); margin-bottom: 14px; }
+    .calc-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #ede6d8; }
+    .calc-row:last-of-type { border-bottom: none; }
+    .calc-label-title { display: block; font-size: 0.85em; font-weight: 600; color: var(--negro); }
+    .calc-label-sub { display: block; font-size: 0.65em; color: #999; }
+    .calc-stepper { display: flex; align-items: center; gap: 10px; }
+    .calc-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid #ddd; background: white; color: var(--negro); font-size: 1em; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; }
+    .calc-btn:hover { border-color: var(--naranja); color: var(--naranja); }
+    .calc-count { min-width: 18px; text-align: center; font-weight: 700; font-size: 0.9em; }
+    .calc-note { font-size: 0.66em; color: #999; margin-top: 10px; line-height: 1.5; }
     .reserva-box { background: white; border: 1px solid #ede6d8; border-radius: 0 0 8px 8px; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
     .reserva-title { font-family: 'Fraunces', serif; font-size: 1.1em; color: var(--negro); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #f0ebe2; }
     .btn-reservar { display: block; width: 100%; background: var(--naranja); color: white; text-align: center; padding: 14px; font-size: 0.85em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background 0.2s; margin-bottom: 12px; }
@@ -90,43 +89,38 @@
     .btn-whatsapp { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 13px; font-size: 0.82em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background 0.2s; }
     .btn-whatsapp:hover { background: #20b858; }
     .reserva-nota { font-size: 0.7em; color: #aaa; text-align: center; margin-top: 12px; line-height: 1.6; }
-
     /* FOOTER */
     footer { background: #0a0a0a; color: rgba(255,255,255,0.3); padding: 32px 80px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer-logo { display: flex; flex-direction: column; text-decoration: none; }
     .footer-copy { font-size: 0.72em; letter-spacing: 0.06em; }
-
     /* LLAMA */
     .llama-btn { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; background: white; padding: 10px 16px 10px 10px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: transform 0.3s; z-index: 999; }
     .llama-btn:hover { transform: translateY(-2px); }
     .chat-text { background: #fff3cd; color: #333; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-right: 10px; line-height: 1.3; animation: bounce 2.5s ease infinite; }
     @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
     .llama-btn img { height: 60px; }
-
     /* MOBILE */
     @media (max-width: 900px) { .tour-body { grid-template-columns: 1fr; } .tour-sidebar { position: static; } .includes-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) { header { padding: 0 20px; height: 80px; } nav { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 20px; } nav.show { display: flex; } .nav-link { padding: 12px 16px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); } .menu-toggle { display: block; } .breadcrumb { left: 20px; } footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; } }
   </style>
 </head>
 <body>
-
 <!-- HEADER -->
 <header id="header">
-  <a href="../index.html" class="logo">
+  <a href="/index.html" class="logo">
     <span class="logo-suyay">SUYAY</span>
     <span class="logo-peru">Peru Travel</span>
     <span class="logo-wakeup">Wake up in Peru</span>
   </a>
   <button class="menu-toggle" onclick="toggleMenu()">☰</button>
   <nav id="menu">
-    <a href="../tours.html" class="nav-link">Tours</a>
+    <a href="/tours.html" class="nav-link">Tours</a>
     <a href="#" class="nav-link">Escapadas & Gastronomía</a>
     <a href="#" class="nav-link">Traslados</a>
     <a href="#" class="nav-link">Blog</a>
-    <a href="../index.html#contacta" class="nav-link cta">Contacta</a>
+    <a href="/index.html#contacta" class="nav-link cta">Contacta</a>
   </nav>
 </header>
-
 <!-- HERO -->
 <section class="tour-hero">
   <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/cieneguilla-1.jpeg" alt="Cieneguilla">
@@ -151,28 +145,23 @@
     </div>
   </div>
   <div class="breadcrumb">
-    <a href="../index.html">Inicio</a>
+    <a href="/index.html">Inicio</a>
     <span>›</span>
-    <a href="../tours.html">Tours</a>
+    <a href="/tours.html">Tours</a>
     <span>›</span>
     <span>Cieneguilla Premium</span>
   </div>
 </section>
-
 <!-- BODY -->
 <div class="tour-body">
-
   <!-- CONTENT -->
   <div class="tour-content">
-
     <h2>Cocina en vivo, caballo de paso <em>& naturaleza</em></h2>
     <p>Escapa del ritmo de la ciudad y descubre un oasis natural a pocos minutos de Lima. Vive una experiencia auténtica en Cieneguilla donde la tradición y la naturaleza se unen en un día inolvidable.</p>
     <p>Granja interactiva, caminata por el valle del Lurín, show de cocina en vivo, caballo de paso y marinera — todo en un solo día de lujo rural.</p>
-
     <hr class="section-divider">
     <h2>Itinerario</h2>
     <div class="itinerary">
-
       <div class="itinerary-item">
         <div class="itinerary-dot">1</div>
         <div class="itinerary-text">
@@ -181,7 +170,6 @@
           <p>Desde Miraflores, San Isidro o Barranco. Traslado cómodo hacia el valle de Cieneguilla (aprox. 1 hora).</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">2</div>
         <div class="itinerary-text">
@@ -190,7 +178,6 @@
           <p>Llegada a un fundo privado rodeado de naturaleza. Bebida de bienvenida e introducción a la experiencia.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">3</div>
         <div class="itinerary-text">
@@ -199,7 +186,6 @@
           <p>Alimenta cabras, gallinas, conejos y más. Una conexión directa con la vida rural peruana.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">4</div>
         <div class="itinerary-text">
@@ -208,7 +194,6 @@
           <p>Recorrido guiado por senderos naturales rodeado de vegetación y paisajes únicos.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">5</div>
         <div class="itinerary-text">
@@ -217,7 +202,6 @@
           <p>Lomo saltado preparado en vivo con ingredientes frescos locales. Opciones vegetarianas disponibles. Almuerzo completo incluido.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">6</div>
         <div class="itinerary-text">
@@ -226,7 +210,6 @@
           <p>Exhibición de caballo de paso con chalán y baile de marinera en pareja — la tradición peruana en su máxima expresión.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">7</div>
         <div class="itinerary-text">
@@ -235,7 +218,6 @@
           <p>Monta los caballos de paso para capturar fotos únicas en un entorno natural inolvidable.</p>
         </div>
       </div>
-
       <div class="itinerary-item">
         <div class="itinerary-dot">8</div>
         <div class="itinerary-text">
@@ -244,9 +226,7 @@
           <p>Traslado de regreso a tu hotel.</p>
         </div>
       </div>
-
     </div>
-
     <hr class="section-divider">
     <h2>¿Qué <em>incluye</em>?</h2>
     <div class="includes-grid">
@@ -273,47 +253,70 @@
         </ul>
       </div>
     </div>
-
   </div>
-
   <!-- SIDEBAR -->
   <aside class="tour-sidebar">
     <div class="precio-header">
-      <div class="precio-label">Desde</div>
-      <div class="precio-main">$155 <span>/ persona</span></div>
-      <div class="precio-nota">Precio según tamaño del grupo</div>
+      <div class="precio-label">Precio estimado</div>
+      <div class="precio-main" id="calc-total-display">$89.76 <span>/ grupo</span></div>
+      <div class="precio-nota"><span id="calc-pax-display">1</span> persona(s) · se recalcula solo</div>
     </div>
-    <div class="price-table-box">
-      <table class="price-table">
-        <tr><td>1 – 3 personas</td><td>$175 / persona</td></tr>
-        <tr><td>4 – 7 personas</td><td>$165 / persona</td></tr>
-        <tr><td>8 – 16 personas</td><td>$155 / persona</td></tr>
-      </table>
+    <div class="calc-box">
+      <div class="calc-title">Calcula tu precio</div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Adultos</span><span class="calc-label-sub">12 - 99 años</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('adulto',-1)">−</button>
+          <span class="calc-count" id="count-adulto">1</span>
+          <button type="button" class="calc-btn" onclick="calcChange('adulto',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Jóvenes</span><span class="calc-label-sub">8 - 11 años</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('joven811',-1)">−</button>
+          <span class="calc-count" id="count-joven811">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('joven811',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Niños</span><span class="calc-label-sub">4 - 7 años</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('joven47',-1)">−</button>
+          <span class="calc-count" id="count-joven47">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('joven47',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Bebés</span><span class="calc-label-sub">0 - 3 años · gratis</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('bebe',-1)">−</button>
+          <span class="calc-count" id="count-bebe">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('bebe',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-16 personas).</div>
     </div>
     <div class="reserva-box">
       <div class="reserva-title">🗓️ Reserva tu experiencia</div>
-      <a href="tour-lima-premium.html" class="btn-reservar">Reservar ahora →</a>
-      <a href="https://wa.me/51925585680?text=Hola%20Suyay%20Tours%20👋%0A%0AQuiero%20información%20sobre%20la%20Cieneguilla%20Premium%20Experience.%0A%0A¿Tienen%20disponibilidad?" class="btn-whatsapp" target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
+      <a href="/tours/tour-lima-premium.html" class="btn-reservar">Reservar ahora →</a>
+      <a href="#" id="btn-whatsapp-consulta" class="btn-whatsapp" target="_blank" rel="noopener">💬 Consultar por WhatsApp</a>
       <p class="reserva-nota">Cancelación flexible hasta 24h antes · Guía bilingüe incluido · Almuerzo incluido</p>
     </div>
   </aside>
-
 </div>
-
 <!-- FOOTER -->
 <footer>
-  <a href="../index.html" class="footer-logo">
+  <a href="/index.html" class="footer-logo">
     <span class="logo-suyay" style="font-size:1em; text-shadow:none">SUYAY</span>
     <span class="logo-wakeup" style="text-shadow:none; color:rgba(255,255,255,0.25)">Wake up in Peru</span>
   </a>
   <span class="footer-copy">&copy; 2025 Suyay Peru Travel — Todos los derechos reservados</span>
 </footer>
-
-<a href="https://wa.me/51925585680?text=Hola%20Suyay%20Peru%20Travel,%20quiero%20información%20sobre%20la%20Cieneguilla%20Premium%20Experience." class="llama-btn" target="_blank" rel="noopener">
+<a href="https://wa.me/51925585680?text=Hola%20Suyay%20Peru%20Travel,%20quiero%20informaci%C3%B3n%20sobre%20la%20Cieneguilla%20Premium%20Experience." class="llama-btn" target="_blank" rel="noopener">
   <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
   <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
 </a>
-
 <script>
   window.addEventListener('scroll', function() {
     var h = document.getElementById('header');
@@ -321,7 +324,6 @@
     else h.classList.remove('scrolled');
   });
   function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
-
   // Hero carousel — 10 fotos
   var slides = document.querySelectorAll('.hero-slide');
   var current = 0;
@@ -330,6 +332,52 @@
     current = (current + 1) % slides.length;
     slides[current].classList.add('is-active');
   }, 3000);
+
+  // ─── CALCULADORA DE PRECIO (tarifa "Gastronomia") ──────
+  // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
+  // Tramos: 1 pax / 2 pax / 3-5 pax / 6-16 pax (de 6 en adelante el precio no baja más).
+  var PRICING = {
+    adulto:   [ {max:1, price:89.76}, {max:2, price:82.72}, {max:5, price:80.96}, {max:16, price:78.32} ],
+    joven811: [ {max:1, price:67.32}, {max:2, price:62.04}, {max:16, price:60.72} ],
+    joven47:  [ {max:1, price:44.88}, {max:2, price:41.36}, {max:16, price:40.48} ],
+    bebe:     [ {max:16, price:0} ]
+  };
+  var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
+
+  function calcChange(cat, delta) {
+    var nuevo = calcCounts[cat] + delta;
+    if (nuevo < 0) return;
+    calcCounts[cat] = nuevo;
+    document.getElementById('count-' + cat).textContent = nuevo;
+    updateTotal();
+  }
+  function getRate(tiers, totalPax) {
+    for (var i = 0; i < tiers.length; i++) {
+      if (totalPax <= tiers[i].max) return tiers[i].price;
+    }
+    return tiers[tiers.length - 1].price;
+  }
+  function updateTotal() {
+    var totalPax = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
+    var totalParaTarifa = Math.max(totalPax, 1);
+    var rAdulto = getRate(PRICING.adulto, totalParaTarifa);
+    var rJoven811 = getRate(PRICING.joven811, totalParaTarifa);
+    var rJoven47 = getRate(PRICING.joven47, totalParaTarifa);
+    var rBebe = getRate(PRICING.bebe, totalParaTarifa);
+    var total = calcCounts.adulto * rAdulto + calcCounts.joven811 * rJoven811 + calcCounts.joven47 * rJoven47 + calcCounts.bebe * rBebe;
+    document.getElementById('calc-total-display').innerHTML = '$' + total.toFixed(2) + ' <span>/ grupo</span>';
+    document.getElementById('calc-pax-display').textContent = totalPax;
+
+    var msg = 'Hola Suyay Tours 👋\n\nQuiero información sobre la Cieneguilla Premium Experience.\n\n'
+      + '👥 Adultos: ' + calcCounts.adulto + '\n'
+      + '👦 Jóvenes (8-11): ' + calcCounts.joven811 + '\n'
+      + '🧒 Niños (4-7): ' + calcCounts.joven47 + '\n'
+      + '👶 Bebés (0-3): ' + calcCounts.bebe + '\n'
+      + '💰 Precio estimado: $' + total.toFixed(2) + '\n\n'
+      + '¿Tienen disponibilidad?';
+    document.getElementById('btn-whatsapp-consulta').href = 'https://wa.me/51925585680?text=' + encodeURIComponent(msg);
+  }
+  updateTotal();
 </script>
 </body>
 </html>
