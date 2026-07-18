@@ -114,6 +114,7 @@
     .codigo-label { font-size: 0.68em; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
     .codigo-valor { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
     .codigo-expira { font-size: 0.7em; color: rgba(255,255,255,0.45); margin-top: 4px; }
+    .codigo-email-status { font-size: 0.68em; color: #ffcc80; margin-top: 8px; line-height: 1.5; }
     .pago-titulo { font-size: 0.78em; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
     .pago-metodos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
     .pago-metodo { background: #fafafa; border: 1px solid #e8e0d4; border-radius: 4px; padding: 10px 14px; cursor: pointer; transition: all 0.15s; }
@@ -355,33 +356,20 @@
           <div class="codigo-label">Tu código de reserva</div>
           <div class="codigo-valor" id="codigo-display">—</div>
           <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
+          <div class="codigo-email-status" id="codigo-email-status" style="display:none;"></div>
         </div>
         <div class="pago-titulo">Elige cómo pagar</div>
-        <div class="pago-metodos">
-          <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header"><span class="pago-metodo-icon">💳</span><span class="pago-metodo-nombre">Visa / Mastercard</span></div>
-            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.</div>
-          </div>
-          <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header"><span class="pago-metodo-icon">🅿️</span><span class="pago-metodo-nombre">PayPal</span></div>
-            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.</div>
-          </div>
-          <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header"><span class="pago-metodo-icon">📱</span><span class="pago-metodo-nombre">Bizum</span></div>
-            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para los detalles.</div>
-          </div>
-          <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header"><span class="pago-metodo-icon">🟣</span><span class="pago-metodo-nombre">Yape</span></div>
-            <div class="pago-metodo-detalle">Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape.</div>
-          </div>
-          <div class="pago-metodo" onclick="togglePago(this)">
-            <div class="pago-metodo-header"><span class="pago-metodo-icon">💵</span><span class="pago-metodo-nombre">Cash (pago al conductor)</span></div>
-            <div class="pago-metodo-detalle">
-              Paga en efectivo directamente al conductor al inicio del traslado.
-              <div class="pago-referencia">Menciona tu código <strong id="codigo-ref-cash">—</strong> para confirmar tu reserva.</div>
-            </div>
-          </div>
+        <div class="form-group">
+          <select id="campo-metodo-pago" onchange="actualizarDetallePago()">
+            <option value="">— Selecciona un método —</option>
+            <option value="💳 Visa / Mastercard">💳 Visa / Mastercard</option>
+            <option value="🅿️ PayPal">🅿️ PayPal</option>
+            <option value="📱 Bizum">📱 Bizum</option>
+            <option value="🟣 Yape">🟣 Yape</option>
+            <option value="💵 Cash (pago al conductor)">💵 Cash (pago al conductor)</option>
+          </select>
         </div>
+        <div class="pago-metodo-detalle" id="detalle-pago" style="display:none;"></div>
         <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">💬 Confirmar mi reserva por WhatsApp</a>
         <p class="nota-final">Tienes 2 horas para confirmar el pago. Pasado ese tiempo el cupo se libera automáticamente.</p>
       </div>
@@ -469,9 +457,23 @@
     var limpio = numero.replace(/[\s\-()]/g, '');
     return /^\+?\d{8,15}$/.test(limpio);
   }
-  function togglePago(el) {
-    document.querySelectorAll('.pago-metodo').forEach(function(m) { m.classList.remove('activo'); });
-    el.classList.toggle('activo');
+  var PAGO_DETALLES = {
+    "💳 Visa / Mastercard": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.",
+    "🅿️ PayPal": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.",
+    "📱 Bizum": "Próximamente disponible. Contáctanos por WhatsApp para los detalles.",
+    "🟣 Yape": "Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape."
+  };
+  function actualizarDetallePago() {
+    var sel = document.getElementById('campo-metodo-pago').value;
+    var det = document.getElementById('detalle-pago');
+    if (!sel) { det.style.display = 'none'; return; }
+    if (sel.indexOf('Cash') !== -1) {
+      var codigo = document.getElementById('codigo-display').textContent;
+      det.innerHTML = 'Paga en efectivo directamente al conductor al inicio del traslado.<div class="pago-referencia">Menciona tu código <strong>' + codigo + '</strong> para confirmar tu reserva.</div>';
+    } else {
+      det.textContent = PAGO_DETALLES[sel] || '';
+    }
+    det.style.display = 'block';
   }
   function mostrarMensaje(tipo, texto) {
     var msg = document.getElementById('msg-disponibilidad');
@@ -544,19 +546,29 @@
   }
   function mostrarPanelReserva(data, tipo) {
     document.getElementById('codigo-display').textContent = data.codigo;
-    document.getElementById('codigo-ref-cash').textContent = data.codigo;
     var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
     document.getElementById('codigo-expira').textContent =
       'Válido hasta las ' + expira.getHours() + ':' +
       String(expira.getMinutes()).padStart(2,'0') +
       ' — tienes ' + data.expira_en_horas + 'h para confirmar';
+    var emailStatusEl = document.getElementById('codigo-email-status');
+    if (data.correo_enviado === false) {
+      emailStatusEl.textContent = '⚠️ No se pudo enviar el correo automático (' + (data.correo_motivo || 'motivo desconocido') + '). Tu reserva sí quedó registrada.';
+      emailStatusEl.style.display = 'block';
+      console.log('Correo de reserva no enviado. Motivo:', data.correo_motivo);
+    } else {
+      emailStatusEl.style.display = 'none';
+    }
     var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('es-PE', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
+    var metodoSel = document.getElementById('campo-metodo-pago');
+    var metodoPago = (metodoSel && metodoSel.value) ? metodoSel.value : 'No especificado';
     var msg = 'Hola Suyay Tours 👋\n\nQuiero confirmar mi reserva:\n\n'
       + '🚗 *Traslado:* ' + (tipo || data.tour_nombre) + '\n'
       + '📅 *Fecha:* ' + fechaFormateada + '\n'
       + '👥 *Personas:* ' + data.personas + '\n'
+      + '💳 *Método de pago:* ' + metodoPago + '\n'
       + '🔑 *Código:* ' + data.codigo + '\n\n'
       + 'Ya realicé el pago. ¡Gracias!';
     document.getElementById('btn-whatsapp-confirmar').href =
