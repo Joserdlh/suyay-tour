@@ -2,14 +2,17 @@
 // Reemplaza por completo la integración anterior con Google Sheets/Apps Script.
 // Maneja: ?accion=verificar_disponibilidad  y  ?accion=crear_reserva
 //
-// Variables de entorno necesarias (Cloudflare Pages → Settings → Environment variables):
-//   BREVO_API_KEY      → tu API Key v3 de Brevo (brevo.com → SMTP & API → API Keys)
-//   BREVO_SENDER_EMAIL → correo remitente verificado en Brevo (Senders, Domains & Dedicated IPs)
-//   BREVO_DEST_EMAIL   → correo donde quieres recibir cada reserva (puede ser el mismo que el remitente)
+// Envío de correo con Resend (resend.com), usando su remitente de prueba
+// "onboarding@resend.dev" — no requiere dominio propio verificado.
+// Cuando compres un dominio, se puede verificar en Resend y cambiar el remitente
+// por uno propio (ej. reservas@tudominio.com) sin tocar el resto del código.
 //
-// Si BREVO_API_KEY no está configurada, la reserva se sigue creando con normalidad
-// (no se cae la función), simplemente no se envía el correo — así puedes probar
-// todo el flujo primero y conectar Brevo después sin romper nada.
+// Variables de entorno necesarias (Cloudflare Pages → Settings → Environment variables):
+//   RESEND_API_KEY   → tu API key de Resend (resend.com → API Keys), empieza con "re_"
+//   RESEND_DEST_EMAIL → correo donde quieres recibir cada reserva
+//
+// Si RESEND_API_KEY no está configurada, la reserva se sigue creando con normalidad
+// (no se cae la función), simplemente no se envía el correo.
 
 const TOURS = {
   CityTourLima:        { nombre: "City Tour Lima Premium",         hora: "08:00 AM" },
@@ -41,11 +44,11 @@ function generarCodigo() {
 }
 
 async function enviarCorreoReserva(env, data) {
-  var apiKey = env.BREVO_API_KEY;
-  var destino = env.BREVO_DEST_EMAIL;
-  var remitente = env.BREVO_SENDER_EMAIL;
-  if (!apiKey || !destino || !remitente) {
-    return { enviado: false, motivo: "Faltan variables de entorno de Brevo (BREVO_API_KEY / BREVO_SENDER_EMAIL / BREVO_DEST_EMAIL)." };
+  var apiKey = env.RESEND_API_KEY;
+  var destino = env.RESEND_DEST_EMAIL;
+  var remitente = "Suyay Peru Travel <onboarding@resend.dev>";
+  if (!apiKey || !destino) {
+    return { enviado: false, motivo: "Faltan variables de entorno de Resend (RESEND_API_KEY / RESEND_DEST_EMAIL)." };
   }
 
   var filas = [
@@ -78,24 +81,23 @@ async function enviarCorreoReserva(env, data) {
     '</div>';
 
   try {
-    var resp = await fetch("https://api.brevo.com/v3/smtp/email", {
+    var resp = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-        "api-key": apiKey
+        "Authorization": "Bearer " + apiKey
       },
       body: JSON.stringify({
-        sender: { email: remitente, name: "Suyay Peru Travel — Reservas" },
-        to: [{ email: destino }],
-        replyTo: data.correo ? { email: data.correo, name: data.nombre } : undefined,
+        from: remitente,
+        to: [destino],
+        reply_to: data.correo || undefined,
         subject: "Nueva reserva: " + data.tourNombre + " — " + data.codigo,
-        htmlContent: html
+        html: html
       })
     });
     if (!resp.ok) {
       var errText = await resp.text();
-      return { enviado: false, motivo: "Brevo respondió " + resp.status + ": " + errText };
+      return { enviado: false, motivo: "Resend respondió " + resp.status + ": " + errText };
     }
     return { enviado: true };
   } catch (err) {
