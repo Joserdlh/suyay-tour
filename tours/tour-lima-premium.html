@@ -384,6 +384,18 @@
         <label for="campo-whatsapp">WhatsApp (con código de país) *</label>
         <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
       </div>
+      <div class="pago-titulo">Elige cómo pagar</div>
+      <div class="form-group">
+        <select id="campo-metodo-pago" onchange="actualizarDetallePago()">
+          <option value="">— Selecciona un método —</option>
+          <option value="💳 Visa / Mastercard">💳 Visa / Mastercard</option>
+          <option value="🅿️ PayPal">🅿️ PayPal</option>
+          <option value="📱 Bizum">📱 Bizum</option>
+          <option value="🟣 Yape">🟣 Yape</option>
+          <option value="💵 Cash (pago al guía)">💵 Cash (pago al guía)</option>
+        </select>
+      </div>
+      <div class="pago-metodo-detalle" id="detalle-pago" style="display:none;"></div>
       <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">
         Verificar disponibilidad
       </button>
@@ -395,18 +407,6 @@
           <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
           <div class="codigo-email-status" id="codigo-email-status" style="display:none;"></div>
         </div>
-        <div class="pago-titulo">Elige cómo pagar</div>
-        <div class="form-group">
-          <select id="campo-metodo-pago" onchange="actualizarDetallePago()">
-            <option value="">— Selecciona un método —</option>
-            <option value="💳 Visa / Mastercard">💳 Visa / Mastercard</option>
-            <option value="🅿️ PayPal">🅿️ PayPal</option>
-            <option value="📱 Bizum">📱 Bizum</option>
-            <option value="🟣 Yape">🟣 Yape</option>
-            <option value="💵 Cash (pago al guía)">💵 Cash (pago al guía)</option>
-          </select>
-        </div>
-        <div class="pago-metodo-detalle" id="detalle-pago" style="display:none;"></div>
         <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">
           💬 Confirmar mi reserva por WhatsApp
         </a>
@@ -455,6 +455,7 @@
     bebe:     [ {max:15, price:0} ]
   };
   var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
+  var ULTIMO_TOTAL = 0;
 
   function calcChange(cat, delta) {
     var nuevo = calcCounts[cat] + delta;
@@ -477,6 +478,7 @@
     var rJoven47 = getRate(PRICING.joven47, totalParaTarifa);
     var rBebe = getRate(PRICING.bebe, totalParaTarifa);
     var total = calcCounts.adulto * rAdulto + calcCounts.joven811 * rJoven811 + calcCounts.joven47 * rJoven47 + calcCounts.bebe * rBebe;
+    ULTIMO_TOTAL = total;
     document.getElementById('calc-total-display').textContent = '$' + total.toFixed(2);
     document.getElementById('calc-pax-display').textContent = totalPax;
     // Sincroniza el desplegable de "número de personas" del formulario de reserva
@@ -506,8 +508,7 @@
     var det = document.getElementById('detalle-pago');
     if (!sel) { det.style.display = 'none'; return; }
     if (sel.indexOf('Cash') !== -1) {
-      var codigo = document.getElementById('codigo-display').textContent;
-      det.innerHTML = 'Paga en efectivo directamente a tu guía al inicio del tour.<div class="pago-referencia">Menciona tu código <strong>' + codigo + '</strong> al guía para confirmar tu reserva.</div>';
+      det.innerHTML = 'Paga en efectivo directamente a tu guía al inicio del tour. Te daremos un código de reserva abajo — solo menciónaselo al guía para confirmar.';
     } else {
       det.textContent = PAGO_DETALLES[sel] || '';
     }
@@ -527,11 +528,12 @@
     return /^\+?\d{8,15}$/.test(limpio);
   }
   function verificarDisponibilidad() {
-    var fecha    = document.getElementById('campo-fecha').value;
-    var personas = document.getElementById('campo-personas').value;
-    var nombre   = document.getElementById('campo-nombre').value.trim();
-    var correo   = document.getElementById('campo-correo').value.trim();
-    var whatsapp = document.getElementById('campo-whatsapp').value.trim();
+    var fecha       = document.getElementById('campo-fecha').value;
+    var personas    = document.getElementById('campo-personas').value;
+    var nombre      = document.getElementById('campo-nombre').value.trim();
+    var correo      = document.getElementById('campo-correo').value.trim();
+    var whatsapp    = document.getElementById('campo-whatsapp').value.trim();
+    var metodoPago  = document.getElementById('campo-metodo-pago').value;
     if (!fecha)    { mostrarMensaje('error', '⚠️ Por favor elige una fecha.'); return; }
     if (!personas) { mostrarMensaje('error', '⚠️ Por favor indica cuántas personas sois.'); return; }
     if (!nombre)   { mostrarMensaje('error', '⚠️ Por favor escribe tu nombre.'); return; }
@@ -539,6 +541,7 @@
     if (!esCorreoValido(correo)) { mostrarMensaje('error', '⚠️ Escribe un correo electrónico válido (ej. nombre@dominio.com).'); return; }
     if (!whatsapp) { mostrarMensaje('error', '⚠️ Por favor escribe tu WhatsApp.'); return; }
     if (!esWhatsappValido(whatsapp)) { mostrarMensaje('error', '⚠️ Escribe un número de WhatsApp válido, con código de país (ej. +51999999999).'); return; }
+    if (!metodoPago) { mostrarMensaje('error', '⚠️ Por favor elige un método de pago.'); return; }
     var btn = document.getElementById('btn-verificar');
     btn.disabled = true;
     btn.textContent = 'Verificando...';
@@ -557,7 +560,7 @@
           btn.disabled = false; btn.textContent = 'Verificar disponibilidad'; return;
         }
         mostrarMensaje('loading', '✅ Solicitud recibida. Te confirmaremos pronto tu reserva...');
-        crearReserva(fecha, parseInt(personas), nombre, correo, whatsapp);
+        crearReserva(fecha, parseInt(personas), nombre, correo, whatsapp, metodoPago);
       })
       .catch(function(err) {
         console.log('Error verificar:', err);
@@ -565,13 +568,19 @@
         btn.disabled = false; btn.textContent = 'Verificar disponibilidad';
       });
   }
-  function crearReserva(fecha, personas, nombre, correo, whatsapp) {
+  function crearReserva(fecha, personas, nombre, correo, whatsapp, metodoPago) {
     var btn = document.getElementById('btn-verificar');
     var url = PROXY_URL + '?accion=crear_reserva&tour=' + TOUR_ID +
       '&fecha=' + fecha + '&personas=' + personas +
       '&nombre=' + encodeURIComponent(nombre) +
       '&correo=' + encodeURIComponent(correo) +
-      '&whatsapp=' + encodeURIComponent(whatsapp);
+      '&whatsapp=' + encodeURIComponent(whatsapp) +
+      '&metodo_pago=' + encodeURIComponent(metodoPago) +
+      '&adultos=' + calcCounts.adulto +
+      '&joven811=' + calcCounts.joven811 +
+      '&joven47=' + calcCounts.joven47 +
+      '&bebes=' + calcCounts.bebe +
+      '&precio_total=' + ULTIMO_TOTAL.toFixed(2);
     fetch(url)
       .then(function(r) { return r.json(); })
       .then(function(data) {
@@ -607,11 +616,18 @@
     });
     var metodoSel = document.getElementById('campo-metodo-pago');
     var metodoPago = (metodoSel && metodoSel.value) ? metodoSel.value : 'No especificado';
+    var desglosePartes = [];
+    if (calcCounts.adulto > 0)   desglosePartes.push(calcCounts.adulto + ' adulto(s)');
+    if (calcCounts.joven811 > 0) desglosePartes.push(calcCounts.joven811 + ' joven(es) 8-11 años');
+    if (calcCounts.joven47 > 0)  desglosePartes.push(calcCounts.joven47 + ' niño(s) 4-7 años');
+    if (calcCounts.bebe > 0)     desglosePartes.push(calcCounts.bebe + ' bebé(s)');
+    var desglose = desglosePartes.join(', ');
     var msg = 'Hola Suyay Tours 👋\n\nQuiero confirmar mi reserva:\n\n'
       + '🗺️ *Tour:* ' + data.tour_nombre + '\n'
       + '📅 *Fecha:* ' + fechaFormateada + '\n'
       + '🕗 *Hora:* ' + data.hora_inicio + '\n'
-      + '👥 *Personas:* ' + data.personas + '\n'
+      + '👥 *Personas:* ' + data.personas + ' (' + desglose + ')\n'
+      + '💰 *Precio total:* $' + ULTIMO_TOTAL.toFixed(2) + '\n'
       + '💳 *Método de pago:* ' + metodoPago + '\n'
       + '🔑 *Código:* ' + data.codigo + '\n\n'
       + 'Ya realicé el pago. ¡Gracias!';
