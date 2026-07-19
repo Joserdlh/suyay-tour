@@ -52,7 +52,13 @@ async function enviarCorreoReserva(env, data) {
     ["Tour", data.tourNombre],
     data.tipo ? ["Tipo de traslado", data.tipo] : null,
     ["Fecha", data.fecha],
-    ["Personas", String(data.personas)],
+    ["Personas (total)", String(data.personas)],
+    data.adultos   ? ["Adultos (12-99 años)", String(data.adultos)]   : null,
+    data.joven811  ? ["Jóvenes (8-11 años)", String(data.joven811)]   : null,
+    data.joven47   ? ["Niños (4-7 años)", String(data.joven47)]       : null,
+    data.bebes     ? ["Bebés (0-3 años)", String(data.bebes)]         : null,
+    data.precioTotal ? ["Precio total estimado", "$" + data.precioTotal] : null,
+    ["Método de pago", data.metodoPago || "No especificado"],
     ["Nombre", data.nombre],
     ["Correo", data.correo],
     ["WhatsApp", data.whatsapp],
@@ -134,6 +140,12 @@ export async function onRequest(context) {
       const correo   = params.get("correo");
       const whatsapp = params.get("whatsapp");
       const tipo     = params.get("tipo"); // solo lo envía Traslados.html
+      const metodoPago  = params.get("metodo_pago");
+      const adultos     = params.get("adultos");
+      const joven811    = params.get("joven811");
+      const joven47     = params.get("joven47");
+      const bebes       = params.get("bebes");
+      const precioTotal = params.get("precio_total");
 
       if (!TOURS[tour]) {
         return jsonResponse({ ok: false, error: "Tour no reconocido: " + tour }, 400);
@@ -150,6 +162,12 @@ export async function onRequest(context) {
         tipo: tipo,
         fecha: fecha,
         personas: personas,
+        adultos: adultos,
+        joven811: joven811,
+        joven47: joven47,
+        bebes: bebes,
+        precioTotal: precioTotal,
+        metodoPago: metodoPago,
         nombre: nombre,
         correo: correo,
         whatsapp: whatsapp,
