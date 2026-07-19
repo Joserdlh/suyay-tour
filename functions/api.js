@@ -60,7 +60,7 @@ async function enviarCorreoReserva(env, data) {
     data.joven811  ? ["Jóvenes (8-11 años)", String(data.joven811)]   : null,
     data.joven47   ? ["Niños (4-7 años)", String(data.joven47)]       : null,
     data.bebes     ? ["Bebés (0-3 años)", String(data.bebes)]         : null,
-    data.precioTotal ? ["Precio total estimado", "$" + data.precioTotal] : null,
+    data.precioTotal ? ["Precio total", "$" + data.precioTotal] : null,
     ["Método de pago", data.metodoPago || "No especificado"],
     ["Nombre", data.nombre],
     ["Correo", data.correo],
