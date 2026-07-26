@@ -404,6 +404,19 @@
       gap: 24px;
       margin-top: 60px;
     }
+    /* ─── SECCIÓN: RESEÑAS ────────────────────────────────── */
+    .section-reviews { background: var(--crema); padding: 100px 48px; }
+    .section-reviews .section-title { color: var(--negro); }
+    .reviews-rating { display: flex; align-items: center; gap: 20px; margin: 32px 0 48px; }
+    .reviews-rating-number { font-family: 'Fraunces', serif; font-size: 3.2em; font-weight: 300; color: var(--negro); line-height: 1; }
+    .reviews-stars { color: var(--naranja); font-size: 1.3em; letter-spacing: 3px; }
+    .reviews-rating-count { font-size: 0.78em; color: #8a8378; margin-top: 6px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card { background: white; border: 1px solid #ede6d8; padding: 28px 26px; border-radius: 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.04); }
+    .review-stars { color: var(--naranja); font-size: 0.85em; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 0.88em; color: #444; line-height: 1.75; margin-bottom: 18px; font-weight: 300; font-style: italic; }
+    .review-author { font-size: 0.72em; color: #8a8378; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .reviews-source-link { display: inline-block; margin-top: 44px; font-size: 0.75em; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--naranja); text-decoration: none; border-bottom: 1px solid var(--naranja); padding-bottom: 3px; }
     .destino-card {
       text-decoration: none; color: inherit;
       border: 1px solid rgba(255,255,255,0.08);
@@ -498,6 +511,7 @@
       .destinos-grid { grid-template-columns: 1fr 1fr; }
       .section-why { grid-template-columns: 1fr; }
       .why-image { display: none; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       header { padding: 0 20px; }
@@ -505,10 +519,12 @@
       nav.show { display: flex; }
       .nav-link { padding: 12px 16px; width: 100%; border-radius: 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
       .menu-toggle { display: block; }
-      .section-tours, .section-destinos, .section-why { padding: 60px 20px; }
+      .section-tours, .section-destinos, .section-why, .section-reviews { padding: 60px 20px; }
       .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
       .tours-grid { grid-template-columns: 1fr; }
       .destinos-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .reviews-rating { flex-direction: column; align-items: flex-start; gap: 8px; }
       .info-band { padding: 50px 20px; }
       .info-band-inner { grid-template-columns: 1fr; gap: 40px; }
       .info-divider { display: none; }
@@ -677,37 +693,54 @@
     <div class="why-image-tag">Hecho en Lima, Perú</div>
   </div>
 </section>
-<!-- CATEGORÍAS -->
-<section class="section-destinos">
+<!-- RESEÑAS -->
+<section class="section-reviews">
   <div class="section-header">
     <div>
-      <span class="section-label">Explora por categoría</span>
-      <h2 class="section-title">Todo lo que <em>Lima</em><br>tiene para ti</h2>
+      <span class="section-label">Lo que dicen nuestros viajeros</span>
+      <h2 class="section-title">Reseñas <em>verificadas</em></h2>
     </div>
   </div>
-  <div class="destinos-grid">
-    <a href="/tours.html" class="destino-card">
-      <span class="destino-icon">🗺️</span>
-      <span class="destino-num">01</span>
-      <div class="destino-title">Tours y Experiencias Gastronómicas</div>
-      <p class="destino-desc">City tours, cultura, historia, naturaleza y gastronomía auténtica de Lima con guías locales expertos.</p>
-      <span class="destino-arrow">Ver tours →</span>
-    </a>
-    <a href="https://www.getyourguide.com/es-es/lima-l39/taxi-aeropuerto-peru-lima-t481832/" class="destino-card" target="_blank" rel="noopener">
-      <span class="destino-icon">⭐</span>
-      <span class="destino-num">02</span>
-      <div class="destino-title">4.9/5 en 259 Reseñas Verificadas</div>
-      <p class="destino-desc">Miles de viajeros ya confiaron en nuestro traslado privado desde el aeropuerto — mira sus reseñas reales y verificadas.</p>
-      <span class="destino-arrow">Ver reseñas →</span>
-    </a>
-    <a href="#" class="destino-card">
-      <span class="destino-icon">✍️</span>
-      <span class="destino-num">03</span>
-      <div class="destino-title">Experiencia Personalizada</div>
-      <p class="destino-desc">Diseñamos el itinerario perfecto según tus intereses, fechas y grupo de viaje.</p>
-      <span class="destino-arrow">Contactar →</span>
-    </a>
+  <div class="reviews-rating">
+    <span class="reviews-rating-number">4.9</span>
+    <div>
+      <div class="reviews-stars">★★★★★</div>
+      <div class="reviews-rating-count">Basado en 259 reseñas verificadas de viajeros reales</div>
+    </div>
   </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"La puntualidad, el transporte y la forma de conducir del chófer."</p>
+      <div class="review-author">Tere · México</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Muy recomendable. Nuestro chofer fue puntual, buena conducción y vehículo en perfectas condiciones. Además nos ayudó en nuestra estancia aconsejándonos platos que probar y sitios a los que ir."</p>
+      <div class="review-author">Andrea Segura · España</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Quiero felicitar al señor que nos recogió en el aeropuerto, muy amable y atento. Realmente es una opción que vale la pena. Gracias."</p>
+      <div class="review-author">Ricardo · Estados Unidos</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Excelente experiencia. Vehículo limpio y espacioso. Conductor muy amable y atento. Recomendaría este servicio siempre."</p>
+      <div class="review-author">Ingrid · Estados Unidos</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"El conductor nos esperó a pesar del largo retraso en el control de pasaportes. Nos recibió con una sonrisa y el viaje fue tranquilo y cómodo. ¡Gracias!"</p>
+      <div class="review-author">Israa · Arabia Saudí</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Excelente servicio. Nos escribieron por WhatsApp antes y de nuevo cuando aterrizamos para avisar que el conductor ya estaba esperando."</p>
+      <div class="review-author">Tim · Reino Unido</div>
+    </div>
+  </div>
+  <a class="reviews-source-link" href="https://www.getyourguide.com/es-es/lima-l39/taxi-aeropuerto-peru-lima-t481832/" target="_blank" rel="noopener">Ver todas las reseñas verificadas →</a>
 </section>
 <!-- BANDA INFO -->
 <section class="info-band" id="contacta">
