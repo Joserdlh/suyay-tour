@@ -443,7 +443,8 @@
   }
   function updateTotal() {
     var totalPax = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
-    var totalParaTarifa = Math.max(totalPax, 1);
+    var totalPagante = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47; // los bebés no cuentan para el descuento por grupo
+    var totalParaTarifa = Math.max(totalPagante, 1);
     var rAdulto = getRate(PRICING.adulto, totalParaTarifa);
     var rJoven811 = getRate(PRICING.joven811, totalParaTarifa);
     var rJoven47 = getRate(PRICING.joven47, totalParaTarifa);
