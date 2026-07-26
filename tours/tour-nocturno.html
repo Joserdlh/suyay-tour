@@ -110,6 +110,9 @@
     .disponibilidad-msg.error { background: #fce4ec; color: #c62828; border: 1px solid #f8bbd0; }
     .disponibilidad-msg.loading { background: #fff3e0; color: #c43d00; border: 1px solid #ffe0b2; }
     .reserva-panel { display: none; margin-top: 16px; border-top: 1px solid #f0ebe2; padding-top: 16px; }
+    .gracias-reserva { background: #faf7f2; border: 1px solid #ede6d8; border-radius: 6px; padding: 14px 18px; margin-bottom: 16px; text-align: center; }
+    .gracias-reserva p { font-size: 0.85em; color: #444; line-height: 1.6; margin: 0; font-weight: 500; }
+    .gracias-reserva strong { color: var(--naranja); }
     .codigo-box { background: var(--negro); border-radius: 4px; padding: 16px; text-align: center; margin-bottom: 16px; }
     .codigo-label { font-size: 0.68em; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
     .codigo-valor { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
@@ -363,6 +366,9 @@
       <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">Verificar disponibilidad</button>
       <div class="disponibilidad-msg" id="msg-disponibilidad"></div>
       <div class="reserva-panel" id="panel-reserva">
+        <div class="gracias-reserva">
+          <p>🙏 ¡Gracias por tu reserva! En <strong>Suyay Peru Travel</strong> te confirmaremos todos los detalles lo antes posible.</p>
+        </div>
         <div class="codigo-box">
           <div class="codigo-label">Tu código de reserva</div>
           <div class="codigo-valor" id="codigo-display">—</div>
@@ -461,10 +467,10 @@
     return /^\+?\d{8,15}$/.test(limpio);
   }
   var PAGO_DETALLES = {
-    "💳 Visa / Mastercard": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.",
-    "🅿️ PayPal": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.",
-    "📱 Bizum": "Próximamente disponible. Contáctanos por WhatsApp para los detalles.",
-    "🟣 Yape": "Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape."
+    "💳 Visa / Mastercard": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "🅿️ PayPal": "Te indicaremos el link de pago de PayPal por WhatsApp y correo electrónico.",
+    "📱 Bizum": "Te indicaremos los datos para pagar por Bizum vía WhatsApp y correo electrónico.",
+    "🟣 Yape": "Te indicaremos el QR de Yape por WhatsApp y correo electrónico."
   };
   function actualizarDetallePago() {
     var sel = document.getElementById('campo-metodo-pago').value;
