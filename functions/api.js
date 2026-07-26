@@ -16,7 +16,7 @@
 
 const TOURS = {
   CityTourLima:        { nombre: "City Tour Lima Premium",         hora: "08:00 AM" },
-  Cieneguilla:          { nombre: "Sabores del Perú - Cieneguilla Premium", hora: "09:00 AM" },
+  Gastronomico:         { nombre: "Tour Gastronómico", hora: "09:00 AM" },
   ExperienciaNocturna:  { nombre: "Experiencia Nocturna Premium",   hora: "05:25 PM" },
   Traslados:            { nombre: "Traslados Privados Premium",     hora: "Según vuelo / hotel" }
 };
