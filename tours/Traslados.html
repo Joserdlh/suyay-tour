@@ -29,9 +29,11 @@
     .nav-link.cta::after { display: none; }
     .nav-link.cta:hover { background: var(--naranja-fuerte); }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
-    /* HERO (sin foto todavía — placeholder degradado) */
+    /* HERO */
     .tour-hero { position: relative; height: 70vh; min-height: 480px; overflow: hidden; background: linear-gradient(135deg, #1c1c1c 0%, var(--negro) 100%); }
     .hero-photo-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 16em; opacity: 0.07; color: white; z-index: 0; }
+    .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease; filter: brightness(1.08) saturate(1.15); }
+    .hero-slide.is-active { opacity: 0.85; }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.6) 100%); z-index: 1; }
     .hero-content { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; padding-top: 100px; }
     .hero-eyebrow { font-size: 0.68em; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--naranja); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
@@ -161,9 +163,14 @@
     <a href="/index.html#contacta" class="nav-link cta">Contacta</a>
   </nav>
 </header>
-<!-- HERO (sin fotos todavía) -->
+<!-- HERO -->
 <section class="tour-hero">
-  <div class="hero-photo-icon">🚗</div>
+  <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado1.jpeg" alt="Traslados Privados Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado2.jpeg" alt="Traslados Privados Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado3.jpeg" alt="Traslados Privados Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado4.jpeg" alt="Traslados Privados Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado5.jpeg" alt="Traslados Privados Premium">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/traslado6.jpeg" alt="Traslados Privados Premium">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Lima · Perú</div>
@@ -407,6 +414,16 @@
     document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
     updateTotal();
   });
+  // Hero carousel
+  var heroSlides = document.querySelectorAll('.hero-slide');
+  var heroCurrent = 0;
+  if (heroSlides.length > 1) {
+    setInterval(function() {
+      heroSlides[heroCurrent].classList.remove('is-active');
+      heroCurrent = (heroCurrent + 1) % heroSlides.length;
+      heroSlides[heroCurrent].classList.add('is-active');
+    }, 3000);
+  }
 
   // ─── CALCULADORA DE PRECIO (tarifa "Traslados Airport") ────────────
   // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
@@ -460,10 +477,10 @@
     return /^\+?\d{8,15}$/.test(limpio);
   }
   var PAGO_DETALLES = {
-    "💳 Visa / Mastercard": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link de pago seguro.",
-    "🅿️ PayPal": "Próximamente disponible. Contáctanos por WhatsApp y te enviamos el link PayPal.",
-    "📱 Bizum": "Próximamente disponible. Contáctanos por WhatsApp para los detalles.",
-    "🟣 Yape": "Próximamente disponible. Contáctanos por WhatsApp para el QR de Yape."
+    "💳 Visa / Mastercard": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "🅿️ PayPal": "Te indicaremos el link de pago de PayPal por WhatsApp y correo electrónico.",
+    "📱 Bizum": "Te indicaremos los datos para pagar por Bizum vía WhatsApp y correo electrónico.",
+    "🟣 Yape": "Te indicaremos el QR de Yape por WhatsApp y correo electrónico."
   };
   function actualizarDetallePago() {
     var sel = document.getElementById('campo-metodo-pago').value;
