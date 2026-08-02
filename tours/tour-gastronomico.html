@@ -486,6 +486,12 @@
   function calcChange(cat, delta) {
     var nuevo = calcCounts[cat] + delta;
     if (nuevo < 0) return;
+    var totalActual = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
+    var totalNuevo = totalActual - calcCounts[cat] + nuevo;
+    if (delta > 0 && totalNuevo > 23) {
+      mostrarMensaje('error', '⚠️ Este tour admite un máximo de 23 personas por reserva.');
+      return;
+    }
     calcCounts[cat] = nuevo;
     document.getElementById('count-' + cat).textContent = nuevo;
     updateTotal();
