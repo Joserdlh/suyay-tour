@@ -319,7 +319,7 @@
   <aside class="tour-sidebar">
     <div class="precio-header">
       <div class="precio-label">Precio estimado</div>
-      <div class="precio-main" id="calc-total-display">$32.00 <span>/ grupo</span></div>
+      <div class="precio-main" id="calc-total-display">$33.20 <span>/ grupo</span></div>
       <div class="precio-nota"><span id="calc-pax-display">1</span> persona(s) · se recalcula solo</div>
     </div>
     <div class="calc-box">
@@ -462,8 +462,10 @@
     if (!this.value) return;
     var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=viernes ... 6=sábado
     if (dia === 5) {
-      alert('Este tour no opera los días viernes. Por favor elige otra fecha.');
+      mostrarMensaje('error', '❌ Este tour no opera los días viernes. Por favor elige otra fecha.');
       this.value = '';
+    } else {
+      document.getElementById('msg-disponibilidad').style.display = 'none';
     }
   });
   // Hero carousel
@@ -484,9 +486,9 @@
   // de "8-11 años" como en las demás tarifas — probablemente un error de tipeo en la hoja
   // original. Se usa 8-11 años aquí para mantener consistencia con el resto del sitio.
   var PRICING = {
-    adulto:   [ {max:1, price:32}, {max:2, price:28}, {max:5, price:27}, {max:16, price:26} ],
-    joven811: [ {max:1, price:24}, {max:2, price:21}, {max:16, price:20} ],
-    joven47:  [ {max:1, price:16}, {max:2, price:14}, {max:16, price:13} ],
+    adulto:   [ {max:1, price:33.201}, {max:2, price:28.7742}, {max:5, price:27.2986}, {max:15, price:25.823} ],
+    joven811: [ {max:1, price:24.90075}, {max:2, price:21.58065}, {max:16, price:20.47395} ],
+    joven47:  [ {max:1, price:16.6005}, {max:2, price:14.3871}, {max:16, price:13.6493} ],
     bebe:     [ {max:16, price:0} ]
   };
   var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
