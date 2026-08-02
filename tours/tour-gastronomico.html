@@ -177,7 +177,7 @@
     <div class="hero-tags">
       <span class="hero-tag">⏱ 5h 30min</span>
       <span class="hero-tag">🕘 9:00 AM</span>
-      <span class="hero-tag">👥 1–16 personas</span>
+      <span class="hero-tag">👥 1–23 personas</span>
       <span class="hero-tag naranja">🐎 Caballo Peruano de Paso</span>
       <span class="hero-tag">📅 Solo viernes</span>
     </div>
@@ -317,7 +317,7 @@
   <aside class="tour-sidebar">
     <div class="precio-header">
       <div class="precio-label">Precio estimado</div>
-      <div class="precio-main" id="calc-total-display">$89.76 <span>/ grupo</span></div>
+      <div class="precio-main" id="calc-total-display">$89.72 <span>/ grupo</span></div>
       <div class="precio-nota"><span id="calc-pax-display">1</span> persona(s) · se recalcula solo</div>
     </div>
     <div class="calc-box">
@@ -354,7 +354,7 @@
           <button type="button" class="calc-btn" onclick="calcChange('bebe',1)">+</button>
         </div>
       </div>
-      <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-16 personas).</div>
+      <div class="calc-note">El precio por persona baja según el tamaño total del grupo (1, 2, 3-5, 6-23 personas).</div>
     </div>
     <div class="reserva-box">
       <div class="reserva-title">🗓️ Reserva ahora</div>
@@ -374,6 +374,10 @@
           <option value="11">11 personas</option><option value="12">12 personas</option>
           <option value="13">13 personas</option><option value="14">14 personas</option>
           <option value="15">15 personas</option><option value="16">16 personas</option>
+          <option value="17">17 personas</option><option value="18">18 personas</option>
+          <option value="19">19 personas</option><option value="20">20 personas</option>
+          <option value="21">21 personas</option><option value="22">22 personas</option>
+          <option value="23">23 personas</option>
         </select>
       </div>
       <div class="form-group">
@@ -452,8 +456,10 @@
     if (!this.value) return;
     var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=viernes ... 6=sábado
     if (dia !== 5) {
-      alert('Este tour solo opera los días viernes. Por favor elige un viernes.');
+      mostrarMensaje('error', '❌ Este tour solo opera los días viernes. Por favor elige un viernes.');
       this.value = '';
+    } else {
+      document.getElementById('msg-disponibilidad').style.display = 'none';
     }
   });
   // Hero carousel
@@ -467,12 +473,12 @@
 
   // ─── CALCULADORA DE PRECIO (tarifa "Gastronomia") ──────
   // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
-  // Tramos: 1 pax / 2 pax / 3-5 pax / 6-16 pax (de 6 en adelante el precio no baja más). Tope: 16 personas.
+  // Tramos: 1 pax / 2 pax / 3-5 pax / 6-23 pax (de 6 en adelante el precio no baja más). Tope: 23 personas.
   var PRICING = {
-    adulto:   [ {max:1, price:89.76}, {max:2, price:82.72}, {max:5, price:80.96}, {max:16, price:78.32} ],
-    joven811: [ {max:1, price:67.32}, {max:2, price:62.04}, {max:16, price:60.72} ],
-    joven47:  [ {max:1, price:44.88}, {max:2, price:41.36}, {max:16, price:40.48} ],
-    bebe:     [ {max:16, price:0} ]
+    adulto:   [ {max:1, price:89.7195}, {max:2, price:82.7645}, {max:5, price:79.9825}, {max:23, price:77.896} ],
+    joven811: [ {max:1, price:67.289625}, {max:2, price:62.073375}, {max:23, price:59.986875} ],
+    joven47:  [ {max:1, price:44.85975}, {max:2, price:41.38225}, {max:23, price:39.99125} ],
+    bebe:     [ {max:23, price:0} ]
   };
   var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
   var ULTIMO_TOTAL = 0;
@@ -503,7 +509,7 @@
     document.getElementById('calc-total-display').innerHTML = '$' + total.toFixed(2) + ' <span>/ grupo</span>';
     document.getElementById('calc-pax-display').textContent = totalPax;
     var selPersonas = document.getElementById('campo-personas');
-    if (selPersonas && totalPax >= 1 && totalPax <= 16) {
+    if (selPersonas && totalPax >= 1 && totalPax <= 23) {
       selPersonas.value = String(totalPax);
     }
   }
