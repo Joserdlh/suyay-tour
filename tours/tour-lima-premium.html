@@ -323,7 +323,7 @@
   <aside class="tour-sidebar">
     <div class="precio-header">
       <div class="precio-label">Precio estimado</div>
-      <div class="precio-main" id="calc-total-display">$27.72</div>
+      <div class="precio-main" id="calc-total-display">$27.90</div>
       <div class="precio-nota"><span id="calc-pax-display">1</span> persona(s) · se recalcula solo</div>
     </div>
     <div class="calc-box">
@@ -470,8 +470,10 @@
     if (!this.value) return;
     var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=viernes ... 6=sábado
     if (dia === 5) {
-      alert('Este tour no opera los días viernes. Por favor elige otra fecha.');
+      mostrarMensaje('error', '❌ Este tour no opera los días viernes. Por favor elige otra fecha.');
       this.value = '';
+    } else {
+      document.getElementById('msg-disponibilidad').style.display = 'none';
     }
   });
 
@@ -479,9 +481,9 @@
   // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
   // Tramos: 1 pax / 2 pax / 3-5 pax / 6-15 pax (de 6 en adelante el precio no baja más).
   var PRICING = {
-    adulto:   [ {max:1, price:27.72}, {max:2, price:24.024}, {max:5, price:22.792}, {max:15, price:21.56} ],
-    joven811: [ {max:1, price:20.79}, {max:2, price:18.018}, {max:15, price:17.094} ],
-    joven47:  [ {max:1, price:13.86}, {max:2, price:12.012}, {max:15, price:11.396} ],
+    adulto:   [ {max:1, price:27.9}, {max:2, price:24.18}, {max:5, price:22.94}, {max:15, price:21.7} ],
+    joven811: [ {max:1, price:20.925}, {max:2, price:18.135}, {max:15, price:17.205} ],
+    joven47:  [ {max:1, price:13.95}, {max:2, price:12.09}, {max:15, price:11.47} ],
     bebe:     [ {max:15, price:0} ]
   };
   var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
