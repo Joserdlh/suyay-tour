@@ -381,11 +381,11 @@
         <div class="codigo-box">
           <div class="codigo-label">Tu código de reserva</div>
           <div class="codigo-valor" id="codigo-display">—</div>
-          <div class="codigo-expira" id="codigo-expira">Válido por 2 horas</div>
+          <div class="codigo-expira" id="codigo-expira">Te contactaremos pronto</div>
           <div class="codigo-email-status" id="codigo-email-status" style="display:none;"></div>
         </div>
         <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">💬 Confirmar mi reserva por WhatsApp</a>
-        <p class="nota-final">Tienes 2 horas para confirmar el pago. Pasado ese tiempo el cupo se libera automáticamente.</p>
+        <p class="nota-final">Nos pondremos en contacto contigo por WhatsApp o correo para confirmar la disponibilidad y coordinar el pago.</p>
       </div>
       <a class="btn-ver-tours" href="/tours.html">← Ver todos los tours</a>
       <p class="reserva-nota">Reserva con al menos 24 horas de anticipación.</p>
@@ -589,11 +589,8 @@
   }
   function mostrarPanelReserva(data, tipo) {
     document.getElementById('codigo-display').textContent = data.codigo;
-    var expira = new Date(Date.now() + data.expira_en_horas * 60 * 60 * 1000);
     document.getElementById('codigo-expira').textContent =
-      'Válido hasta las ' + expira.getHours() + ':' +
-      String(expira.getMinutes()).padStart(2,'0') +
-      ' — tienes ' + data.expira_en_horas + 'h para confirmar';
+      'Te contactaremos pronto para confirmar tu reserva';
     var emailStatusEl = document.getElementById('codigo-email-status');
     if (data.correo_enviado === false) {
       emailStatusEl.textContent = '⚠️ No se pudo enviar el correo automático (' + (data.correo_motivo || 'motivo desconocido') + '). Tu reserva sí quedó registrada.';
@@ -620,7 +617,7 @@
       + '💰 *Precio total:* $' + ULTIMO_TOTAL.toFixed(2) + '\n'
       + '💳 *Método de pago:* ' + metodoPago + '\n'
       + '🔑 *Código:* ' + data.codigo + '\n\n'
-      + 'Ya realicé el pago. ¡Gracias!';
+      + 'Quedo atento(a) a la confirmación de disponibilidad. ¡Gracias!';
     document.getElementById('btn-whatsapp-confirmar').href =
       'https://wa.me/' + data.whatsapp_manager + '?text=' + encodeURIComponent(msg);
     document.getElementById('panel-reserva').style.display = 'block';
