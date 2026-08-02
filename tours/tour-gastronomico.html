@@ -90,6 +90,22 @@
     .form-group label { display: block; font-size: 0.72em; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em; font-family: 'Raleway', sans-serif; color: var(--negro); background: #fafafa; transition: border-color 0.2s; }
     .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--naranja); background: white; }
+    .date-picker-wrap { position: relative; }
+    .date-picker-input { cursor: pointer; background: #fafafa url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z'/%3E%3C/svg%3E") no-repeat right 14px center; background-size: 16px; }
+    .calendario-popup { display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; background: white; border: 1px solid #e0d8cc; border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,0.14); padding: 16px; z-index: 60; }
+    .calendario-popup.show { display: block; }
+    .calendario-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .cal-nav { background: none; border: none; font-size: 1.2em; cursor: pointer; color: var(--naranja); padding: 2px 12px; border-radius: 4px; transition: background 0.15s; }
+    .cal-nav:hover:not(:disabled) { background: #faf2ea; }
+    .cal-nav:disabled { color: #ddd; cursor: default; }
+    .cal-mes-label { font-weight: 700; font-size: 0.85em; text-transform: capitalize; color: var(--negro); }
+    .calendario-dias-semana { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.65em; color: #aaa; margin-bottom: 6px; font-weight: 700; letter-spacing: 0.05em; }
+    .calendario-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-day { text-align: center; padding: 9px 0; font-size: 0.8em; border-radius: 6px; color: #ddd; user-select: none; }
+    .cal-day.empty { visibility: hidden; }
+    .cal-day.viernes-disponible { color: var(--negro); background: #faf7f2; cursor: pointer; font-weight: 700; border: 1px solid #ede6d8; }
+    .cal-day.viernes-disponible:hover { background: var(--naranja); color: white; border-color: var(--naranja); }
+    .cal-day.selected { background: var(--naranja) !important; color: white !important; border-color: var(--naranja) !important; }
     .btn-verificar { width: 100%; background: var(--naranja); color: white; padding: 13px; border: none; border-radius: 3px; font-size: 0.85em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
     .btn-verificar:hover { background: var(--naranja-fuerte); }
     .btn-verificar:disabled { background: #aaa; cursor: not-allowed; }
@@ -359,8 +375,20 @@
     <div class="reserva-box">
       <div class="reserva-title">🗓️ Reserva ahora</div>
       <div class="form-group">
-        <label for="campo-fecha">Fecha del tour</label>
-        <input type="date" id="campo-fecha" min="">
+        <label for="campo-fecha-display">Elige un viernes disponible</label>
+        <div class="date-picker-wrap">
+          <input type="text" id="campo-fecha-display" class="date-picker-input" placeholder="Selecciona una fecha" readonly onclick="toggleCalendario()">
+          <input type="hidden" id="campo-fecha">
+          <div class="calendario-popup" id="calendario-popup">
+            <div class="calendario-header">
+              <button type="button" class="cal-nav" id="cal-prev" onclick="cambiarMes(-1)">‹</button>
+              <span class="cal-mes-label" id="cal-mes-label"></span>
+              <button type="button" class="cal-nav" id="cal-next" onclick="cambiarMes(1)">›</button>
+            </div>
+            <div class="calendario-dias-semana"><span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span></div>
+            <div class="calendario-grid" id="calendario-grid"></div>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="campo-personas">Número de personas</label>
@@ -445,22 +473,83 @@
     else h.classList.remove('scrolled');
   });
   function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
-  window.addEventListener('DOMContentLoaded', function() {
-    var hoy = new Date();
-    hoy.setDate(hoy.getDate() + 1);
-    document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
-    updateTotal();
-  });
-  // Este tour solo opera los días viernes
-  document.getElementById('campo-fecha').addEventListener('change', function() {
-    if (!this.value) return;
-    var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=viernes ... 6=sábado
-    if (dia !== 5) {
-      mostrarMensaje('error', '❌ Este tour solo opera los días viernes. Por favor elige un viernes.');
-      this.value = '';
-    } else {
-      document.getElementById('msg-disponibilidad').style.display = 'none';
+  // Este tour solo opera los días viernes. En vez de un calendario nativo donde
+  // se puede elegir cualquier día, construimos un calendario visual propio: se ve
+  // y se comporta como un date picker normal, pero solo los viernes son clickeables
+  // (el resto de los días aparece en gris, sin poder seleccionarse).
+  var CAL_MES_ACTUAL, CAL_MIN_FECHA;
+  var CAL_MESES_ADELANTE = 12; // hasta cuántos meses hacia adelante se puede navegar
+
+  function toggleCalendario() {
+    document.getElementById('calendario-popup').classList.toggle('show');
+  }
+  document.addEventListener('click', function(e) {
+    var wrap = document.querySelector('.date-picker-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById('calendario-popup').classList.remove('show');
     }
+  });
+  function inicializarCalendario() {
+    var hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    CAL_MIN_FECHA = new Date(hoy);
+    CAL_MIN_FECHA.setDate(CAL_MIN_FECHA.getDate() + 1); // al menos 24h de anticipación
+    CAL_MES_ACTUAL = new Date(CAL_MIN_FECHA.getFullYear(), CAL_MIN_FECHA.getMonth(), 1);
+    renderCalendario();
+  }
+  function cambiarMes(delta) {
+    CAL_MES_ACTUAL.setMonth(CAL_MES_ACTUAL.getMonth() + delta);
+    renderCalendario();
+  }
+  function renderCalendario() {
+    var grid = document.getElementById('calendario-grid');
+    var label = document.getElementById('cal-mes-label');
+    var año = CAL_MES_ACTUAL.getFullYear();
+    var mes = CAL_MES_ACTUAL.getMonth();
+    var nombreMes = CAL_MES_ACTUAL.toLocaleDateString('es-PE', { month: 'long', year: 'numeric' });
+    label.textContent = nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1);
+    grid.innerHTML = '';
+    var primerDiaSemana = new Date(año, mes, 1).getDay();
+    var diasEnMes = new Date(año, mes + 1, 0).getDate();
+    for (var i = 0; i < primerDiaSemana; i++) {
+      var vacio = document.createElement('div');
+      vacio.className = 'cal-day empty';
+      grid.appendChild(vacio);
+    }
+    var fechaSeleccionada = document.getElementById('campo-fecha').value;
+    for (var d = 1; d <= diasEnMes; d++) {
+      var fecha = new Date(año, mes, d);
+      var celda = document.createElement('div');
+      celda.className = 'cal-day';
+      celda.textContent = d;
+      var esViernes = fecha.getDay() === 5;
+      var esValida = esViernes && fecha >= CAL_MIN_FECHA;
+      if (esValida) {
+        celda.classList.add('viernes-disponible');
+        var iso = fecha.getFullYear() + '-' + String(fecha.getMonth() + 1).padStart(2, '0') + '-' + String(fecha.getDate()).padStart(2, '0');
+        if (iso === fechaSeleccionada) celda.classList.add('selected');
+        (function(isoVal, fechaObj) {
+          celda.onclick = function() { seleccionarFecha(isoVal, fechaObj); };
+        })(iso, fecha);
+      }
+      grid.appendChild(celda);
+    }
+    var esMesMinimo = (año === CAL_MIN_FECHA.getFullYear() && mes === CAL_MIN_FECHA.getMonth());
+    document.getElementById('cal-prev').disabled = esMesMinimo;
+    var mesesAdelante = (año - CAL_MIN_FECHA.getFullYear()) * 12 + (mes - CAL_MIN_FECHA.getMonth());
+    document.getElementById('cal-next').disabled = mesesAdelante >= CAL_MESES_ADELANTE;
+  }
+  function seleccionarFecha(iso, fechaObj) {
+    document.getElementById('campo-fecha').value = iso;
+    var etiqueta = fechaObj.toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    etiqueta = etiqueta.charAt(0).toUpperCase() + etiqueta.slice(1);
+    document.getElementById('campo-fecha-display').value = etiqueta;
+    document.getElementById('calendario-popup').classList.remove('show');
+    renderCalendario();
+  }
+  window.addEventListener('DOMContentLoaded', function() {
+    inicializarCalendario();
+    updateTotal();
   });
   // Hero carousel
   var slides = document.querySelectorAll('.hero-slide');
