@@ -166,7 +166,18 @@
 </header>
 <!-- HERO -->
 <section class="tour-hero">
-  <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/collage2-min.png" alt="Experiencia Nocturna Premium">
+  <img class="hero-slide is-active" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas1.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas2.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas3.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas4.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas5.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas6.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas7.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas8.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas9.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas10.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas11.jpeg" alt="Circuito Mágico del Agua">
+  <img class="hero-slide" src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/aguas12.jpeg" alt="Circuito Mágico del Agua">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Lima · Perú</div>
@@ -412,6 +423,16 @@
     document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
     updateTotal();
   });
+  // Hero carousel
+  var heroSlides = document.querySelectorAll('.hero-slide');
+  var heroCurrent = 0;
+  if (heroSlides.length > 1) {
+    setInterval(function() {
+      heroSlides[heroCurrent].classList.remove('is-active');
+      heroCurrent = (heroCurrent + 1) % heroSlides.length;
+      heroSlides[heroCurrent].classList.add('is-active');
+    }, 3000);
+  }
 
   // ─── CALCULADORA DE PRECIO (tarifa "Aguas") ────────────
   // El precio por persona depende del tamaño TOTAL del grupo (todas las edades sumadas).
