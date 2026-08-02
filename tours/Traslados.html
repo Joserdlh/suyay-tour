@@ -363,9 +363,11 @@
       <div class="form-group">
         <select id="campo-metodo-pago" onchange="actualizarDetallePago()">
           <option value="">— Selecciona un método —</option>
-          <option value="💳 Visa / Mastercard">💳 Visa / Mastercard</option>
+          <option value="💳 Visa">💳 Visa</option>
+          <option value="💳 Mastercard">💳 Mastercard</option>
+          <option value="💳 American Express">💳 American Express</option>
+          <option value="💳 Diners Club">💳 Diners Club</option>
           <option value="🅿️ PayPal">🅿️ PayPal</option>
-          <option value="📱 Bizum">📱 Bizum</option>
           <option value="🟣 Yape">🟣 Yape</option>
           <option value="💵 Cash (pago al conductor)">💵 Cash (pago al conductor)</option>
         </select>
@@ -487,9 +489,11 @@
     return /^\+?\d{8,15}$/.test(limpio);
   }
   var PAGO_DETALLES = {
-    "💳 Visa / Mastercard": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "💳 Visa": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "💳 Mastercard": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "💳 American Express": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
+    "💳 Diners Club": "Te indicaremos el link de pago seguro por WhatsApp y correo electrónico.",
     "🅿️ PayPal": "Te indicaremos el link de pago de PayPal por WhatsApp y correo electrónico.",
-    "📱 Bizum": "Te indicaremos los datos para pagar por Bizum vía WhatsApp y correo electrónico.",
     "🟣 Yape": "Te indicaremos el QR de Yape por WhatsApp y correo electrónico."
   };
   function actualizarDetallePago() {
