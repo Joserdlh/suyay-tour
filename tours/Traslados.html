@@ -451,6 +451,10 @@
     var totalActual = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
     var totalNuevo = totalActual - calcCounts[cat] + nuevo;
     if (delta < 0 && totalNuevo < 2) return; // mínimo 2 personas por reserva
+    if (delta > 0 && totalNuevo > 7) {
+      mostrarMensaje('error', '⚠️ Este servicio admite un máximo de 7 personas por reserva. Para grupos más grandes, escríbenos por WhatsApp.');
+      return;
+    }
     calcCounts[cat] = nuevo;
     document.getElementById('count-' + cat).textContent = nuevo;
     updateTotal();
