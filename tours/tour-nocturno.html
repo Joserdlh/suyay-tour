@@ -185,9 +185,9 @@
     <div class="hero-tags">
       <span class="hero-tag">⏱ 5 horas</span>
       <span class="hero-tag">🕐 2:45 PM</span>
-      <span class="hero-tag">👥 1–7 personas</span>
+      <span class="hero-tag">👥 1–15 personas</span>
       <span class="hero-tag naranja">🌆 Tarde y noche</span>
-      <span class="hero-tag">Jue · Vie · Sáb</span>
+      <span class="hero-tag">📅 Todos los días, excepto viernes</span>
     </div>
   </div>
   <div class="breadcrumb">
@@ -272,10 +272,14 @@
     <hr class="section-divider">
     <h2>Días disponibles</h2>
     <div class="dias-grid">
+      <span class="dia-badge">Lunes</span>
+      <span class="dia-badge">Martes</span>
+      <span class="dia-badge">Miércoles</span>
       <span class="dia-badge">Jueves</span>
-      <span class="dia-badge">Viernes</span>
       <span class="dia-badge">Sábado</span>
+      <span class="dia-badge">Domingo</span>
     </div>
+    <p style="margin-top:10px; font-size:0.85em; color:#c62828; font-weight:600;">✗ No disponible los días viernes.</p>
     <p style="margin-top:14px; font-size:0.85em; color:#888;">Los horarios son referenciales y pueden variar ligeramente según tráfico y ubicación del hospedaje.</p>
     <hr class="section-divider">
     <h2>¿Qué <em>incluye</em>?</h2>
@@ -357,7 +361,7 @@
       <div class="booking-info">
         <div class="booking-info-item"><span class="label">Recojo</span><span class="value">2:45 PM</span></div>
         <div class="booking-info-item"><span class="label">Retorno</span><span class="value">~8:00 PM</span></div>
-        <div class="booking-info-item"><span class="label">Días</span><span class="value">Jue · Vie · Sáb</span></div>
+        <div class="booking-info-item"><span class="label">Días</span><span class="value">Todos, excepto Vie</span></div>
         <div class="booking-info-item"><span class="label">Recojo en</span><span class="value">Miraflores / San Isidro / Barranco</span></div>
       </div>
       <div class="form-group">
@@ -371,7 +375,11 @@
           <option value="1">1 persona</option><option value="2">2 personas</option>
           <option value="3">3 personas</option><option value="4">4 personas</option>
           <option value="5">5 personas</option><option value="6">6 personas</option>
-          <option value="7">7 personas</option>
+          <option value="7">7 personas</option><option value="8">8 personas</option>
+          <option value="9">9 personas</option><option value="10">10 personas</option>
+          <option value="11">11 personas</option><option value="12">12 personas</option>
+          <option value="13">13 personas</option><option value="14">14 personas</option>
+          <option value="15">15 personas</option>
         </select>
       </div>
       <div class="form-group">
@@ -447,6 +455,15 @@
     document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
     updateTotal();
   });
+  // Este tour no opera los días viernes
+  document.getElementById('campo-fecha').addEventListener('change', function() {
+    if (!this.value) return;
+    var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=viernes ... 6=sábado
+    if (dia === 5) {
+      alert('Este tour no opera los días viernes. Por favor elige otra fecha.');
+      this.value = '';
+    }
+  });
   // Hero carousel
   var heroSlides = document.querySelectorAll('.hero-slide');
   var heroCurrent = 0;
@@ -499,7 +516,7 @@
     document.getElementById('calc-total-display').innerHTML = '$' + total.toFixed(2) + ' <span>/ grupo</span>';
     document.getElementById('calc-pax-display').textContent = totalPax;
     var selPersonas = document.getElementById('campo-personas');
-    if (selPersonas && totalPax >= 1 && totalPax <= 7) {
+    if (selPersonas && totalPax >= 1 && totalPax <= 15) {
       selPersonas.value = String(totalPax);
     }
   }
