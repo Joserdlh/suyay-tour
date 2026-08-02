@@ -2,10 +2,8 @@
 // Reemplaza por completo la integración anterior con Google Sheets/Apps Script.
 // Maneja: ?accion=verificar_disponibilidad  y  ?accion=crear_reserva
 //
-// Envío de correo con Resend (resend.com), usando su remitente de prueba
-// "onboarding@resend.dev" — no requiere dominio propio verificado.
-// Cuando compres un dominio, se puede verificar en Resend y cambiar el remitente
-// por uno propio (ej. reservas@tudominio.com) sin tocar el resto del código.
+// Envío de correo con Resend (resend.com), usando el dominio propio verificado
+// suyaytour.com — remitente: reservas@suyaytour.com
 //
 // Variables de entorno necesarias (Cloudflare Pages → Settings → Environment variables):
 //   RESEND_API_KEY   → tu API key de Resend (resend.com → API Keys), empieza con "re_"
@@ -46,7 +44,7 @@ function generarCodigo() {
 async function enviarCorreoReserva(env, data) {
   var apiKey = env.RESEND_API_KEY;
   var destino = env.RESEND_DEST_EMAIL;
-  var remitente = "Suyay Peru Travel <onboarding@resend.dev>";
+  var remitente = "Suyay Peru Travel <reservas@suyaytour.com>";
   if (!apiKey || !destino) {
     return { enviado: false, motivo: "Faltan variables de entorno de Resend (RESEND_API_KEY / RESEND_DEST_EMAIL)." };
   }
