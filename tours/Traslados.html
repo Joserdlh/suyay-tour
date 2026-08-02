@@ -280,7 +280,7 @@
   <aside class="tour-sidebar">
     <div class="precio-header">
       <div class="precio-label">Precio estimado</div>
-      <div class="precio-main" id="calc-total-display">$28.00 <span>/ grupo</span></div>
+      <div class="precio-main" id="calc-total-display">$28.02 <span>/ grupo</span></div>
       <div class="precio-nota"><span id="calc-pax-display">2</span> persona(s) · se recalcula solo</div>
     </div>
     <div class="calc-box">
@@ -317,7 +317,7 @@
           <button type="button" class="calc-btn" onclick="calcChange('bebe',1)">+</button>
         </div>
       </div>
-      <div class="calc-note">Mínimo 2 personas por reserva. Precio del taxi privado directo, por persona, según el tamaño total del grupo (1-2, 3-4, 5-6, 6-7 personas). Grupos de más de 7 personas: escríbenos por WhatsApp para cotizar el bus compartido.</div>
+      <div class="calc-note">Mínimo 2 personas por reserva. Precio del taxi privado directo, por persona, según el tamaño total del grupo (1-2, 3, 4-5, 6-7 personas). Grupos de más de 7 personas: escríbenos por WhatsApp para cotizar el bus compartido.</div>
     </div>
     <div class="booking-body">
       <div class="booking-info">
@@ -437,9 +437,9 @@
   // Tramos según el Excel original: 1-2 / 3-4 / 5-6 / 6-7 personas (tope = capacidad de un vehículo privado).
   // Para grupos mayores a 7 (bus compartido), se deriva a WhatsApp — no hay tarifa fija por asiento.
   var PRICING = {
-    adulto:   [ {max:2, price:14}, {max:4, price:12}, {max:6, price:10}, {max:7, price:8} ],
-    joven811: [ {max:2, price:11}, {max:4, price:9}, {max:7, price:7} ],
-    joven47:  [ {max:2, price:9}, {max:4, price:8}, {max:6, price:7} ],
+    adulto:   [ {max:2, price:14.0096}, {max:3, price:13.1296}, {max:5, price:12.2496}, {max:7, price:11.44} ],
+    joven811: [ {max:2, price:10.5072}, {max:3, price:9.8472}, {max:7, price:9.1872} ],
+    joven47:  [ {max:2, price:7.0048}, {max:3, price:6.5648}, {max:7, price:6.1248} ],
     bebe:     [ {max:7, price:0} ]
   };
   var calcCounts = { adulto: 2, joven811: 0, joven47: 0, bebe: 0 };
