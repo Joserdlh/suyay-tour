@@ -103,6 +103,65 @@ async function enviarCorreoReserva(env, data) {
   }
 }
 
+// Correo de confirmación para el CLIENTE (más simple/amigable que el interno de arriba).
+// Usa las mismas variables de entorno RESEND_API_KEY — no necesita configuración adicional.
+async function enviarCorreoCliente(env, data) {
+  var apiKey = env.RESEND_API_KEY;
+  var remitente = "Suyay Peru Travel <reservas@suyaytour.com>";
+  if (!apiKey || !data.correo) {
+    return { enviado: false, motivo: "Falta RESEND_API_KEY o el correo del cliente." };
+  }
+
+  var filas = [
+    ["Tour", data.tourNombre],
+    data.tipo ? ["Tipo de traslado", data.tipo] : null,
+    ["Fecha", data.fecha],
+    ["Hora de inicio", data.horaInicio],
+    ["Personas", String(data.personas)],
+    data.precioTotal ? ["Precio total", "$" + data.precioTotal] : null,
+    ["Método de pago", data.metodoPago || "No especificado"],
+    ["Código de reserva", data.codigo]
+  ].filter(Boolean);
+
+  var filasHtml = filas.map(function(f) {
+    return '<tr><td style="padding:6px 12px;font-weight:700;color:#333;border-bottom:1px solid #eee;">' + f[0] + '</td>' +
+           '<td style="padding:6px 12px;color:#555;border-bottom:1px solid #eee;">' + f[1] + '</td></tr>';
+  }).join("");
+
+  var html =
+    '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">' +
+    '<h2 style="color:#e8520a;">¡Gracias por tu reserva, ' + (data.nombre || "") + '!</h2>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">Recibimos tu solicitud en <strong>Suyay Peru Travel</strong>. Aquí tienes el resumen de tu reserva:</p>' +
+    '<table style="width:100%;border-collapse:collapse;margin:16px 0;">' + filasHtml + '</table>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">Tienes <strong>2 horas</strong> para confirmar el pago por WhatsApp; pasado ese tiempo el cupo se libera automáticamente. Si tienes cualquier duda, escríbenos al +51 925 585 680.</p>' +
+    '<p style="margin-top:20px;font-size:12px;color:#999;">Este correo se generó automáticamente al completar tu reserva en suyaytour.com.</p>' +
+    '</div>';
+
+  try {
+    var resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + apiKey
+      },
+      body: JSON.stringify({
+        from: remitente,
+        to: [data.correo],
+        reply_to: "suyaytour@gmail.com",
+        subject: "Tu reserva en Suyay Peru Travel — " + data.codigo,
+        html: html
+      })
+    });
+    if (!resp.ok) {
+      var errText = await resp.text();
+      return { enviado: false, motivo: "Resend respondió " + resp.status + ": " + errText };
+    }
+    return { enviado: true };
+  } catch (err) {
+    return { enviado: false, motivo: err.message };
+  }
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -174,6 +233,21 @@ export async function onRequest(context) {
         codigo: codigo
       });
 
+      // Correo de confirmación para el cliente (independiente del correo interno de arriba;
+      // si uno falla no afecta al otro, y la reserva queda registrada de todas formas).
+      const correoClienteResultado = await enviarCorreoCliente(env, {
+        tourNombre: infoTour.nombre,
+        tipo: tipo,
+        fecha: fecha,
+        horaInicio: infoTour.hora,
+        personas: personas,
+        precioTotal: precioTotal,
+        metodoPago: metodoPago,
+        nombre: nombre,
+        correo: correo,
+        codigo: codigo
+      });
+
       return jsonResponse({
         ok: true,
         codigo: codigo,
@@ -184,7 +258,9 @@ export async function onRequest(context) {
         personas: personas,
         whatsapp_manager: WHATSAPP_MANAGER,
         correo_enviado: correoResultado.enviado,
-        correo_motivo: correoResultado.enviado ? undefined : correoResultado.motivo
+        correo_motivo: correoResultado.enviado ? undefined : correoResultado.motivo,
+        correo_cliente_enviado: correoClienteResultado.enviado,
+        correo_cliente_motivo: correoClienteResultado.enviado ? undefined : correoClienteResultado.motivo
       });
     }
 
