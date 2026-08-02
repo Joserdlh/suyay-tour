@@ -133,7 +133,7 @@ async function enviarCorreoCliente(env, data) {
     '<h2 style="color:#e8520a;">¡Gracias por tu reserva, ' + (data.nombre || "") + '!</h2>' +
     '<p style="color:#444;font-size:14px;line-height:1.6;">Recibimos tu solicitud en <strong>Suyay Peru Travel</strong>. Aquí tienes el resumen de tu reserva:</p>' +
     '<table style="width:100%;border-collapse:collapse;margin:16px 0;">' + filasHtml + '</table>' +
-    '<p style="color:#444;font-size:14px;line-height:1.6;">Tienes <strong>2 horas</strong> para confirmar el pago por WhatsApp; pasado ese tiempo el cupo se libera automáticamente. Si tienes cualquier duda, escríbenos al +51 925 585 680.</p>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">En breve nos pondremos en contacto contigo por WhatsApp o correo para confirmar la disponibilidad y coordinar el pago. Si tienes cualquier duda, escríbenos al +51 925 585 680.</p>' +
     '<p style="margin-top:20px;font-size:12px;color:#999;">Este correo se generó automáticamente al completar tu reserva en suyaytour.com.</p>' +
     '</div>';
 
@@ -251,7 +251,6 @@ export async function onRequest(context) {
       return jsonResponse({
         ok: true,
         codigo: codigo,
-        expira_en_horas: 2,
         fecha: fecha,
         hora_inicio: infoTour.hora,
         tour_nombre: infoTour.nombre,
