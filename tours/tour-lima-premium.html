@@ -510,12 +510,11 @@
   }
   function updateTotal() {
     var totalPax = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
-    var totalPagante = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47; // los bebés no cuentan para el descuento por grupo
-    var totalParaTarifa = Math.max(totalPagante, 1);
-    var rAdulto = getRate(PRICING.adulto, totalParaTarifa);
-    var rJoven811 = getRate(PRICING.joven811, totalParaTarifa);
-    var rJoven47 = getRate(PRICING.joven47, totalParaTarifa);
-    var rBebe = getRate(PRICING.bebe, totalParaTarifa);
+    // La tarifa de cada categoría depende de la cantidad de personas DE ESA categoría (no del total mixto del grupo)
+    var rAdulto = getRate(PRICING.adulto, calcCounts.adulto);
+    var rJoven811 = getRate(PRICING.joven811, calcCounts.joven811);
+    var rJoven47 = getRate(PRICING.joven47, calcCounts.joven47);
+    var rBebe = getRate(PRICING.bebe, calcCounts.bebe);
     var total = calcCounts.adulto * rAdulto + calcCounts.joven811 * rJoven811 + calcCounts.joven47 * rJoven47 + calcCounts.bebe * rBebe;
     ULTIMO_TOTAL = total;
     document.getElementById('calc-total-display').textContent = '$' + total.toFixed(2);
