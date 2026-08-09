@@ -1,1 +1,729 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Tour Lima Premium – Suyay Tour</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --naranja: #e8520a; --naranja-fuerte: #c43d00; --negro: #0a0a0a; --verde-oscuro: #17332d; --crema: #f5f0e8; --gris: #888; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Raleway', sans-serif; background: #fff; color: var(--negro); overflow-x: hidden; }
+    /* HEADER */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 0 80px; height: 100px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, transparent 100%); transition: background 0.4s, height 0.3s; }
+    header.scrolled { background: rgba(10,10,10,0.97); box-shadow: 0 2px 30px rgba(0,0,0,0.4); height: 80px; }
+    header.scrolled .logo-wakeup { display: none; }
+    .logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.15; }
+    .logo-suyay { font-family: 'Fraunces', serif; font-weight: 800; font-size: 2.4em; color: var(--naranja); letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .logo-peru { font-family: 'Raleway', sans-serif; font-weight: 800; font-size: 0.85em; color: var(--naranja-fuerte); letter-spacing: 0.38em; text-transform: uppercase; margin-top: 2px; text-shadow: 0 1px 8px rgba(0,0,0,0.4); }
+    .logo-wakeup { font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: 1.25em; color: #ffffff; letter-spacing: 0.12em; margin-top: 3px; }
+    nav { display: flex; align-items: center; gap: 6px; }
+    .nav-link { color: white; text-decoration: none; font-size: 0.82em; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 20px; transition: all 0.2s; position: relative; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+    .nav-link::after { content: ''; position: absolute; bottom: 5px; left: 20px; right: 20px; height: 1px; background: var(--naranja); transform: scaleX(0); transition: transform 0.2s; }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link.cta { background: var(--naranja); color: white; padding: 11px 26px; border-radius: 3px; margin-left: 12px; text-shadow: none; }
+    .nav-link.cta::after { display: none; }
+    .nav-link.cta:hover { background: var(--naranja-fuerte); }
+    .lang-switcher { display: flex; align-items: center; gap: 8px; margin-left: 14px; padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.2); }
+    .lang-flag { font-size: 1.15em; text-decoration: none; opacity: 0.4; filter: grayscale(70%); transition: opacity 0.2s, filter 0.2s; line-height: 1; }
+    .lang-flag:hover { opacity: 0.8; filter: grayscale(0%); }
+    .lang-flag.active { opacity: 1; filter: grayscale(0%); cursor: default; }
+    @media (max-width: 768px) { .lang-switcher { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 14px 0 0; padding: 14px 0 0; justify-content: center; width: 100%; } }
+    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
+    /* HERO */
+    .tour-hero { position: relative; height: 80vh; min-height: 560px; overflow: hidden; background: #111; }
+    .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 32%; opacity: 0; transition: opacity 1.5s ease; filter: brightness(1.08) saturate(1.15); }
+    .hero-slide.is-active { opacity: 0.85; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%); z-index: 1; }
+    .hero-content { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; padding-top: 100px; }
+    .hero-eyebrow { font-size: 0.68em; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--naranja); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 40px; height: 1px; background: var(--naranja); opacity: 0.6; }
+    .hero-content h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(2.4em, 5vw, 4.2em); color: white; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 24px rgba(0,0,0,0.6); }
+    .hero-content h1 em { font-style: italic; color: rgba(255,255,255,0.75); }
+    .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+    .hero-tag { background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); color: white; font-size: 0.72em; font-weight: 600; padding: 7px 16px; border: 1px solid rgba(255,255,255,0.2); }
+    .hero-tag.naranja { background: var(--naranja); border-color: var(--naranja); }
+    .breadcrumb { position: absolute; bottom: 28px; left: 80px; display: flex; align-items: center; gap: 8px; font-size: 0.7em; color: rgba(255,255,255,0.45); z-index: 3; }
+    .breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--naranja); }
+    /* BODY */
+    .tour-body { max-width: 1140px; margin: 0 auto; padding: 70px 40px 100px; display: grid; grid-template-columns: 1fr 360px; gap: 60px; align-items: start; }
+    .tour-content h2 { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 400; color: var(--negro); margin-bottom: 16px; }
+    .tour-content h2 em { font-style: italic; color: var(--naranja); }
+    .tour-content p { font-size: 0.92em; line-height: 1.85; color: #444; margin-bottom: 16px; font-weight: 300; }
+    .section-divider { border: none; border-top: 1px solid #ede6d8; margin: 40px 0; }
+    .dias-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+    .dia-badge { background: var(--negro); color: white; font-weight: 700; font-size: 0.85em; padding: 9px 20px; border-radius: 4px; }
+    .itinerary { margin-top: 10px; }
+    .itinerary-item { display: flex; gap: 20px; margin-bottom: 28px; position: relative; }
+    .itinerary-item:not(:last-child)::after { content: ''; position: absolute; left: 15px; top: 34px; width: 2px; bottom: -14px; background: #ede6d8; }
+    .itinerary-dot { width: 32px; height: 32px; border-radius: 50%; background: var(--naranja); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8em; color: white; font-weight: 700; position: relative; z-index: 1; }
+    .itinerary-text h4 { font-family: 'Fraunces', serif; font-size: 1em; font-weight: 600; color: var(--negro); margin-bottom: 5px; }
+    .itinerary-text p { font-size: 0.85em; color: #555; line-height: 1.65; margin: 0; }
+    .itinerary-time { font-size: 0.68em; font-weight: 700; color: var(--naranja); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+    .includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .includes-box { background: #faf7f2; border-radius: 8px; padding: 22px; border: 1px solid #ede6d8; }
+    .includes-box h4 { font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+    .includes-box.yes h4 { color: #2e7d32; }
+    .includes-box.no h4 { color: #c62828; }
+    .includes-box ul { list-style: none; }
+    .includes-box ul li { font-size: 0.85em; color: #444; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
+    .includes-box.yes ul li::before { content: '✓'; color: var(--naranja); font-weight: 700; flex-shrink: 0; }
+    .includes-box.no ul li::before { content: '✗'; color: #c62828; font-weight: 700; flex-shrink: 0; }
+    .reco-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .reco-item { background: #faf7f2; border: 1px solid #ede6d8; border-radius: 8px; padding: 10px 16px; font-size: 0.85em; color: #444; display: flex; align-items: center; gap: 8px; }
+    /* SIDEBAR */
+    .tour-sidebar { position: sticky; top: 110px; }
+    .precio-header { background: var(--negro); border-radius: 8px 8px 0 0; padding: 24px; text-align: center; }
+    .precio-label { font-size: 0.68em; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase; }
+    .precio-main { font-family: 'Fraunces', serif; font-size: 2.8em; font-weight: 300; color: white; }
+    .precio-main span { font-size: 0.4em; font-family: 'Raleway', sans-serif; color: rgba(255,255,255,0.55); }
+    .precio-nota { font-size: 0.72em; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .price-table-box { background: #faf7f2; padding: 16px 24px; border-left: 1px solid #ede6d8; border-right: 1px solid #ede6d8; }
+    .price-table { width: 100%; }
+    .price-table tr td { padding: 8px 4px; font-size: 0.85em; border-bottom: 1px solid #ede6d8; }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table td:first-child { color: #666; }
+    .price-table td:last-child { font-weight: 700; color: var(--negro); text-align: right; }
+    .calc-box { background: #faf7f2; border-left: 1px solid #ede6d8; border-right: 1px solid #ede6d8; padding: 18px 24px 20px; }
+    .calc-title { font-size: 0.72em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--negro); margin-bottom: 14px; }
+    .calc-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #ede6d8; }
+    .calc-row:last-of-type { border-bottom: none; }
+    .calc-label-title { display: block; font-size: 0.85em; font-weight: 600; color: var(--negro); }
+    .calc-label-sub { display: block; font-size: 0.65em; color: #999; }
+    .calc-stepper { display: flex; align-items: center; gap: 10px; }
+    .calc-btn { width: 26px; height: 26px; border-radius: 50%; border: 1px solid #ddd; background: white; color: var(--negro); font-size: 1em; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; }
+    .calc-btn:hover { border-color: var(--naranja); color: var(--naranja); }
+    .calc-count { min-width: 18px; text-align: center; font-weight: 700; font-size: 0.9em; }
+    .calc-note { font-size: 0.66em; color: #999; margin-top: 10px; line-height: 1.5; }
+    .reserva-form { background: white; border: 1px solid #ede6d8; border-radius: 0 0 8px 8px; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.07); }
+    .form-title { font-family: 'Fraunces', serif; font-size: 1.1em; color: var(--negro); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #f0ebe2; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.72em; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.9em; font-family: 'Raleway', sans-serif; color: var(--negro); background: #fafafa; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--naranja); background: white; }
+    .btn-verificar { width: 100%; background: var(--naranja); color: white; padding: 13px; border: none; border-radius: 3px; font-size: 0.85em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; margin-top: 6px; }
+    .btn-verificar:hover { background: var(--naranja-fuerte); }
+    .btn-verificar:disabled { background: #aaa; cursor: not-allowed; }
+    .disponibilidad-msg { margin-top: 12px; padding: 12px 14px; border-radius: 4px; font-size: 0.85em; font-weight: 600; display: none; }
+    .disponibilidad-msg.ok { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+    .disponibilidad-msg.error { background: #fce4ec; color: #c62828; border: 1px solid #f8bbd0; }
+    .disponibilidad-msg.loading { background: #fff3e0; color: #c43d00; border: 1px solid #ffe0b2; }
+    .reserva-panel { display: none; margin-top: 16px; border-top: 1px solid #f0ebe2; padding-top: 16px; }
+    .gracias-reserva { background: #faf7f2; border: 1px solid #ede6d8; border-radius: 6px; padding: 14px 18px; margin-bottom: 16px; text-align: center; }
+    .gracias-reserva p { font-size: 0.85em; color: #444; line-height: 1.6; margin: 0; font-weight: 500; }
+    .gracias-reserva strong { color: var(--naranja); }
+    .codigo-box { background: var(--negro); border-radius: 4px; padding: 16px; text-align: center; margin-bottom: 16px; }
+    .codigo-label { font-size: 0.68em; color: rgba(255,255,255,0.5); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
+    .codigo-valor { font-family: 'Fraunces', serif; font-size: 1.8em; font-weight: 700; color: var(--naranja); letter-spacing: 2px; }
+    .codigo-expira { font-size: 0.7em; color: rgba(255,255,255,0.45); margin-top: 4px; }
+    .codigo-email-status { font-size: 0.68em; color: #ffcc80; margin-top: 8px; line-height: 1.5; }
+    .pago-titulo { font-size: 0.78em; font-weight: 700; color: #444; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .pago-metodos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .pago-metodo { background: #fafafa; border: 1px solid #e8e0d4; border-radius: 4px; padding: 10px 14px; cursor: pointer; transition: all 0.15s; }
+    .pago-metodo:hover { border-color: var(--naranja); background: #fff7f2; }
+    .pago-metodo.activo { border-color: var(--naranja); background: rgba(232,82,10,0.06); }
+    .pago-metodo-header { display: flex; align-items: center; gap: 10px; }
+    .pago-metodo-icon { font-size: 1.3em; }
+    .pago-metodo-nombre { font-weight: 700; font-size: 0.88em; color: var(--negro); }
+    .pago-metodo-detalle { display: none; font-size: 0.8em; color: #555; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e0d8cc; line-height: 1.6; }
+    .pago-metodo.activo .pago-metodo-detalle { display: block; }
+    .pago-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
+    .pago-opcion { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px 6px; background: #fff; border: 2px solid #e5e0d8; border-radius: 10px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .pago-opcion:hover { border-color: #d8cfc0; transform: translateY(-1px); }
+    .pago-opcion.selected { border-color: #e8520a; background: #fff6f0; box-shadow: 0 0 0 1px #e8520a; }
+    .pago-opcion img { max-width: 48px; max-height: 28px; object-fit: contain; }
+    .pago-opcion span { font-size: 0.7em; color: #555; font-weight: 600; }
+    .pago-opcion-emoji .pago-emoji { font-size: 20px; line-height: 1; }
+    .pago-referencia { background: #fff8e1; border: 1px solid #ffe082; border-radius: 4px; padding: 8px 12px; margin-top: 6px; font-size: 0.8em; color: #795548; }
+    .pago-referencia strong { color: var(--naranja-fuerte); }
+    .btn-confirmar { display: block; width: 100%; background: #25d366; color: white; text-align: center; padding: 14px; border-radius: 3px; font-size: 0.9em; font-weight: 700; text-decoration: none; transition: background 0.2s; margin-top: 14px; }
+    .btn-confirmar:hover { background: #20b858; }
+    .nota-final { font-size: 0.7em; color: #aaa; text-align: center; margin-top: 10px; line-height: 1.5; }
+    /* FOOTER */
+    footer { background: #0a0a0a; color: rgba(255,255,255,0.3); padding: 32px 80px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { display: flex; flex-direction: column; text-decoration: none; }
+    .footer-copy { font-size: 0.72em; letter-spacing: 0.06em; }
+    /* LLAMA */
+    .llama-btn { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; background: white; padding: 10px 16px 10px 10px; border-radius: 50px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: transform 0.3s; z-index: 999; }
+    .llama-btn:hover { transform: translateY(-2px); }
+    .chat-text { background: #fff3cd; color: #333; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; margin-right: 10px; line-height: 1.3; animation: bounce 2.5s ease infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+    .llama-btn img { height: 60px; }
+    /* MOBILE */
+    @media (max-width: 900px) { .tour-body { grid-template-columns: 1fr; } .tour-sidebar { position: static; } .includes-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .tour-hero { height: 52vh; min-height: 380px; } header { padding: 0 20px; height: 80px; } nav { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 20px; } nav.show { display: flex; } .nav-link { padding: 12px 16px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); } .menu-toggle { display: block; } .breadcrumb { left: 20px; } footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; } }
+  </style>
+</head>
+<body>
+<!-- HEADER -->
+<header id="header">
+  <a href="/pt/index.html" class="logo">
+    <span class="logo-suyay">SUYAY</span>
+    <span class="logo-peru">Tour</span>
+    <span class="logo-wakeup">Wake up in Peru</span>
+  </a>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="menu">
+    <a href="/pt/tours.html" class="nav-link">Tours e Experiências Gastronômicas</a>
+    <a href="/pt/Traslados.html" class="nav-link">Traslados</a>
+    <a href="/pt/index.html#resenas" class="nav-link">Avaliações</a>
+    <a href="/pt/index.html#contacta" class="nav-link cta">Contato</a>
+    <div class="lang-switcher">
+      <a href="/tour-lima-premium.html" class="lang-flag" title="Español">🇵🇪</a>
+      <a href="/en/tour-lima-premium.html" class="lang-flag" title="English">🇺🇸</a>
+      <a href="/pt/tour-lima-premium.html" class="lang-flag active" title="Português">🇧🇷</a>
+    </div>
+  </nav>
+</header>
+<!-- HERO -->
+<section class="tour-hero">
+  <img class="hero-slide is-active" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/citytour1.jpeg';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/01.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/02.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/03.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/04.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/05.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/06.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/07.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/08.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/09.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/10.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/11.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/12.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/13.png';">
+  <img class="hero-slide" src="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png&w=1080&output=webp&q=80&a=attention" alt="City Tour Lima Premium" srcset="https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png&w=480&output=webp&q=80&a=attention 480w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png&w=768&output=webp&q=80&a=attention 768w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png&w=1080&output=webp&q=80&a=attention 1080w, https://wsrv.nl/?url=ssl:raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png&w=1600&output=webp&q=80&a=attention 1600w" sizes="100vw" onerror="this.onerror=null;this.srcset='';this.src='https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/14.png';">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Lima · Peru</div>
+    <h1>City Tour Lima<br><em>Premium</em></h1>
+    <div class="hero-tags">
+      <span class="hero-tag">⏱ 4h 45min</span>
+      <span class="hero-tag">🕗 8:15 AM</span>
+      <span class="hero-tag">👥 1–15 pessoas</span>
+      <span class="hero-tag naranja">🌟 Mais popular</span>
+      <span class="hero-tag">📅 Todos os dias, exceto sexta</span>
+    </div>
+  </div>
+  <div class="breadcrumb">
+    <a href="/pt/index.html">Início</a>
+    <span>›</span>
+    <a href="/pt/tours.html">Tours</a>
+    <span>›</span>
+    <span>City Tour Lima Premium</span>
+  </div>
+</section>
+<!-- BODY -->
+<div class="tour-body">
+  <!-- CONTENT -->
+  <div class="tour-content">
+    <h2>O melhor de Lima: <em>Passeio pelo centro histórico e Barranco</em></h2>
+    <p>Descubra os dois destinos mais emblemáticos de Lima em uma única manhã. Percorra o histórico Centro de Lima e o boêmio bairro de Barranco em uma experiência premium pensada para quem visita o Peru pela primeira vez.</p>
+    <p>Descubra a fascinante história colonial e a impressionante arquitetura de Lima enquanto explora o charme do seu Centro Histórico. Acompanhado por um guia local especializado, você conhecerá o contexto histórico e cultural de cada lugar, descobrindo os tesouros mais emblemáticos que fazem de Lima um destino inesquecível.</p>
+    <hr class="section-divider">
+    <h2>Itinerário</h2>
+    <div class="itinerary">
+      <div class="itinerary-item">
+        <div class="itinerary-dot">1</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">08:15 AM</span>
+          <h4>Busca no seu hotel ou Airbnb</h4>
+          <p>Buscamos você em Miraflores, San Isidro ou Barranco em um veículo turístico moderno e com ar-condicionado. Seu guia, que fala espanhol, inglês e português, acompanha você desde o primeiro momento.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">2</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">09:35 AM</span>
+          <h4>Plaza San Martín + Hotel Bolívar</h4>
+          <p>Praça inaugurada em 1921 pelo centenário da independência do Peru, com arquitetura de influência europeia. O histórico Hotel Bolívar preserva o charme clássico da Lima aristocrática e faz parte do patrimônio urbano do centro histórico.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">3</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">09:55 AM</span>
+          <h4>Basílica de La Merced</h4>
+          <p>Uma das igrejas mais importantes do centro de Lima. Sua bela fachada barroca e seu profundo valor religioso a tornam uma visita indispensável no roteiro histórico.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">4</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">10:05 AM</span>
+          <h4>Jirón de la Unión</h4>
+          <p>A via de pedestres mais tradicional do centro histórico. Caminhar por essa rua permite ver a vida cotidiana limenha e a evolução social e comercial da cidade ao longo dos séculos.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">5</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">10:10 AM</span>
+          <h4>Plaza Mayor de Lima (Plaza de Armas)</h4>
+          <p>O coração histórico da capital. Fundada por Francisco Pizarro em 1535, representa a origem de Lima e do Vice-Reino do Peru, cercada por imponentes edifícios coloniais.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">6</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">10:25 AM</span>
+          <h4>Casa de la Literatura Peruana</h4>
+          <p>Localizada na antiga estação de trem de Desamparados, esta elegante construção republicana abriga hoje um dos espaços culturais mais importantes do país, onde você conhecerá parte da identidade literária e cultural do Peru.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">7</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">10:35 AM</span>
+          <h4>Convento e Catacumbas de San Francisco</h4>
+          <p>Sob o convento se estende uma rede de passagens subterrâneas que funcionaram como um antigo cemitério colonial. Uma fascinante viagem ao passado de Lima. Entrada incluída.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">8</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">12:30 PM</span>
+          <h4>Barranco – Bairro boêmio</h4>
+          <p>Barranco é o coração artístico e boêmio de Lima, um bairro que encanta pela sua mistura perfeita de cultura, história e mar. Suas ruas cheias de murais coloridos, imponentes casarões republicanos, galerias de arte e cafés charmosos criam uma atmosfera única.</p>
+        </div>
+      </div>
+      <div class="itinerary-item">
+        <div class="itinerary-dot">9</div>
+        <div class="itinerary-text">
+          <span class="itinerary-time">01:00 PM</span>
+          <h4>Retorno</h4>
+          <p>Traslado até seu hotel ou Airbnb.</p>
+        </div>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <h2>Dias disponíveis</h2>
+    <div class="dias-grid">
+      <span class="dia-badge">Segunda</span>
+      <span class="dia-badge">Terça</span>
+      <span class="dia-badge">Quarta</span>
+      <span class="dia-badge">Quinta</span>
+      <span class="dia-badge">Sábado</span>
+      <span class="dia-badge">Domingo</span>
+    </div>
+    <p style="margin-top:10px; font-size:0.85em; color:#c62828; font-weight:600;">✗ Não disponível às sextas-feiras.</p>
+    <hr class="section-divider">
+    <h2>O que <em>está incluído</em>?</h2>
+    <div class="includes-grid">
+      <div class="includes-box yes">
+        <h4>✓ Incluído</h4>
+        <ul>
+          <li>Transporte turístico confortável e seguro</li>
+          <li>Busca e retorno no hotel ou Airbnb</li>
+          <li>Guia em espanhol, inglês e português</li>
+          <li>Entrada nas Catacumbas de San Francisco</li>
+          <li>Água mineral</li>
+          <li>Wifi a bordo</li>
+        </ul>
+      </div>
+      <div class="includes-box no">
+        <h4>✗ Não incluído</h4>
+        <ul>
+          <li>Bebidas alcoólicas adicionais</li>
+          <li>Gastos pessoais</li>
+          <li>Gorjetas (opcionais)</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="section-divider">
+    <h2>Recomendações</h2>
+    <div class="reco-grid">
+      <div class="reco-item">👟 Calçado confortável</div>
+      <div class="reco-item">🧴 Protetor solar</div>
+      <div class="reco-item">🧢 Boné e óculos de sol</div>
+      <div class="reco-item">📱 Câmera ou celular</div>
+      <div class="reco-item">💵 Dinheiro em espécie (pouco)</div>
+      <div class="reco-item">🥗 Informe restrições alimentares</div>
+    </div>
+  </div>
+  <!-- SIDEBAR -->
+  <aside class="tour-sidebar">
+    <div class="precio-header">
+      <div class="precio-label">Preço estimado</div>
+      <div class="precio-main" id="calc-total-display">$27.90</div>
+      <div class="precio-nota"><span id="calc-pax-display">1</span> pessoa(s) · recalcula sozinho</div>
+    </div>
+    <div class="calc-box">
+      <div class="calc-title">Calcule seu preço</div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Adultos</span><span class="calc-label-sub">12 - 99 anos</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('adulto',-1)">−</button>
+          <span class="calc-count" id="count-adulto">1</span>
+          <button type="button" class="calc-btn" onclick="calcChange('adulto',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Jovens</span><span class="calc-label-sub">8 - 11 anos</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('joven811',-1)">−</button>
+          <span class="calc-count" id="count-joven811">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('joven811',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Crianças</span><span class="calc-label-sub">4 - 7 anos</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('joven47',-1)">−</button>
+          <span class="calc-count" id="count-joven47">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('joven47',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <div><span class="calc-label-title">Bebês</span><span class="calc-label-sub">0 - 3 anos · grátis</span></div>
+        <div class="calc-stepper">
+          <button type="button" class="calc-btn" onclick="calcChange('bebe',-1)">−</button>
+          <span class="calc-count" id="count-bebe">0</span>
+          <button type="button" class="calc-btn" onclick="calcChange('bebe',1)">+</button>
+        </div>
+      </div>
+      <div class="calc-note">O preço por pessoa diminui conforme o tamanho total do grupo (1, 2, 3-5, 6-15 pessoas).</div>
+    </div>
+    <div class="reserva-form">
+      <div class="form-title">🗓️ Reserve agora</div>
+      <div class="form-group">
+        <label for="campo-fecha">Data do tour</label>
+        <input type="date" id="campo-fecha" min="">
+      </div>
+      <div class="form-group">
+        <label for="campo-personas">Número de pessoas</label>
+        <select id="campo-personas">
+          <option value="">— Selecione —</option>
+          <option value="1">1 pessoa</option>
+          <option value="2">2 pessoas</option>
+          <option value="3">3 pessoas</option>
+          <option value="4">4 pessoas</option>
+          <option value="5">5 pessoas</option>
+          <option value="6">6 pessoas</option>
+          <option value="7">7 pessoas</option>
+          <option value="8">8 pessoas</option>
+          <option value="9">9 pessoas</option>
+          <option value="10">10 pessoas</option>
+          <option value="11">11 pessoas</option>
+          <option value="12">12 pessoas</option>
+          <option value="13">13 pessoas</option>
+          <option value="14">14 pessoas</option>
+          <option value="15">15 pessoas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="campo-nombre">Seu nome</label>
+        <input type="text" id="campo-nombre" placeholder="Nome completo">
+      </div>
+      <div class="form-group">
+        <label for="campo-correo">E-mail *</label>
+        <input type="email" id="campo-correo" placeholder="seuemail@exemplo.com">
+      </div>
+      <div class="form-group">
+        <label for="campo-whatsapp">WhatsApp (com código do país) *</label>
+        <input type="tel" id="campo-whatsapp" placeholder="+51 999 999 999">
+      </div>
+      <div class="pago-titulo">Escolha como pagar</div>
+      <div class="form-group">
+        <input type="hidden" id="campo-metodo-pago" value="">
+        <div class="pago-picker">
+          <button type="button" class="pago-opcion" data-valor="💳 Visa" onclick="seleccionarMetodoPago('💳 Visa', this)">
+            <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/VISA-logo.png" alt="Visa">
+            <span>Visa</span>
+          </button>
+          <button type="button" class="pago-opcion" data-valor="💳 Mastercard" onclick="seleccionarMetodoPago('💳 Mastercard', this)">
+            <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Mastercardlogo.png" alt="Mastercard">
+            <span>Mastercard</span>
+          </button>
+          <button type="button" class="pago-opcion" data-valor="💳 American Express" onclick="seleccionarMetodoPago('💳 American Express', this)">
+            <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/AmerExpresslogo.png" alt="American Express">
+            <span>Amex</span>
+          </button>
+          <button type="button" class="pago-opcion" data-valor="💳 Diners Club" onclick="seleccionarMetodoPago('💳 Diners Club', this)">
+            <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/DinersLogos.png" alt="Diners Club">
+            <span>Diners</span>
+          </button>
+          <button type="button" class="pago-opcion" data-valor="🅿️ PayPal" onclick="seleccionarMetodoPago('🅿️ PayPal', this)">
+            <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/img/Paypallogo.png" alt="PayPal">
+            <span>PayPal</span>
+          </button>
+          <button type="button" class="pago-opcion pago-opcion-emoji" data-valor="🟣 Yape" onclick="seleccionarMetodoPago('🟣 Yape', this)">
+            <span class="pago-emoji">🟣</span>
+            <span>Yape</span>
+          </button>
+        </div>
+      </div>
+      <div class="pago-metodo-detalle" id="detalle-pago" style="display:none;"></div>
+      <button class="btn-verificar" id="btn-verificar" onclick="verificarDisponibilidad()">
+        Verificar disponibilidade
+      </button>
+      <div class="disponibilidad-msg" id="msg-disponibilidad"></div>
+      <div class="reserva-panel" id="panel-reserva">
+        <div class="gracias-reserva">
+          <p>🙏 Obrigado pela sua reserva! Na <strong>Suyay Tour</strong> confirmaremos todos os detalhes o quanto antes.</p>
+        </div>
+        <div class="codigo-box">
+          <div class="codigo-label">Seu código de reserva</div>
+          <div class="codigo-valor" id="codigo-display">—</div>
+          <div class="codigo-expira" id="codigo-expira">Entraremos em contato em breve</div>
+          <div class="codigo-email-status" id="codigo-email-status" style="display:none;"></div>
+        </div>
+        <a class="btn-confirmar" id="btn-whatsapp-confirmar" href="#" target="_blank" rel="noopener">
+          💬 Confirmar minha reserva pelo WhatsApp
+        </a>
+        <p class="nota-final">Entraremos em contato com você por WhatsApp ou e-mail para confirmar a disponibilidade e combinar o pagamento.</p>
+      </div>
+    </div>
+  </aside>
+</div>
+<!-- FOOTER -->
+<footer>
+  <a href="/pt/index.html" class="footer-logo">
+    <span class="logo-suyay" style="font-size:1em; text-shadow:none">SUYAY</span>
+    <span class="logo-wakeup" style="text-shadow:none; color:rgba(255,255,255,0.25)">Wake up in Peru</span>
+  </a>
+  <span class="footer-copy">&copy; 2025 Suyay Tour — Todos os direitos reservados</span>
+</footer>
+<a href="https://wa.me/51925585680?text=Ol%C3%A1%20Suyay%20Tour%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20City%20Tour%20Lima%20Premium." class="llama-btn" target="_blank" rel="noopener">
+  <div class="chat-text">Tem dúvidas?<br>Clique aqui</div>
+  <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay">
+</a>
+<script>
+  var PROXY_URL = "/api";
+  var TOUR_ID   = "CityTourLima";
 
+  window.addEventListener('scroll', function() {
+    var h = document.getElementById('header');
+    if (window.scrollY > 50) h.classList.add('scrolled');
+    else h.classList.remove('scrolled');
+  });
+  function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    var hoy = new Date();
+    hoy.setDate(hoy.getDate() + 1);
+    document.getElementById('campo-fecha').min = hoy.toISOString().split('T')[0];
+    updateTotal();
+  });
+  // Este tour não opera às sextas-feiras
+  document.getElementById('campo-fecha').addEventListener('change', function() {
+    if (!this.value) return;
+    var dia = new Date(this.value + 'T00:00:00').getDay(); // 0=domingo ... 5=sexta ... 6=sábado
+    if (dia === 5) {
+      mostrarMensaje('error', '❌ Este tour não opera às sextas-feiras. Por favor, escolha outra data.');
+      this.value = '';
+    } else {
+      document.getElementById('msg-disponibilidad').style.display = 'none';
+    }
+  });
+
+  // ─── CALCULADORA DE PREÇO (tarifa "Lima city") ─────────
+  // O preço por pessoa depende do tamanho TOTAL do grupo (todas as idades somadas).
+  // Faixas: 1 pax / 2 pax / 3-5 pax / 6-15 pax (a partir de 6 o preço não diminui mais).
+  var PRICING = {
+    adulto:   [ {max:1, price:27.9}, {max:2, price:24.18}, {max:5, price:22.94}, {max:15, price:21.7} ],
+    joven811: [ {max:1, price:20.925}, {max:2, price:18.135}, {max:15, price:17.205} ],
+    joven47:  [ {max:1, price:13.95}, {max:2, price:12.09}, {max:15, price:11.47} ],
+    bebe:     [ {max:15, price:0} ]
+  };
+  var calcCounts = { adulto: 1, joven811: 0, joven47: 0, bebe: 0 };
+  var ULTIMO_TOTAL = 0;
+
+  function calcChange(cat, delta) {
+    var nuevo = calcCounts[cat] + delta;
+    if (nuevo < 0) return;
+    var totalActual = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
+    var totalNuevo = totalActual - calcCounts[cat] + nuevo;
+    if (delta > 0 && totalNuevo > 15) {
+      mostrarMensaje('error', '⚠️ Este tour admite no máximo 15 pessoas por reserva.');
+      return;
+    }
+    calcCounts[cat] = nuevo;
+    document.getElementById('count-' + cat).textContent = nuevo;
+    updateTotal();
+  }
+  function getRate(tiers, totalPax) {
+    for (var i = 0; i < tiers.length; i++) {
+      if (totalPax <= tiers[i].max) return tiers[i].price;
+    }
+    return tiers[tiers.length - 1].price;
+  }
+  function updateTotal() {
+    var totalPax = calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe;
+    // A tarifa de cada categoria depende da quantidade de pessoas DESSA categoria (não do total misto do grupo)
+    var rAdulto = getRate(PRICING.adulto, calcCounts.adulto);
+    var rJoven811 = getRate(PRICING.joven811, calcCounts.joven811);
+    var rJoven47 = getRate(PRICING.joven47, calcCounts.joven47);
+    var rBebe = getRate(PRICING.bebe, calcCounts.bebe);
+    var total = calcCounts.adulto * rAdulto + calcCounts.joven811 * rJoven811 + calcCounts.joven47 * rJoven47 + calcCounts.bebe * rBebe;
+    ULTIMO_TOTAL = total;
+    document.getElementById('calc-total-display').textContent = '$' + total.toFixed(2);
+    document.getElementById('calc-pax-display').textContent = totalPax;
+    // Sincroniza o campo "número de pessoas" do formulário de reserva
+    var selPersonas = document.getElementById('campo-personas');
+    if (selPersonas && totalPax >= 1 && totalPax <= 15) {
+      selPersonas.value = String(totalPax);
+    }
+  }
+
+  // Hero carousel
+  var slides = document.querySelectorAll('.hero-slide');
+  var current = 0;
+  setInterval(function() {
+    slides[current].classList.remove('is-active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('is-active');
+  }, 3500);
+
+  var PAGO_DETALLES = {
+    "💳 Visa": "Enviaremos o link de pagamento seguro pelo WhatsApp e e-mail.",
+    "💳 Mastercard": "Enviaremos o link de pagamento seguro pelo WhatsApp e e-mail.",
+    "💳 American Express": "Enviaremos o link de pagamento seguro pelo WhatsApp e e-mail.",
+    "💳 Diners Club": "Enviaremos o link de pagamento seguro pelo WhatsApp e e-mail.",
+    "🅿️ PayPal": "Enviaremos o link de pagamento do PayPal pelo WhatsApp e e-mail.",
+    "🟣 Yape": "Enviaremos o QR do Yape pelo WhatsApp e e-mail."
+  };
+  function seleccionarMetodoPago(valor, btn) {
+    document.getElementById('campo-metodo-pago').value = valor;
+    var opciones = document.querySelectorAll('.pago-opcion');
+    for (var i = 0; i < opciones.length; i++) { opciones[i].classList.remove('selected'); }
+    btn.classList.add('selected');
+    actualizarDetallePago();
+  }
+  function actualizarDetallePago() {
+    var sel = document.getElementById('campo-metodo-pago').value;
+    var det = document.getElementById('detalle-pago');
+    if (!sel) { det.style.display = 'none'; return; }
+    if (sel.indexOf('Cash') !== -1) {
+      det.innerHTML = 'Pague em dinheiro diretamente ao seu guia no início do tour. Vamos te dar um código de reserva abaixo — basta mencioná-lo ao guia para confirmar.';
+    } else {
+      det.textContent = PAGO_DETALLES[sel] || '';
+    }
+    det.style.display = 'block';
+  }
+  function mostrarMensaje(tipo, texto) {
+    var msg = document.getElementById('msg-disponibilidad');
+    msg.className = 'disponibilidad-msg ' + tipo;
+    msg.textContent = texto;
+    msg.style.display = 'block';
+  }
+  function esCorreoValido(correo) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(correo);
+  }
+  function esWhatsappValido(numero) {
+    var limpio = numero.replace(/[\s\-()]/g, '');
+    return /^\+?\d{8,15}$/.test(limpio);
+  }
+  function verificarDisponibilidad() {
+    var fecha       = document.getElementById('campo-fecha').value;
+    var personas    = document.getElementById('campo-personas').value;
+    var nombre      = document.getElementById('campo-nombre').value.trim();
+    var correo      = document.getElementById('campo-correo').value.trim();
+    var whatsapp    = document.getElementById('campo-whatsapp').value.trim();
+    var metodoPago  = document.getElementById('campo-metodo-pago').value;
+    if (!fecha)    { mostrarMensaje('error', '⚠️ Por favor, escolha uma data.'); return; }
+    if (!personas) { mostrarMensaje('error', '⚠️ Por favor, indique quantas pessoas vocês são.'); return; }
+    if (!nombre)   { mostrarMensaje('error', '⚠️ Por favor, escreva seu nome.'); return; }
+    if (!correo)   { mostrarMensaje('error', '⚠️ O e-mail é obrigatório.'); return; }
+    if (!esCorreoValido(correo)) { mostrarMensaje('error', '⚠️ Escreva um e-mail válido (ex. nome@dominio.com).'); return; }
+    if (!whatsapp) { mostrarMensaje('error', '⚠️ Por favor, escreva seu WhatsApp.'); return; }
+    if (!esWhatsappValido(whatsapp)) { mostrarMensaje('error', '⚠️ Escreva um número de WhatsApp válido, com código do país (ex. +51999999999).'); return; }
+    if (!metodoPago) { mostrarMensaje('error', '⚠️ Por favor, escolha um método de pagamento.'); return; }
+    var btn = document.getElementById('btn-verificar');
+    btn.disabled = true;
+    btn.textContent = 'Verificando...';
+    mostrarMensaje('loading', '🔍 Verificando disponibilidade...');
+    document.getElementById('panel-reserva').style.display = 'none';
+    var url = PROXY_URL + '?accion=verificar_disponibilidad&tour=' + TOUR_ID + '&fecha=' + fecha + '&personas=' + personas;
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '⚠️ Erro ao verificar. Tente novamente.');
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidade'; return;
+        }
+        if (!data.disponible) {
+          mostrarMensaje('error', '❌ ' + data.mensaje);
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidade'; return;
+        }
+        mostrarMensaje('loading', '✅ Solicitação recebida. Confirmaremos sua reserva em breve...');
+        crearReserva(fecha, parseInt(personas), nombre, correo, whatsapp, metodoPago);
+      })
+      .catch(function(err) {
+        console.log('Error verificar:', err);
+        mostrarMensaje('error', '⚠️ Erro de conexão. Tente novamente.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidade';
+      });
+  }
+  function crearReserva(fecha, personas, nombre, correo, whatsapp, metodoPago) {
+    var btn = document.getElementById('btn-verificar');
+    var url = PROXY_URL + '?accion=crear_reserva&tour=' + TOUR_ID +
+      '&fecha=' + fecha + '&personas=' + personas +
+      '&nombre=' + encodeURIComponent(nombre) +
+      '&correo=' + encodeURIComponent(correo) +
+      '&whatsapp=' + encodeURIComponent(whatsapp) +
+      '&metodo_pago=' + encodeURIComponent(metodoPago) +
+      '&adultos=' + calcCounts.adulto +
+      '&joven811=' + calcCounts.joven811 +
+      '&joven47=' + calcCounts.joven47 +
+      '&bebes=' + calcCounts.bebe +
+      '&precio_total=' + ULTIMO_TOTAL.toFixed(2);
+    fetch(url)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.ok) {
+          mostrarMensaje('error', '❌ ' + (data.error || 'Erro ao criar a reserva.'));
+          btn.disabled = false; btn.textContent = 'Verificar disponibilidade'; return;
+        }
+        mostrarPanelReserva(data);
+      })
+      .catch(function(err) {
+        console.log('Error crear:', err);
+        mostrarMensaje('error', '⚠️ Erro de conexão. Tente novamente.');
+        btn.disabled = false; btn.textContent = 'Verificar disponibilidade';
+      });
+  }
+  function mostrarPanelReserva(data) {
+    document.getElementById('codigo-display').textContent = data.codigo;
+    document.getElementById('codigo-expira').textContent =
+      'Entraremos em contato em breve para confirmar sua reserva';
+    var emailStatusEl = document.getElementById('codigo-email-status');
+    if (data.correo_enviado === false) {
+      emailStatusEl.textContent = '⚠️ Não foi possível enviar o e-mail automático (' + (data.correo_motivo || 'motivo desconhecido') + '). Sua reserva foi registrada mesmo assim.';
+      emailStatusEl.style.display = 'block';
+      console.log('Correo de reserva no enviado. Motivo:', data.correo_motivo);
+    } else {
+      emailStatusEl.style.display = 'none';
+    }
+    var fechaFormateada = new Date(data.fecha + 'T12:00:00').toLocaleDateString('pt-BR', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    var metodoSel = document.getElementById('campo-metodo-pago');
+    var metodoPago = (metodoSel && metodoSel.value) ? metodoSel.value : 'Não especificado';
+    var desglosePartes = [];
+    if (calcCounts.adulto > 0)   desglosePartes.push(calcCounts.adulto + ' adulto(s)');
+    if (calcCounts.joven811 > 0) desglosePartes.push(calcCounts.joven811 + ' jovem(ns) 8-11 anos');
+    if (calcCounts.joven47 > 0)  desglosePartes.push(calcCounts.joven47 + ' criança(s) 4-7 anos');
+    if (calcCounts.bebe > 0)     desglosePartes.push(calcCounts.bebe + ' bebê(s)');
+    var desglose = desglosePartes.join(', ');
+    var msg = 'Olá Suyay Tours 👋\n\nGostaria de confirmar minha reserva:\n\n'
+      + '🗺️ *Tour:* ' + data.tour_nombre + '\n'
+      + '📅 *Data:* ' + fechaFormateada + '\n'
+      + '🕗 *Hora:* ' + data.hora_inicio + '\n'
+      + '👥 *Pessoas:* ' + data.personas + ' (' + desglose + ')\n'
+      + '💰 *Preço total:* $' + ULTIMO_TOTAL.toFixed(2) + '\n'
+      + '💳 *Método de pagamento:* ' + metodoPago + '\n'
+      + '🔑 *Código:* ' + data.codigo + '\n\n'
+      + 'Fico no aguardo da confirmação de disponibilidade. Obrigado(a)!';
+    document.getElementById('btn-whatsapp-confirmar').href =
+      'https://wa.me/' + data.whatsapp_manager + '?text=' + encodeURIComponent(msg);
+    document.getElementById('panel-reserva').style.display = 'block';
+    document.getElementById('msg-disponibilidad').style.display = 'none';
+    var btn = document.getElementById('btn-verificar');
+    btn.textContent = '✓ Código gerado';
+    btn.style.background = '#2e7d32';
+  }
+</script>
+</body>
+</html>
