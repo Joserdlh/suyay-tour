@@ -11,12 +11,29 @@
 //
 // Si RESEND_API_KEY no está configurada, la reserva se sigue creando con normalidad
 // (no se cae la función), simplemente no se envía el correo.
+//
+// MULTI-IDIOMA: el correo INTERNO (para el negocio) siempre se envía en español,
+// sin importar el idioma del cliente. El correo de CONFIRMACIÓN AL CLIENTE se envía
+// en español, inglés o portugués según el parámetro "lang" que mande el formulario
+// (?lang=es | en | pt). Si no llega ese parámetro, se asume español.
 
 const TOURS = {
-  CityTourLima:        { nombre: "City Tour Lima Premium",         hora: "08:15 AM" },
-  Gastronomico:         { nombre: "Tour Gastronómico", hora: "09:00 AM" },
-  ExperienciaNocturna:  { nombre: "Lima Nocturna Premium",   hora: "02:45 PM" },
-  Traslados:            { nombre: "Traslados Privados Premium",     hora: "Según vuelo / hotel" }
+  CityTourLima: {
+    hora: "08:15 AM",
+    nombre: { es: "City Tour Lima Premium", en: "City Tour Lima Premium", pt: "City Tour Lima Premium" }
+  },
+  Gastronomico: {
+    hora: "09:00 AM",
+    nombre: { es: "Tour Gastronómico", en: "Gastronomic Tour", pt: "Tour Gastronômico" }
+  },
+  ExperienciaNocturna: {
+    hora: "02:45 PM",
+    nombre: { es: "Lima Nocturna Premium", en: "Lima By Night Premium", pt: "Lima Noturna Premium" }
+  },
+  Traslados: {
+    hora: "Según vuelo / hotel",
+    nombre: { es: "Traslados Privados Premium", en: "Private Premium Transfers", pt: "Traslados Privados Premium" }
+  }
 };
 
 const WHATSAPP_MANAGER = "51925585680";
@@ -26,6 +43,59 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type"
 };
+
+// Textos del correo de confirmación al cliente, por idioma.
+const I18N = {
+  es: {
+    asunto: "Tu reserva en Suyay Tour — ",
+    titulo: "¡Gracias por tu reserva, ",
+    intro: "Recibimos tu solicitud en <strong>Suyay Tour</strong>. Aquí tienes el resumen de tu reserva:",
+    labelTour: "Tour",
+    labelTipo: "Tipo de traslado",
+    labelFecha: "Fecha",
+    labelHora: "Hora de inicio",
+    labelPersonas: "Personas",
+    labelPrecio: "Precio total",
+    labelPago: "Método de pago",
+    labelCodigo: "Código de reserva",
+    cierre: "En breve nos pondremos en contacto contigo por WhatsApp o correo para confirmar la disponibilidad y coordinar el pago. Si tienes cualquier duda, escríbenos al +51 925 585 680.",
+    footer: "Este correo se generó automáticamente al completar tu reserva en suyaytour.com."
+  },
+  en: {
+    asunto: "Your booking at Suyay Tour — ",
+    titulo: "Thank you for your booking, ",
+    intro: "We received your request at <strong>Suyay Tour</strong>. Here's a summary of your booking:",
+    labelTour: "Tour",
+    labelTipo: "Transfer type",
+    labelFecha: "Date",
+    labelHora: "Start time",
+    labelPersonas: "People",
+    labelPrecio: "Total price",
+    labelPago: "Payment method",
+    labelCodigo: "Booking code",
+    cierre: "We'll be in touch shortly via WhatsApp or email to confirm availability and coordinate payment. If you have any questions, message us at +51 925 585 680.",
+    footer: "This email was generated automatically when you completed your booking at suyaytour.com."
+  },
+  pt: {
+    asunto: "Sua reserva na Suyay Tour — ",
+    titulo: "Obrigado pela sua reserva, ",
+    intro: "Recebemos sua solicitação na <strong>Suyay Tour</strong>. Aqui está o resumo da sua reserva:",
+    labelTour: "Tour",
+    labelTipo: "Tipo de traslado",
+    labelFecha: "Data",
+    labelHora: "Horário de início",
+    labelPersonas: "Pessoas",
+    labelPrecio: "Preço total",
+    labelPago: "Forma de pagamento",
+    labelCodigo: "Código de reserva",
+    cierre: "Em breve entraremos em contato com você por WhatsApp ou e-mail para confirmar a disponibilidade e combinar o pagamento. Se tiver alguma dúvida, escreva para +51 925 585 680.",
+    footer: "Este e-mail foi gerado automaticamente ao concluir sua reserva em suyaytour.com."
+  }
+};
+
+function idiomaValido(lang) {
+  return (lang === "en" || lang === "pt") ? lang : "es";
+}
 
 function jsonResponse(obj, status) {
   return new Response(JSON.stringify(obj), {
@@ -41,6 +111,7 @@ function generarCodigo() {
   return "SUYAY-" + out;
 }
 
+// Correo INTERNO para el negocio — siempre en español, sin importar el idioma del cliente.
 async function enviarCorreoReserva(env, data) {
   var apiKey = env.RESEND_API_KEY;
   var destino = env.RESEND_DEST_EMAIL;
@@ -63,6 +134,7 @@ async function enviarCorreoReserva(env, data) {
     ["Nombre", data.nombre],
     ["Correo", data.correo],
     ["WhatsApp", data.whatsapp],
+    ["Idioma del cliente", (data.lang || "es").toUpperCase()],
     ["Código de reserva", data.codigo]
   ].filter(Boolean);
 
@@ -103,8 +175,7 @@ async function enviarCorreoReserva(env, data) {
   }
 }
 
-// Correo de confirmación para el CLIENTE (más simple/amigable que el interno de arriba).
-// Usa las mismas variables de entorno RESEND_API_KEY — no necesita configuración adicional.
+// Correo de confirmación para el CLIENTE — en español, inglés o portugués según data.lang.
 async function enviarCorreoCliente(env, data) {
   var apiKey = env.RESEND_API_KEY;
   var remitente = "Suyay Tour <reservas@suyaytour.com>";
@@ -112,15 +183,17 @@ async function enviarCorreoCliente(env, data) {
     return { enviado: false, motivo: "Falta RESEND_API_KEY o el correo del cliente." };
   }
 
+  var t = I18N[idiomaValido(data.lang)];
+
   var filas = [
-    ["Tour", data.tourNombre],
-    data.tipo ? ["Tipo de traslado", data.tipo] : null,
-    ["Fecha", data.fecha],
-    ["Hora de inicio", data.horaInicio],
-    ["Personas", String(data.personas)],
-    data.precioTotal ? ["Precio total", "$" + data.precioTotal] : null,
-    ["Método de pago", data.metodoPago || "No especificado"],
-    ["Código de reserva", data.codigo]
+    [t.labelTour, data.tourNombre],
+    data.tipo ? [t.labelTipo, data.tipo] : null,
+    [t.labelFecha, data.fecha],
+    [t.labelHora, data.horaInicio],
+    [t.labelPersonas, String(data.personas)],
+    data.precioTotal ? [t.labelPrecio, "$" + data.precioTotal] : null,
+    [t.labelPago, data.metodoPago || "—"],
+    [t.labelCodigo, data.codigo]
   ].filter(Boolean);
 
   var filasHtml = filas.map(function(f) {
@@ -130,11 +203,11 @@ async function enviarCorreoCliente(env, data) {
 
   var html =
     '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">' +
-    '<h2 style="color:#e8520a;">¡Gracias por tu reserva, ' + (data.nombre || "") + '!</h2>' +
-    '<p style="color:#444;font-size:14px;line-height:1.6;">Recibimos tu solicitud en <strong>Suyay Tour</strong>. Aquí tienes el resumen de tu reserva:</p>' +
+    '<h2 style="color:#e8520a;">' + t.titulo + (data.nombre || "") + '!</h2>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">' + t.intro + '</p>' +
     '<table style="width:100%;border-collapse:collapse;margin:16px 0;">' + filasHtml + '</table>' +
-    '<p style="color:#444;font-size:14px;line-height:1.6;">En breve nos pondremos en contacto contigo por WhatsApp o correo para confirmar la disponibilidad y coordinar el pago. Si tienes cualquier duda, escríbenos al +51 925 585 680.</p>' +
-    '<p style="margin-top:20px;font-size:12px;color:#999;">Este correo se generó automáticamente al completar tu reserva en suyaytour.com.</p>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">' + t.cierre + '</p>' +
+    '<p style="margin-top:20px;font-size:12px;color:#999;">' + t.footer + '</p>' +
     '</div>';
 
   try {
@@ -148,7 +221,7 @@ async function enviarCorreoCliente(env, data) {
         from: remitente,
         to: [data.correo],
         reply_to: "suyaytour@gmail.com",
-        subject: "Tu reserva en Suyay Tour — " + data.codigo,
+        subject: t.asunto + data.codigo,
         html: html
       })
     });
@@ -205,6 +278,7 @@ export async function onRequest(context) {
       const joven47     = params.get("joven47");
       const bebes       = params.get("bebes");
       const precioTotal = params.get("precio_total");
+      const lang        = idiomaValido(params.get("lang"));
 
       if (!TOURS[tour]) {
         return jsonResponse({ ok: false, error: "Tour no reconocido: " + tour }, 400);
@@ -215,9 +289,12 @@ export async function onRequest(context) {
 
       const codigo = generarCodigo();
       const infoTour = TOURS[tour];
+      const nombreTourCliente = infoTour.nombre[lang];
+      const nombreTourInterno = infoTour.nombre.es;
 
+      // El correo interno del negocio siempre va en español, con el nombre del tour en español.
       const correoResultado = await enviarCorreoReserva(env, {
-        tourNombre: infoTour.nombre,
+        tourNombre: nombreTourInterno,
         tipo: tipo,
         fecha: fecha,
         personas: personas,
@@ -230,13 +307,14 @@ export async function onRequest(context) {
         nombre: nombre,
         correo: correo,
         whatsapp: whatsapp,
+        lang: lang,
         codigo: codigo
       });
 
-      // Correo de confirmación para el cliente (independiente del correo interno de arriba;
+      // Correo de confirmación para el cliente, en su idioma (independiente del correo interno;
       // si uno falla no afecta al otro, y la reserva queda registrada de todas formas).
       const correoClienteResultado = await enviarCorreoCliente(env, {
-        tourNombre: infoTour.nombre,
+        tourNombre: nombreTourCliente,
         tipo: tipo,
         fecha: fecha,
         horaInicio: infoTour.hora,
@@ -245,6 +323,7 @@ export async function onRequest(context) {
         metodoPago: metodoPago,
         nombre: nombre,
         correo: correo,
+        lang: lang,
         codigo: codigo
       });
 
@@ -253,7 +332,7 @@ export async function onRequest(context) {
         codigo: codigo,
         fecha: fecha,
         hora_inicio: infoTour.hora,
-        tour_nombre: infoTour.nombre,
+        tour_nombre: nombreTourCliente,
         personas: personas,
         whatsapp_manager: WHATSAPP_MANAGER,
         correo_enviado: correoResultado.enviado,
