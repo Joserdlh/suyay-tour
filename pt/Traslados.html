@@ -612,7 +612,8 @@
       '&joven811=' + calcCounts.joven811 +
       '&joven47=' + calcCounts.joven47 +
       '&bebes=' + calcCounts.bebe +
-      '&precio_total=' + ULTIMO_TOTAL.toFixed(2);
+      '&precio_total=' + ULTIMO_TOTAL.toFixed(2) +
+      '&lang=pt';
     fetch(url)
       .then(function(r) { return r.json(); })
       .then(function(data) {
