@@ -44,7 +44,7 @@ function generarCodigo() {
 async function enviarCorreoReserva(env, data) {
   var apiKey = env.RESEND_API_KEY;
   var destino = env.RESEND_DEST_EMAIL;
-  var remitente = "Suyay Peru Travel <reservas@suyaytour.com>";
+  var remitente = "Suyay Tour <reservas@suyaytour.com>";
   if (!apiKey || !destino) {
     return { enviado: false, motivo: "Faltan variables de entorno de Resend (RESEND_API_KEY / RESEND_DEST_EMAIL)." };
   }
@@ -73,7 +73,7 @@ async function enviarCorreoReserva(env, data) {
 
   var html =
     '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">' +
-    '<h2 style="color:#e8520a;">Nueva reserva — Suyay Peru Travel</h2>' +
+    '<h2 style="color:#e8520a;">Nueva reserva — Suyay Tour</h2>' +
     '<table style="width:100%;border-collapse:collapse;">' + filasHtml + '</table>' +
     '<p style="margin-top:20px;font-size:12px;color:#999;">Este correo se generó automáticamente cuando el cliente completó el formulario de reserva en la web.</p>' +
     '</div>';
@@ -107,7 +107,7 @@ async function enviarCorreoReserva(env, data) {
 // Usa las mismas variables de entorno RESEND_API_KEY — no necesita configuración adicional.
 async function enviarCorreoCliente(env, data) {
   var apiKey = env.RESEND_API_KEY;
-  var remitente = "Suyay Peru Travel <reservas@suyaytour.com>";
+  var remitente = "Suyay Tour <reservas@suyaytour.com>";
   if (!apiKey || !data.correo) {
     return { enviado: false, motivo: "Falta RESEND_API_KEY o el correo del cliente." };
   }
@@ -131,7 +131,7 @@ async function enviarCorreoCliente(env, data) {
   var html =
     '<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;">' +
     '<h2 style="color:#e8520a;">¡Gracias por tu reserva, ' + (data.nombre || "") + '!</h2>' +
-    '<p style="color:#444;font-size:14px;line-height:1.6;">Recibimos tu solicitud en <strong>Suyay Peru Travel</strong>. Aquí tienes el resumen de tu reserva:</p>' +
+    '<p style="color:#444;font-size:14px;line-height:1.6;">Recibimos tu solicitud en <strong>Suyay Tour</strong>. Aquí tienes el resumen de tu reserva:</p>' +
     '<table style="width:100%;border-collapse:collapse;margin:16px 0;">' + filasHtml + '</table>' +
     '<p style="color:#444;font-size:14px;line-height:1.6;">En breve nos pondremos en contacto contigo por WhatsApp o correo para confirmar la disponibilidad y coordinar el pago. Si tienes cualquier duda, escríbenos al +51 925 585 680.</p>' +
     '<p style="margin-top:20px;font-size:12px;color:#999;">Este correo se generó automáticamente al completar tu reserva en suyaytour.com.</p>' +
@@ -148,7 +148,7 @@ async function enviarCorreoCliente(env, data) {
         from: remitente,
         to: [data.correo],
         reply_to: "suyaytour@gmail.com",
-        subject: "Tu reserva en Suyay Peru Travel — " + data.codigo,
+        subject: "Tu reserva en Suyay Tour — " + data.codigo,
         html: html
       })
     });
