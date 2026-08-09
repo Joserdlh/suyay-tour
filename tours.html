@@ -37,6 +37,11 @@
     .nav-link.cta { background: var(--naranja); color: white; padding: 11px 26px; border-radius: 3px; margin-left: 12px; text-shadow: none; }
     .nav-link.cta::after { display: none; }
     .nav-link.cta:hover { background: var(--naranja-fuerte); }
+    .lang-switcher { display: flex; align-items: center; gap: 8px; margin-left: 14px; padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.2); }
+    .lang-flag { font-size: 1.15em; text-decoration: none; opacity: 0.4; filter: grayscale(70%); transition: opacity 0.2s, filter 0.2s; line-height: 1; }
+    .lang-flag:hover { opacity: 0.8; filter: grayscale(0%); }
+    .lang-flag.active { opacity: 1; filter: grayscale(0%); cursor: default; }
+    @media (max-width: 768px) { .lang-switcher { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 14px 0 0; padding: 14px 0 0; justify-content: center; width: 100%; } }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
     /* ─── HERO ───────────────────────────────────────────── */
     .page-hero {
@@ -291,6 +296,11 @@
     <a href="/tours/Traslados.html" class="nav-link">Traslados</a>
     <a href="/index.html#resenas" class="nav-link">Reseñas</a>
     <a href="/index.html#contacta" class="nav-link cta">Contacta</a>
+    <div class="lang-switcher">
+      <a href="/tours.html" class="lang-flag active" title="Español">🇵🇪</a>
+      <a href="/en/tours.html" class="lang-flag" title="English">🇺🇸</a>
+      <a href="/pt/tours.html" class="lang-flag" title="Português">🇧🇷</a>
+    </div>
   </nav>
 </header>
 <!-- HERO -->
@@ -422,7 +432,7 @@
   <span class="footer-copy">&copy; 2025 Suyay Tour — Todos los derechos reservados</span>
 </footer>
 <!-- LLAMA -->
-<a href="https://wa.me/51925585680?text=Hola%20Suyay%20Peru%20Travel,%20quiero%20informaci%C3%B3n%20sobre%20los%20tours." class="llama-btn" target="_blank" rel="noopener">
+<a href="https://wa.me/51925585680?text=Hola%20Suyay%20Tour,%20quiero%20informaci%C3%B3n%20sobre%20los%20tours." class="llama-btn" target="_blank" rel="noopener">
   <div class="chat-text">¿Tienes dudas?<br>Haz clic aquí</div>
   <img src="https://raw.githubusercontent.com/Joserdlh/suyay-tour/main/A_digital_illustration_features_an_alpaca_with_lig.png" alt="Alpaca Suyay" loading="lazy" decoding="async">
 </a>
