@@ -13,9 +13,9 @@
 // (no se cae la función), simplemente no se envía el correo.
 
 const TOURS = {
-  CityTourLima:        { nombre: "City Tour Lima Premium",         hora: "08:00 AM" },
+  CityTourLima:        { nombre: "City Tour Lima Premium",         hora: "08:15 AM" },
   Gastronomico:         { nombre: "Tour Gastronómico", hora: "09:00 AM" },
-  ExperienciaNocturna:  { nombre: "Experiencia Nocturna Premium",   hora: "05:25 PM" },
+  ExperienciaNocturna:  { nombre: "Lima Nocturna Premium",   hora: "02:45 PM" },
   Traslados:            { nombre: "Traslados Privados Premium",     hora: "Según vuelo / hotel" }
 };
 
