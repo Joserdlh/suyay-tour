@@ -25,11 +25,19 @@
     .nav-link.cta { background: var(--naranja); color: white; padding: 11px 26px; border-radius: 3px; margin-left: 12px; text-shadow: none; }
     .nav-link.cta::after { display: none; }
     .nav-link.cta:hover { background: var(--naranja-fuerte); }
-    .lang-switcher { display: flex; align-items: center; gap: 8px; margin-left: 14px; padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.2); }
-    .lang-flag { font-size: 1.15em; text-decoration: none; opacity: 0.4; filter: grayscale(70%); transition: opacity 0.2s, filter 0.2s; line-height: 1; }
-    .lang-flag:hover { opacity: 0.8; filter: grayscale(0%); }
-    .lang-flag.active { opacity: 1; filter: grayscale(0%); cursor: default; }
-    @media (max-width: 768px) { .lang-switcher { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 14px 0 0; padding: 14px 0 0; justify-content: center; width: 100%; } }
+    .lang-switcher { position: relative; margin-left: 14px; padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.2); }
+    .lang-current { display: flex; align-items: center; gap: 9px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.28); color: white; font-family: 'Raleway', sans-serif; font-size: 0.82em; font-weight: 700; letter-spacing: 0.04em; padding: 9px 16px; border-radius: 999px; cursor: pointer; transition: background 0.2s, border-color 0.2s; white-space: nowrap; }
+    .lang-current:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.45); }
+    .lang-current-flag { font-size: 1.25em; line-height: 1; }
+    .lang-chevron { font-size: 0.65em; opacity: 0.8; transition: transform 0.2s; margin-left: 1px; }
+    .lang-switcher.open .lang-chevron { transform: rotate(180deg); }
+    .lang-menu { position: absolute; top: calc(100% + 10px); right: 0; background: #14201c; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; min-width: 175px; padding: 6px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity 0.18s, transform 0.18s, visibility 0.18s; z-index: 300; }
+    .lang-switcher.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.85em; font-weight: 600; transition: background 0.15s, color 0.15s; }
+    .lang-option:hover { background: rgba(255,255,255,0.08); color: white; }
+    .lang-option.active { color: var(--naranja); background: rgba(232,82,10,0.12); }
+    .lang-option-flag { font-size: 1.2em; line-height: 1; }
+    @media (max-width: 768px) { .lang-switcher { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 14px 0 0; padding: 14px 0 0; width: 100%; } .lang-current { width: 100%; justify-content: center; } .lang-menu { left: 0; right: 0; width: 100%; } }
     .menu-toggle { display: none; background: none; border: none; color: white; font-size: 28px; cursor: pointer; }
     /* HERO */
     .tour-hero { position: relative; height: 80vh; min-height: 560px; overflow: hidden; background: #111; }
@@ -178,10 +186,15 @@
     <a href="/en/Traslados.html" class="nav-link">Transfers</a>
     <a href="/en/index.html#resenas" class="nav-link">Reviews</a>
     <a href="/en/index.html#contacta" class="nav-link cta">Contact</a>
-    <div class="lang-switcher">
-      <a href="/tours/tour-gastronomico.html" class="lang-flag" title="Español">🇵🇪</a>
-      <a href="/en/tour-gastronomico.html" class="lang-flag active" title="English">🇺🇸</a>
-      <a href="/pt/tour-gastronomico.html" class="lang-flag" title="Português">🇧🇷</a>
+    <div class="lang-switcher" id="lang-switcher">
+      <button type="button" class="lang-current" onclick="toggleLangMenu(event)">
+        <span class="lang-current-flag">🇺🇸</span>English<span class="lang-chevron">▾</span>
+      </button>
+      <div class="lang-menu">
+        <a href="/tours/tour-gastronomico.html" class="lang-option"><span class="lang-option-flag">🇵🇪</span> Español</a>
+        <a href="/en/tour-gastronomico.html" class="lang-option active"><span class="lang-option-flag">🇺🇸</span> English</a>
+        <a href="/pt/tour-gastronomico.html" class="lang-option"><span class="lang-option-flag">🇧🇷</span> Português</a>
+      </div>
     </div>
   </nav>
 </header>
@@ -500,6 +513,14 @@
     else h.classList.remove('scrolled');
   });
   function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
+  function toggleLangMenu(e) {
+    e.stopPropagation();
+    document.getElementById('lang-switcher').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    var ls = document.getElementById('lang-switcher');
+    if (ls && ls.classList.contains('open') && !ls.contains(e.target)) ls.classList.remove('open');
+  });
   // This tour only operates on Fridays. Instead of a native calendar where any
   // day can be picked, we build our own visual calendar: it looks and behaves
   // like a normal date picker, but only Fridays are clickable
