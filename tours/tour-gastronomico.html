@@ -454,8 +454,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="campo-personas">Número de personas</label>
-        <select id="campo-personas">
+        <label for="campo-personas">Número de personas (según la calculadora)</label>
+        <select id="campo-personas" disabled style="background:#f0ebe2;color:#555;opacity:1;cursor:not-allowed;">
           <option value="">— Selecciona —</option>
           <option value="1">1 persona</option><option value="2">2 personas</option>
           <option value="3">3 personas</option><option value="4">4 personas</option>
@@ -739,7 +739,7 @@
   }
   function verificarDisponibilidad() {
     var fecha       = document.getElementById('campo-fecha').value;
-    var personas    = document.getElementById('campo-personas').value;
+    var personas    = String(calcCounts.adulto + calcCounts.joven811 + calcCounts.joven47 + calcCounts.bebe); document.getElementById('campo-personas').value = personas;
     var nombre      = document.getElementById('campo-nombre').value.trim();
     var correo      = document.getElementById('campo-correo').value.trim();
     var whatsapp    = document.getElementById('campo-whatsapp').value.trim();
